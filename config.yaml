@@ -1,0 +1,170 @@
+module:
+  imports:
+    - path: github.com/adityatelange/hugo-PaperMod
+    - path: github.com/martignoni/hugo-notice
+
+# https://github.com/adityatelange/hugo-PaperMod/wiki/Variables
+baseURL: https://jimangel.io
+languageCode: en-us
+title: jimangel.io
+theme: ["hugo-notice", "PaperMod"]
+
+# prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
+# See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
+ignoreErrors:
+  - error-remote-getjson
+
+# enableInlineShortcodes: true
+enableRobotsTXT: true
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+enableEmoji: true
+pygmentsUseClasses: true
+# https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
+
+googleAnalytics: G-7X0S9Y56NW # Updated to G4A 8/27/2022
+disqusShortname: jimangel
+
+minify:
+  disableXML: true
+  # minifyOutput: true
+
+
+languages:
+    en:
+        languageName: "English"
+        weight: 1
+        taxonomies:
+          category: categories
+          tag: tags
+          series: series
+        menu:
+            main:
+                - name: Posts
+                  url: posts/
+                  weight: 5
+                - name: Search
+                  url: search/
+                  weight: 10
+                - name: About Me
+                  url: https://github.com/jimangel
+
+outputs:
+    home:
+        - HTML
+        - RSS
+        - JSON
+
+params:
+  # SET TO PROD BEFORE USING!
+  env: production # or development to enable google analytics, opengraph, twitter-cards and schema.
+  title: jimangel.io
+  description: "A collection of my walkthroughs, rants, and hacks on emerging cloud technologies."
+  # keywords for homepage SEO
+  keywords: [Blog, Kubernetes, Cloud, Tech]
+  author: Jim Angel
+  # author: ["Me", "You"] # multiple authors
+  # https://adityatelange.github.io/hugo-PaperMod/posts/papermod/papermod-features/#twitter-cards-support
+  #images: ["<link or path of image for opengraph, twitter-cards>"]
+  images:
+    - /img/social.png # This is the root pic when sharing on social media
+  DateFormat: "January 2, 2006"
+  defaultTheme: auto # dark, light, auto
+  disableThemeToggle: false
+  ShowReadingTime: true
+  ShowShareButtons: true
+  ShareButtons:
+    - twitter
+    - linkedin
+    - reddit
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: false
+  ShowCodeCopyButtons: true
+  ShowWordCount: false
+  # ShowFullTextinRSS: false
+  ShowRssButtonInSectionTermList: false # don't show RSS on the post link
+  UseHugoToc: true
+  #disableSpecial1stPost: false
+  displayFullLangName: true
+  disableScrollToTop: true
+  comments: true
+  hidemeta: false
+  hideSummary: false
+  showtoc: false
+  tocopen: false
+  assets:
+    disableHLJS: true # to disable highlight.js
+    disableFingerprinting: true # https://github.com/adityatelange/hugo-PaperMod/issues/89#issuecomment-736549907
+    favicon: "/favicon.ico"
+    favicon16x16: "/favicon.ico"
+    favicon32x32: "/favicon.ico"
+    apple_touch_icon: "/favicon.ico"
+    safari_pinned_tab: "/favicon.ico"
+    # theme_color: "#089de3" for the browser bar color...
+  profileMode:
+        enabled: true
+        title: "Jim Angel" # optional default will be site title
+        subtitle: |
+           Infrastructure Cloud Consultant at <span style="color:#4285F4">G</span><span style="color:#DB4437">o</span><span style="color:#F4B400">o</span><span style="color:#4285F4">g</span><span style="color:#0F9D58">l</span><span style="color:#DB4437">e</span>
+
+           _Littering the internet with docs as I figure things out_
+        imageUrl: "/img/me.jpeg" # optional
+        imageWidth: 120 # custom size
+        imageHeight: 120 # custom size
+        buttons:
+          - name: Blog posts
+            url: "/archives"
+        #  - name: Github
+        #    url: "https://github.com/jimangel"
+  socialIcons:
+    - name: twitter
+      url: "https://twitter.com/JimmAngel"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/angeljim/"
+    - name: rss
+      url: "index.xml"
+  cover:
+    hiddenInList: false # hide on list pages and home
+    hiddenInSingle: false # hide on single page
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    #location: 0
+    #distance: 0
+    ignoreLocation: true
+    threshold: 0.0
+    minMatchCharLength: 3
+    keys: ["content"]
+
+markup:
+    goldmark:
+        renderer:
+            unsafe: true
+    # https://github.com/adityatelange/hugo-PaperMod/wiki/FAQs#using-hugos-syntax-highlighter-chroma
+    highlight:
+      codeFences: true
+      guessSyntax: true
+      lineNos: false
+      noClasses: false
+
+privacy:
+    vimeo:
+        disabled: false
+        simple: true
+    twitter:
+        disabled: false
+        enableDNT: true
+        simple: true
+    instagram:
+        disabled: false
+        simple: true
+    youtube:
+        disabled: false
+        privacyEnhanced: true
+
+services:
+    instagram:
+        disableInlineCSS: true
+    twitter:
+        disableInlineCSS: true

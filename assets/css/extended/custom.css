@@ -1,0 +1,62 @@
+/* Color my main logo */
+.logo a {
+    color: #089de3;
+}
+
+/* For whatever reason, this is the background color on home... */
+.list {
+    background: white;
+}
+
+/* Word wrap code vs. horzscroll */
+pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    border-radius: 8px !important;
+}
+
+
+/* UPDATE: Make the code highlighted text match theme (defaults square) (cat layouts/partials/css/syntax-dark.css | grep bg) */
+code {
+    border-radius: 4px !important;
+    color: unset !important;
+}
+
+/* font color when dark (cat layouts/partials/css/syntax-dark.css | grep bg) */
+.dark code {
+    color: #f8f8f2 !important;
+}
+
+:root {
+    --gap: 24px;
+    --content-gap: 20px;
+    --nav-width: 1024px;
+    --main-width: 720px;
+    --header-height: 60px;
+    --footer-height: 60px;
+    --radius: 8px;
+    --theme: rgb(255, 255, 255);
+    --entry: rgb(245, 245, 245);   /* list / post background, defaults to 255, 255, 255 */
+    --primary: rgb(30, 30, 30);
+    --secondary: rgb(108, 108, 108);
+    --tertiary: rgb(214, 214, 214);
+    --content: rgb(31, 31, 31);
+    --hljs-bg: #f0f3f3;      /* (from STYLE in README) weirdly important as disabling highlighjs in the site doesn't appear to work...  */
+    --code-bg: #f0f3f3;  /* I made a little darker because I can't get the notify feature to not be dark on my phone... (switch to style) This is used as the primary background color, defaults to 245, 245, 245 */
+    --border: rgb(238, 238, 238);
+}
+
+.dark {
+    --theme: rgb(29, 30, 32);
+    --entry: rgb(46, 46, 51);
+    --primary: rgb(218, 218, 219);
+    --secondary: rgb(155, 156, 157);
+    --tertiary: rgb(65, 66, 68);
+    --content: rgb(196, 196, 197);
+    --hljs-bg: #282a36; /*  Note: It doesn't hurt to match code-bg and hljs...(from STYLE in README) weirdly important as disabling highlighjs in the site doesn't appear to work...  */
+    --code-bg: #282a36;
+    --border: rgb(51, 51, 51);
+}

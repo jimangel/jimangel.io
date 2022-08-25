@@ -1,0 +1,25 @@
+[build]
+publish = "public"
+command = "hugo --gc --minify"
+
+  [build.environment]
+  HUGO_VERSION = "0.101.0"
+  HUGO_ENV = "production"
+
+  [build.processing]
+  # If skip_processing = true, all other settings are ignored
+  skip_processing = false
+
+    [build.processing.css]
+    bundle = true
+    minify = true
+
+    [build.processing.js]
+    bundle = true
+    minify = true
+
+    [build.processing.html]
+    pretty_urls = false
+
+    [build.processing.images]
+    compress = true
