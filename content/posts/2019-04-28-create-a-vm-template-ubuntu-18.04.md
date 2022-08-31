@@ -11,6 +11,7 @@ authors:
 tags:
 - ubuntu
 - vmware
+- images
 categories: []
 
 cover:

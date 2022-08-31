@@ -60,8 +60,7 @@ outputs:
         - JSON
 
 params:
-  # SET TO PROD BEFORE USING!
-  env: production # or development to enable google analytics, opengraph, twitter-cards and schema.
+  env: development # netlify.toml sets this to production (HUGO_ENV) to enable google analytics, opengraph, twitter-cards and schema.
   title: jimangel.io
   description: "A collection of my walkthroughs, rants, and hacks on emerging cloud technologies."
   # keywords for homepage SEO
@@ -112,7 +111,7 @@ params:
         subtitle: |
            Infrastructure Cloud Consultant at <span style="color:#4285F4">G</span><span style="color:#DB4437">o</span><span style="color:#F4B400">o</span><span style="color:#4285F4">g</span><span style="color:#0F9D58">l</span><span style="color:#DB4437">e</span>
 
-           Littering the internet with docs as I figure out things
+           _littering the internet with docs as I figure things out_
         imageUrl: "/img/me.jpeg" # optional
         imageWidth: 120 # custom size
         imageHeight: 120 # custom size

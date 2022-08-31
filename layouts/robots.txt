@@ -1,0 +1,9 @@
+User-agent: *
+{{- if hugo.IsProduction | or (eq site.Params.env "production") }}
+Disallow: /post/bypass
+Disallow: /blog/quality-stock-photos-for-your-blog/
+Disallow: /category/systems/
+{{- else }}
+Disallow: /
+{{- end }}
+Sitemap: {{ "sitemap.xml" | absURL }}

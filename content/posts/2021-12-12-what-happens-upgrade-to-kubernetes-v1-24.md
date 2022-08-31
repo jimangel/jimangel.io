@@ -309,9 +309,7 @@ I like the idea of running fewer things on a node; let's see how hard it is to s
 
 Here's the cool thing,
 
-{{< notice warning >}}
-If you installed `docker-ce` following the [official instructions](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository), you already installed `containerd.io`!
-{{< /notice >}}
+> If you installed `docker-ce` following the [official instructions](https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository), you already installed `containerd.io`!
 
 That means we just need to update `kubelet`'s configuration to bypass Docker. Stop docker by running:
 

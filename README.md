@@ -30,6 +30,10 @@ git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git t
 git submodule add https://github.com/martignoni/hugo-notice.git themes/hugo-notice
 ```
 
+# Note: I added robots.txt
+
+see https://gohugo.io/templates/robots/
+
 # Update modified theme content
 
 ```
