@@ -17,12 +17,10 @@ categories: []
 cover:
   image: /img/automated-vcenter-featured.jpg
 
-aliases:
-- "/post/automated-vcsa-vcenter-install/"
-
+slug: "automated-vcsa-vcenter-install"
 ---
 
-This post is an extention of my [ESXi setup]({{< ref "/posts/2018-06-10-automated-esxi-6.7-u2-zero-touch-install/index.md" >}}), usually what I do after the host is up.
+This post is an extension of my [ESXi setup]({{< ref "/posts/2018-06-10-automated-esxi-6.7-u2-zero-touch-install/index.md" >}}), usually what I do after the host is up.
 
 We will use a file to automate 100% of the configuration.
 
@@ -46,7 +44,7 @@ Put the ISO in your `~/Downloads` folder if you plan on following my exact comma
 
 ## Create the config file
 
-First mount the VCSA ISO locally and then create a custom JSON config that will be used.
+First, mount the VCSA ISO locally and create a custom JSON config.
 
 ### Mount the ISO
 
@@ -55,11 +53,11 @@ mkdir /vcsa
 sudo mount -o loop ~/Downloads/VMware-VCSA-all-6.7.0-13010631.iso /vcsa
 ```
 
-We will be using vCenter (VCSA) with an embedded PSC controller. If you're wondering what the heck PCS is, you can learn more about it [here](https://emadyounis.com/vcenter-server-architecture-part-1-the-basics/).
+We will be using vCenter (VCSA) with an embedded PSC controller. If you're wondering what PCS is, you can learn more about it [here](https://emadyounis.com/vcenter-server-architecture-part-1-the-basics/).
 
-The ISO will contain a few templates for us to copy and modify. Other options for VCSA and PCS can be found [here](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.install.doc/GUID-A1777A0B-9FD6-4DE7-AC37-7B3181D13032.html). 
+The ISO will contain a few templates for us to copy and modify. You can find VCSA and PCS' other options [here](https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.install.doc/GUID-A1777A0B-9FD6-4DE7-AC37-7B3181D13032.html). 
 
-### Copy and edit the json config
+### Copy and edit the JSON config
 
 ```bash
 cp /vcsa/vcsa-cli-installer/templates/install/embedded_vCSA_on_ESXi.json /tmp/config.json
@@ -69,7 +67,7 @@ cp /vcsa/vcsa-cli-installer/templates/install/embedded_vCSA_on_ESXi.json /tmp/co
 curl -L https://gist.github.com/jimangel/8d5869a4be139e631a310e2bfe4d8b81/raw > /tmp/config.json
 ```
 
-### Validate the template without installling
+### Validate the template without installing
 ```bash
 /vcsa/vcsa-cli-installer/lin64/vcsa-deploy install \
 --accept-eula \
@@ -97,7 +95,7 @@ If you run into any issues, you can replace `--terse` with `--verbose`.
 
 ## Validate vCenter install
 
-Navigate to the vCenter **FQDN_or_IP_address** in your browser and log in. Don't forget to use the propper `domain.local` suffix:
+Navigate to the vCenter **FQDN_or_IP_address** in your browser and log in. Don't forget to use the proper `domain.local` suffix:
 
 ```bash
 # The root user for VCSA is `administrator`
@@ -107,9 +105,9 @@ Password: R00tp@ssw0rd!
 
 ## Conclusion
 
-You're now ready to deploy some VMs! The biggest reason I setup VCSA is to leverage https://github.com/vmware/govmomi which is a goLang API interface to vSphere.
+You're now ready to deploy some VMs! The biggest reason I set up VCSA is to leverage https://github.com/vmware/govmomi, a goLang API interface to vSphere.
 
-I plan on revisting this post and adding in LetsEncrypt SSL certificates and VMware licenses in `config.json`.
+I plan on revisiting this post and adding in LetsEncrypt SSL certificates and VMware licenses in the `config.json`.
 
 Sources:
 

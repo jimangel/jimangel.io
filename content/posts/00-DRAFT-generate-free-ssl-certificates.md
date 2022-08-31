@@ -19,6 +19,9 @@ categories: []
 # Focal point options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
 image:
   caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/KGbX1f3Uxtg/)'
+
+
+slug: ""  # make your URL pretty!
 ---
 
 Intro in paragraph font about why something matters to them. Outline what will be acomplished and what's out of scope.

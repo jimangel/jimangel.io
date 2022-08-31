@@ -1,5 +1,5 @@
 ---
-title: "Automated bare metal Ubuntu 22.04 installs via USB"
+title: "No-touch Ubuntu 22.04 install with USB"
 description: "Never touch a keyboard again while provisioning bare metal servers."
 summary: "Auto-provision bare metal Ubuntu servers from 2 USB sticks"
 date: 2022-08-24T11:51:56-05:00
@@ -18,6 +18,8 @@ ShowWordCount: false
 cover:
     image: /img/ubuntu-usb-install-22-04-cover.png # image path/url
     alt: "Ubuntu desktop for 22.04" # alt text
+
+slug: ""  # make your URL pretty!
 ---
 
 this post outlines using xyz resulting xyz

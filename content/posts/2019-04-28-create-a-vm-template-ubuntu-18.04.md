@@ -16,29 +16,27 @@ categories: []
 cover:
   image: /img/ubuntu-18-04-template-featured.jpg
 
-aliases:
-- "/post/create-a-vm-template-ubuntu-18.04/"
-
+slug: ""
 ---
 
-## Why
-Creating a template in vSphere allows for rapid deployment of VMs. You can add or update custom software and build the perfect server to be consistently deployed in your enviornment.
+## Why?
+Creating a template in vSphere allows for rapid deployment of VMs. You can add or update custom software and build the perfect server to consistently deploy in your environment.
 
-My goal is to create a VM, add VMware tools, and strip out any unique data.
+I aim to create a VM, add VMware tools, and strip out any unique data.
 
 ---
 
 ## Before We Start
 * Download the ISO of [Ubuntu 18.04 LTS](https://releases.ubuntu.com/18.04/ubuntu-18.04.6-live-server-amd64.iso)
 * Upload the Ubuntu 18.04 ISO to a vSphere datastore.
-* Create a VM using that ISO (including full post install / OS setup)
+* Create a VM using that ISO (including full post-install / OS setup)
 * SSH into the newly created VM
 
 ---
 
 ## Customize The Template
 
-I've included the manual steps below that are needed to clean up your template. If you want to take the fast track you can just run [this script](https://github.com/jimangel/ubuntu-18.04-scripts/blob/master/prepare-ubuntu-18.04-template.sh) and skip to the next section.
+I've included the manual steps below that are needed to clean up your template. If you want to take the fast track, you can just run [this script](https://github.com/jimangel/ubuntu-18.04-scripts/blob/master/prepare-ubuntu-18.04-template.sh) and skip to the next section.
 
 ### Update All Packages
 
@@ -58,10 +56,10 @@ sudo apt -y install open-vm-tools
 ### Strip Out Unique Data
 
 ```bash
-#Stop services for cleanup
+# stop services for cleanup
 sudo service rsyslog stop
 
-#clear audit logs
+# clear audit logs
 if [ -f /var/log/wtmp ]; then
     truncate -s0 /var/log/wtmp
 fi
@@ -69,31 +67,25 @@ if [ -f /var/log/lastlog ]; then
     truncate -s0 /var/log/lastlog
 fi
 
-#cleanup /tmp directories
+# cleanup /tmp directories
 rm -rf /tmp/*
 rm -rf /var/tmp/*
 
-#cleanup current ssh keys
+# cleanup current ssh keys
 rm -f /etc/ssh/ssh_host_*
 
-#add check for ssh keys on reboot...regenerate if neccessary
+# add check for ssh keys on reboot...regenerate if necessary
 cat << 'EOL' | sudo tee /etc/rc.local
 #!/bin/sh -e
 #
 # rc.local
 #
-# This script is executed at the end of each multiuser runlevel.
-# Make sure that the script will "" on success or any other
-# value on error.
-#
-# In order to enable or disable this script just change the execution
-# bits.
-#
-# By default this script does nothing.
 # dynamically create hostname (optional)
 #if hostname | grep localhost; then
 #    hostnamectl set-hostname "$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')"
 #fi
+#
+# check for SSH keys and create if not present
 test -f /etc/ssh/ssh_host_dsa_key || dpkg-reconfigure openssh-server
 exit 0
 EOL
@@ -101,27 +93,27 @@ EOL
 # make sure the script is executable
 chmod +x /etc/rc.local
 
-#reset hostname
-# prevent cloudconfig from preserving the original hostname
+# reset hostname
+# prevent cloud-init from preserving the original hostname
 sed -i 's/preserve_hostname: false/preserve_hostname: true/g' /etc/cloud/cloud.cfg
 truncate -s0 /etc/hostname
 hostnamectl set-hostname localhost
 
-#cleanup apt
+# cleanup apt
 apt clean
 
-# set dhcp to use mac - this is a little bit of a hack but I need this to be placed under the active nic settings
+# set DHCP to use mac - keying off of a default line is a little bit of a hack to insert the replacement text, but we need the replaced text inserted under the active nic settings
 # also look in /etc/netplan for other config files
 sed -i 's/optional: true/dhcp-identifier: mac/g' /etc/netplan/50-cloud-init.yaml
 
-# cleans out all of the cloud-init cache / logs - this is mainly cleaning out networking info
+# cleans out all of the cloud-init cache/logs - this is mainly cleaning out networking info
 sudo cloud-init clean --logs
 
-#cleanup shell history
+# cleanup shell history
 cat /dev/null > ~/.bash_history && history -c
 history -w
 
-#shutdown
+# shutdown
 shutdown -h now
 ```
 
@@ -132,19 +124,19 @@ shutdown -h now
 sudo swapoff --all
 sudo sed -ri '/\sswap\s/s/^#?/#/' /etc/fstab
 
-# If you want to dynamically create a hostname, uncomment the below from /etc/rc.local:
+# If you want to create a hostname dynamically, uncomment the below from /etc/rc.local:
 # dynamically create hostname (optional)
-# if hostname | grep localhost; then
+#if hostname | grep localhost; then
 #   hostnamectl set-hostname "$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo '')"
 #fi
 ```
 
 ### Add As A Template To vSphere
 
-At this point, we've customized the VM and it should be shut off.
+At this point, we've customized the VM, and should shut it off.
 
 {{< notice warning >}}
-Make sure to disconnect the CDROM and the NIC before adding as template  
+Make sure to disconnect the CDROM and the NIC before adding as the image as a template  
 Right Click VM > Edit Settings > deselect...
 {{< /notice >}}
 

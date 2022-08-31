@@ -23,26 +23,24 @@ categories: []
 cover:
   image: /img/self-updating-gitops-cover.jpg
 
-aliases:
-- "/post/auto-gitops-isitstillrunning.com/"
-
+slug: "self-updating-gitops"
 ---
 
 I'm fascinated with the idea of automating myself out of a job.
 
-Throughout my career, I've done **a lot** of server maintenance. I've seen first hand what happens when you don't update often. I know how painful it is to do multiple "catch up" upgrades for older software.
+Throughout my career, I've done **a lot** of server maintenance. I've seen firsthand what happens when you don't update often. I know how painful it is to do multiple "catch-up" upgrades for older software.
 
-Over the past 5 years, open source containerization has dominated the industry and there's no signs of slowing down.
+Over the past five years, open source containerization has dominated the industry, and there are no signs of slowing down.
 
-We're at the point now that we've abstracted a lot of the "sharp-edges" around application development. Today, applications are less reliant on the underlying hardware. Kubernetes is the abstraction layer that helps applications **just work™**
+We're at the point now that we've abstracted most of the "sharp edges" around application development. Today, applications are less reliant on the underlying hardware. Kubernetes is the abstraction layer that helps applications **just work™**
 
-That got me thinking about what the next evolution was for cloud native practitioners.
+That got me thinking about the next evolution for cloud-native practitioners.
 
 I posted a silly question on Twitter about "turning on all the automation."
 
 {{< tweet user="jimmangel" id="1297254167262769159" >}}
 
-In this proposal, the cluster would self-upgrade and GitOps would update applications, including itself. High level overview: 
+In this proposal, the cluster would self-upgrade, and GitOps would update applications, including itself. High-level overview: 
 
 [![Overview](/img/self-updating-gitops-high-level.png#center)](/img/self-updating-gitops-high-level.png#center)
 
@@ -56,51 +54,51 @@ There's so much that could go wrong with this. I should remind everyone that thi
 
 I wanted to try this using local VMs. So I spun up 3 Ubuntu VMs on VMware Workstation. It seems like cheating to use a cloud provider for auto-patching.
 
-In my first attempt, I built the cluster using [kube-spray](https://github.com/kubernetes-sigs/kubespray) because it's production ready with more "batteries included." The "batteries included" ended up obscuring some of the configuration; which later came to bite me.
+In my first attempt, I built the cluster using [kube-spray](https://github.com/kubernetes-sigs/kubespray) because it's production ready with more "batteries included." The "batteries included" obscured some of the configuration, which later bit me.
 
 {{< tweet user="jimmangel" id="1304925547752026112" >}}
 
 ### isitstillrunning.com
 
-Once the infrastructure was stable-ish and auto-updating, I launched a [website: isitstillrunning.com](https://isitstillrunning.com) to track the cluster's progress. A script on the control plane would scrape the node and commit the data back in GitHub daily (which then triggers a website build).
+Once the infrastructure was stable-ish and auto-updating, I launched a website: [isitstillrunning.com](https://isitstillrunning.com), to track the cluster's progress. A script on the control plane would scrape the node and commit the data back to GitHub daily (which then triggers a website build).
 
-The cluster ran for **8 months** and survived 2 major releases and a handful of patch releases! :tada: 
+The cluster ran for **eight months** and survived two major releases and a handful of patch releases! :tada: 
 
-However, I made a couple mistakes when configuring kubespray and I had to redo the entire project in June of 2021 after everything broke. It wasn't only kubespray, it was also...
+However, I made some mistakes when configuring kubespray, and I had to redo the entire project in June of 2021 after everything broke. It wasn't only kubespray; it was also:
 
 ### The 2021 Texas Power Crisis
 
-In mid-February of 2021, [central Texas lost power](https://en.wikipedia.org/wiki/2021_Texas_power_crisis) for a week impacting millions. I was without power and water for 5 days which was longer than the cluster's DHCP leases. Each node in the cluster received a new IP. 🤦
+In mid-February of 2021, [central Texas lost power](https://en.wikipedia.org/wiki/2021_Texas_power_crisis) for a week, impacting millions. I was without power and water for five days which was longer than the cluster's DHCP leases. Each node in the cluster received a new IP. 🤦
 
 {{< tweet user="jimmangel" id="1372196855161950216" >}}
 
-Below is the final screen grab before I took the cluster offline. The gaps on the right side is the script failing due to the lack of a working Kubernetes cluster.
+Below is the final screen grab before I took the cluster offline. The gap on the right side are when the script fails due to the lack of a working Kubernetes cluster.
 
 ![](https://i.imgur.com/rDmKoIN.png#center)
 
 ## We can rebuild it
 
-With a fresh slate, I chose to automate most of what I did. This helps for rebuilding after future failures. A couple changes and "lessons learned" that I'm going to add:
+With a fresh slate, I automated most of what I did. Automating the build helps for rebuilding after future failures. A couple of changes and "lessons learned" that I'm going to add:
 
-- Use reserved / static IPs
+- Use reserved/static IPs
 - Take etcd backups
-- Use Flux v2 (more of a toolkit then operator)
+- Use Flux v2 (more of a toolkit then an operator)
 - Take Calico out of flux, apply [the Calico CNI file](https://docs.projectcalico.org/manifests/calico.yaml) often
 - Leverage more `helm` and less `kustomize` for automation
 
-It would have been great to have Calico auto-update based on image tags or repositories, but it became more complex than it was worth for this project. Let me know if you have thoughts on how to better handle the CNI!
+It would have been great to have Calico auto-update based on image tags or repositories, but it became more complex than it was worth for this project. Let me know if you have thoughts on how to handle the CNI better!
 
 ## Create the cluster
 
 I wrote my own Ansible playbooks because I want know my cluster's exact configuration. I also tried to make the playbook easy to read and update. By leveraging Ansible, my future changes and maintenance will be a lot easier.
 
-The Ansible scripts work on any OS but for this project I'm using Ubuntu 20.04 LTS VMs. The most important thing is having 3 IPs that we can use for Ansible.
+The Ansible scripts work on any OS, but for this project, I'm using Ubuntu 20.04 LTS VMs.
 
 > I'm using Ubuntu for (free) [Canonical Livepatch Service](https://ubuntu.com/security/livepatch) which I use to keep our kernel up to date.
 
 ## Set static IPs
 
-Let's try to avoid having a natural disaster turn into a technical disaster. This depends 100% on your network. I use a router from Unifi and can set static IPs through the UI.
+Let's avoid having a natural disaster turn into a technical one. This depends on how your network is configured. I use a router from Unifi and can set static IPs through the UI.
 
 ## Setup Ansible config and access
 
@@ -146,7 +144,7 @@ If it all comes back successful, you're ready to go!
 
 ## Playbook-1: Update everything and snapshot
 
-If you're interested in what's installed, look at `playbooks/update.yaml`. I borrowed much of this playbook from [linuxsysadmins.com](https://www.linuxsysadmins.com/install-kubernetes-cluster-with-ansible/)
+If interested in what's installed, look at `playbooks/update.yaml`. I borrowed much of this playbook from [linuxsysadmins.com](https://www.linuxsysadmins.com/install-kubernetes-cluster-with-ansible/)
 
 The first playbook gets us to a "clean slate" by running updates on all the machines and installing the necessary repos / components.
 
@@ -167,36 +165,36 @@ To summarize what's happening:
 - reboot
 
 
-Once complete, let's take a snapshot of the VMs to revert at any point. This is also helpful if I ever want to create a node template. I'm using VMware Workstation to take a snapshot.
+Once complete, let's take a snapshot of the VMs to revert at any point. This is also helpful if I ever want to create a node template.
 
 ## Playbook-2: Force version of Kubernetes and components
 
-I'm going to install 1 minor version so I can see if the automation and updates work. By default, the script takes the value from `inventory.yaml`.
+I'm going to install one minor version to see if the automation and updates work. By default, the script takes the value from `inventory.yaml`.
 
 ```bash
 ansible-playbook playbooks/set-k8s-version.yaml -K
 ```
 
-You can also lookup and specify a version of k8s.
+You can also look up and specify a version of k8s.
 
 ```bash
 # `apt-cache madison kubeadm | grep 1.20`
 ansible-playbook playbooks/set-k8s-version.yaml --extra-vars "kubernetes_version=1.20.7-00" -K
 ```
 
-Be careful running this on existing clusters. Running mix-matched version of utilities is not recommended. Always ensure your tools stay within the [version skew](https://kubernetes.io/releases/version-skew-policy/).
+Be careful running this on existing clusters. Running a mix-matched version of utilities is not recommended. Always ensure your tools stay within the [version skew](https://kubernetes.io/releases/version-skew-policy/).
 
 ## Playbook-3: Install Kubernetes
 
-I created a kubeadm template which acts as the main driving configuration for Kubernetes. If you open `templates/kubeadm-config.j2` up you can see there are a lot of parameters for Kubernetes.
+I created a kubeadm template which acts as the main driving configuration for Kubernetes. If you open `templates/kubeadm-config.j2` up, you can see there are a lot of parameters for Kubernetes.
 
-Kubeadm doesn't support changing any parameters while upgrading, so it is important to get right from the start.
+Kubeadm doesn't support changing any parameters while upgrading, so getting right from the start is essential.
 
 ```bash
 ansible-playbook playbooks/install-k8s.yaml -K
 ```
 
-In a few minutes you'll have a cluster!
+In a few minutes, you'll have a cluster!
 
 ![](https://i.imgur.com/ZOiae5K.png#center)
 
@@ -208,7 +206,7 @@ Once logged in, `kubectl` should already be configured.
 
 ### Create etcd Prometheus secret
 
-Prometheus is included in my GitOps stack, let's make sure it can scrape etcd by creating the authentication certificate as a secret.
+Prometheus is included in my GitOps stack; let's make sure it can scrape etcd by creating the authentication certificate as a secret.
 
 ```bash
 # Creates secret for Prometheus scraping
@@ -239,7 +237,7 @@ curl -s https://fluxcd.io/install.sh | sudo bash
 . <(flux completion bash)
 ```
 
-`flux bootstrap` is supposed to be idempotent and either creates or pulls a repo depending on if it exists. Once setup, the CLI can do more. Check out the [official docs](https://fluxcd.io/docs/installation/#bootstrap)!
+`flux bootstrap` is supposed to be idempotent and either create or pull a repo, depending on its existence. Once set up, the CLI can do more. Check out the [official docs](https://fluxcd.io/docs/installation/#bootstrap)!
 
 ```bash
 flux bootstrap github \
@@ -251,7 +249,7 @@ flux bootstrap github \
   --personal
 ```
 
-I did a TON of work to automate my flux deployments. It could almost be another post. If you're interested in looking at the repo [click here](https://github.com/jimangel/auto-gitops-v2).
+I did a TON of work to automate my flux deployments. It could almost be another post. If you're interested in looking at the repo, [click here](https://github.com/jimangel/auto-gitops-v2).
 
 ## Playbook-4: Configure auto-updates
 
@@ -268,7 +266,7 @@ The defaults cover the OS but don't include Docker and Kubernetes. To add Docker
         "Docker:focal";
 ```
 
-If you want to test it out you can, however, keep in mind that you're actually upgrading everything.
+If you want to test it out, you can; however, keep in mind that you're upgrading everything.
 
 ```bash
 sudo unattended-upgrade –dry-run –debug
@@ -337,7 +335,7 @@ git add /home/jangel/go/src/github.com/jimangel/isitstillrunning.com/data/curren
 git commit -m "Updating current data $(date +'%m-%d-%Y')"
 git push -u origin
 
-# check for a new CNI... (ShitOps)
+# check for a new CNI
 curl -s https://docs.projectcalico.org/manifests/calico.yaml \
 | sed 's/# - name: CALICO_IPV4POOL_CIDR/- name: CALICO_IPV4POOL_CIDR/' \
 | sed 's/#   value: "192.168.0.0\/16"/  value: "172.16.0.0\/12"/' > /tmp/calico.yaml \
@@ -357,9 +355,9 @@ Lastly, I enabled [LivePatch](https://ubuntu.com/advantage) to auto-patch the ke
 
 ## Conclusion
 
-I'm glad to be up and running. It took me longer due to building the automation but I hope it opens up for future fast iterations. I'm not entirely sure my Flux configuration is optimal. I might consider trying out Argo, an alternative GitOps engine.
+I'm glad to be up and running. Building the automation took me longer, but I hope it opens up for future fast iterations. I'm not entirely sure my Flux configuration is optimal. I might consider trying out Argo, an alternative GitOps engine.
 
-There's a lot of work above that could have been automated and I might; when I revist this.
+There's a lot of work above that could have been automated, and I might; when I revisit this.
 
 My next steps are:
 
@@ -369,4 +367,4 @@ My next steps are:
 - Look into rotating Flux keys
 - Look into integrating secrets with my GitOps strategy (Sealed Secrets / SOPS)
 
-As issues pop up with the cluster I'll update this post! Cheers!
+As issues pop up with the cluster, I'll update this post! Cheers!

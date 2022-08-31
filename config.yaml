@@ -9,6 +9,9 @@ languageCode: en-us
 title: jimangel.io
 theme: ["hugo-notice", "PaperMod"]
 
+permalinks:
+  posts: /posts/:slug/ # uses title if no slug is provided
+
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456
 ignoreErrors:
@@ -47,7 +50,7 @@ languages:
                 - name: Search
                   url: search/
                   weight: 10
-                - name: About Me
+                - name: About Me (GitHub)
                   url: https://github.com/jimangel
 
 outputs:
@@ -72,13 +75,14 @@ params:
   DateFormat: "January 2, 2006"
   defaultTheme: auto # dark, light, auto
   disableThemeToggle: false
+  disableShare: true
   ShowReadingTime: true
-  ShowShareButtons: true
-  ShareButtons:
-    - twitter
-    - linkedin
-    - reddit
-  ShowPostNavLinks: true
+  ShowShareButtons: false
+  #ShareButtons:
+  #  - twitter
+  #  - linkedin
+  #  - reddit
+  ShowPostNavLinks: false # Show Previous and Next Posts below a Post
   ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
   ShowWordCount: false
@@ -108,18 +112,20 @@ params:
         subtitle: |
            Infrastructure Cloud Consultant at <span style="color:#4285F4">G</span><span style="color:#DB4437">o</span><span style="color:#F4B400">o</span><span style="color:#4285F4">g</span><span style="color:#0F9D58">l</span><span style="color:#DB4437">e</span>
 
-           _Littering the internet with docs as I figure things out_
+           Littering the internet with docs as I figure out things
         imageUrl: "/img/me.jpeg" # optional
         imageWidth: 120 # custom size
         imageHeight: 120 # custom size
         buttons:
-          - name: Blog posts
-            url: "/archives"
+          - name: Blog Archive
+            url: "/archive"
         #  - name: Github
         #    url: "https://github.com/jimangel"
   socialIcons:
     - name: twitter
       url: "https://twitter.com/JimmAngel"
+    - name: github
+      url: "https://github.com/jimangel"
     - name: linkedin
       url: "https://www.linkedin.com/in/angeljim/"
     - name: rss

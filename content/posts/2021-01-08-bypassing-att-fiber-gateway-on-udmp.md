@@ -17,28 +17,27 @@ categories: []
 cover:
   image: /img/bypassing-att-fiber-gateway-featured.jpg
 
-aliases:
-- "/post/bypassing-att-fiber-gateway-on-udmp/"
+slug: "bypassing-att-fiber-gateway-on-udmp"
 
 ---
 
 The fundamental problem is: 
 
 {{< notice info >}}
-AT&T does not allow you to remove their residential gateway, even if you'd rather use something better.
+AT&T does not allow you to remove their residential gateway, even if you'd prefer to use something better.
 {{< /notice >}}
 
-You must use AT&T's provided residential gateway, such as a NVG5x9, BGW210, or 5268AC, to authenticate to AT&T's fiber internet service.
+You must use AT&T's provided residential gateway, such as an NVG5x9, BGW210, or 5268AC, to authenticate to AT&T's fiber internet service.
 
-Considering AT&T's gateway handles all inbound and outbound traffic, it can cause problems if you're running another router gateway behind it. To prevent managing traffic twice, some AT&T gateways have a mode called IP passthrough. IP passthrough allows you to specify a different device to act as the WAN gateway and the original gateway forwards all traffic to it without interfering. Even with IP passthrough, you're limited by AT&T's gateway NAT table size and you *still* have an extra hop.
+Considering that AT&T's gateway handles all inbound and outbound traffic, it can cause problems if you run another router gateway behind it. Some AT&T gateways have a mode called "IP passthrough" to prevent managing traffic twice. IP passthrough allows you to specify a different device to act as the WAN gateway, and the original gateway forwards all traffic to it without interfering. Even with IP passthrough, you're limited by AT&T's gateway NAT table size and you *still* have an extra hop.
 
 {{< notice tip >}}
 Even with the NAT limitations, I would recommend using the IP passthrough mode as a first choice to bypass AT&T for most folks due to ease of setup.
 {{< /notice >}}
 
-To be honest, I haven't had a ton of issues using IP passthrough mode, but I couldn't resist downsizing my network devices and hacking on some hardware.
+To be honest, I haven't had many issues using IP passthrough mode, but I couldn't resist downsizing my network devices and hacking on some hardware.
 
-I've always been on the fence about "bypassing" AT&T's device because I didn't understand how I could revert if I got stuck. It turns out, the bulk of the work is prep. In fact, you can get to the very end and revert everything on the UDM Pro by running the following commands:
+I've always been on the fence about "bypassing" AT&T's device because I didn't understand how I could revert if I got stuck. It turns out that the bulk of the work is prep. You can get to the very end and revert everything on the UDM Pro by running the following commands:
 
 ```shell
 # stop the wpa_supplicant-udmpro container
@@ -66,7 +65,7 @@ For AT&T Fiber to work, the ONT port must *also* provide EAP-TLS 802.1X authenti
 
 802.1X is usually used for enterprise WiFi authentication. AT&T fiber uses 802.1X to authenticate their customer's residential gateway.
 
-Let's break down what 802.1X is; there's only three components needed for 802.1X authentication.
+Let's break down what 802.1X is; only three components are needed for 802.1X authentication.
 
 * A supplicant or client (NVG589 ONT) to initiate 802.1X negotiation
 * A controller (???) to handle access before and after 802.1X authentication
@@ -81,19 +80,19 @@ In AT&T's default setup, we have:
 * **???**: The controller handling authentication access
 * **AT&T RADIUS Server**: Based on hardware AT&T TLS certificates
 
-The NVG589 ONT port (**1**) handles 802.1X authentication (**2**) allowing for internet (**3**) traffic.
+The NVG589 ONT port (**1**) handles 802.1X authentication (**2**), allowing for internet (**3**) traffic.
 
-Steps (**1**) and (**2**) are EAP. EAP stands for Extensible Authentication Protocol and is the way AT&T gateway's authenticate.
+Steps (**1**) and (**2**) are EAP. EAP stands for Extensible Authentication Protocol and is how AT&T gateways authenticate.
 
 {{< notice note >}}
-One very important factor about EAP-TLS is that it requires mutual TLS (mTLS). Notice a couple pictures above, that AT&T provides identification (TLS) as well as the NVG589 (TLS).
+One very significant factor about EAP-TLS is that it requires mutual TLS (mTLS). Notice a couple of pictures above that AT&T provides identification (TLS) and the NVG589 (TLS).
 {{< /notice >}}
 
 ![](/img/bypassing-att-fiber-gateway-zEACvlp.png#center)
 
 ## How do we bypass the AT&T gateway?
 
-We now know what the problem is; AT&T requires 802.1X authentication using certificates only available on their gateways. How can we bypass the gateway completely if certificates are required?
+We now know what the problem is: AT&T requires 802.1X authentication using certificates only available on their gateways. How can we bypass the gateway altogether if certificates are required?
 
 There's a handful of accepted methods with varying degrees of complexity. It also matters what your goal is and what devices you have.
 
@@ -109,7 +108,7 @@ This is a way to trick your AT&T connection using a switch and MAC spoofing. You
 
 ![](/img/bypassing-att-fiber-gateway-hVt3jAy.png#center)
 
-It's a [blue-green deployment](https://en.wikipedia.org/wiki/Blue-green_deployment) for WAN uplinks. It seems very simple to test, but not easy to maintain long term.
+It's a [blue-green deployment](https://en.wikipedia.org/wiki/Blue-green_deployment) for WAN uplinks. It seems very simple to test but not easy to maintain long term.
 
 {{< notice warning >}}
 Note: AT&T is currently installing fiber infrastructure that uses different authentication methods. If you're in one of those areas, none of these bypass methods will work. See [this thread](https://www.dslreports.com/forum/r32839785-AT-T-Fiber-Gateway-bypass-with-WPA-supplicant-stopped-working-2-days-ago) for more info.
@@ -121,13 +120,13 @@ This method proxies EAP packets between network interfaces for authentication, l
 
 ![](/img/bypassing-att-fiber-gateway-EdVc7Vz.png#center)
 
-The EAP proxy listens on both interfaces for EAP over LAN frames and forwards EAP packets between interfaces. It works well because there is no need for advanced setup.
+The EAP proxy listens on both interfaces for EAP over LAN frames and forwards EAP packets between interfaces. It works well because there is no need for an advanced setup.
 
-The negative is, you're still taking up a port and relying on a running gateway at all times for authentication. Find more details [here](https://github.com/jaysoffian/eap_proxy).
+The negative is, that you're still taking up a port and relying on a running gateway at all times for authentication. Find more details [here](https://github.com/jaysoffian/eap_proxy).
 
 ### The `netgraph` method
 
-Made popular by GitHub user MonkWho, [this option](https://github.com/MonkWho/pfatt) is mainly used by pfSense users and involves using [netgraph](https://www.freebsd.org/cgi/man.cgi?netgraph(4)) to bridge 802.1X traffic to the NVG589 ONT port. The result is a similar solution to the EAP proxy only using a different tool. This solution still requires relying on a running gateway at all times for authentication.
+Made popular by GitHub user MonkWho, [this option](https://github.com/MonkWho/pfatt) is mainly used by pfSense users and involves using [netgraph](https://www.freebsd.org/cgi/man.cgi?netgraph(4)) to bridge 802.1X traffic to the NVG589 ONT port. The result is a similar solution to the EAP proxy, only using a different tool. This solution still requires relying on a running gateway at all times for authentication.
 
 ### The WPA supplicant method
 
@@ -151,7 +150,7 @@ This is the method we're implementing. Earlier I mentioned that 802.1X only need
 
 To get the data from an AT&T gateway, we must use public knowledge of security vulnerabilities in old NVG589 gateway's firmware to gain root access.
 
-If you've spent any time searching this topic, you'll see that most people buy their rooted AT&T certificates off of eBay. This could be due to the fact that rooting is too complex or not worth their time. I love learning new skills and I'm ready to get my hands dirty, let's give it a try!
+If you've spent time searching this topic, you'll see that most people buy their rooted AT&T certificates from eBay. This could be because rooting is too complex or not worth their time. I love learning new skills, and I'm ready to get my hands dirty, let's give it a try!
 
 To extract the certificates, we generally have the following options:
 
@@ -164,21 +163,21 @@ To extract the certificates, we generally have the following options:
 
 ### Gain admin access on a NVG589 ([root](https://github.com/bypassrg/att/blob/master/README.md#nvg589))
 
-I first came across a promising [thread](https://github.com/bypassrg/att#rooting-1) that talks about using software exploits by upgrading or downgrading the NVG firmware to an exploitable version.
+I first encountered a promising [thread](https://github.com/bypassrg/att#rooting-1) about using software exploits by upgrading or downgrading the NVG firmware to an exploitable version.
 
 The [CVE-2017-14115](https://www.cvedetails.com/cve/CVE-2017-14115/) exploit:
 
 >The AT&T U-verse 9.2.2h0d83 firmware for the Arris NVG589 and NVG599 devices, when IP Passthrough mode is not used, configures ssh-permanent-enable WAN SSH logins to the remotessh account with the 5SaP9I26 password, which allows remote attackers to access a "Terminal shell v1.0" service, and subsequently obtain unrestricted root privileges, by establishing an SSH session and then entering certain shell metacharacters and BusyBox commands.
 
-Unrelated, can we talk about how crazy it is that there was a **WAN exposed**, **HARD CODED**, **SSH login** for **ANY** period of time on these devices? Oof...
+Unrelated, can we talk about how crazy it is that there was a **WAN exposed**, **HARD-CODED**, **SSH login**? Oof.
 
-I **abruptly** learned that AT&T has patched most of the exploits on modern, internet connected, routers. No matter how many times I upgraded or downgraded, I could *not* root my personal NVG589.
+I **abruptly** learned that AT&T patched most of the exploits on modern, internet-connected routers. No matter how many times I upgraded or downgraded, I could *not* root my NVG589.
 
 As I went deeper down the rabbit hole, it seemed like my only option was going to be exploiting the hardware. So I bought another NVG589 off of eBay to avoid bricking my only working device.
 
 ![](/img/bypassing-att-fiber-gateway-Jc6hWUx.png#center)
 
-When the NVG589 arrived, I plugged it in off-line.
+When the NVG589 arrived, I plugged it in offline.
 
 Luckily it had older firmware that allowed me to downgrade to version `9.2.2h0d83` and SSH into it with no problems.
 
@@ -190,7 +189,7 @@ ping -c 1 192.168.1.254;echo /bin/sh >>/etc/shells
 ping -c 1 192.168.1.254;sed -i 's/cshell/nsh/g' /etc/passwd
 ```
 
-Afterwards, restart the session and switch to root:
+Afterward, restart the session and switch to root:
 
 ```shell
 exit
@@ -217,11 +216,11 @@ cp cert.tar /www/att/images
 cp /tmp/mfg.dat /www/att/images
 ```
 
-To download the two files, *right click* > *Save Link As...* 192.168.1.254/images/mfg.dat and 192.168.1.254/images/cert.tar to your **local** device. When I clicked on the links, instead of downloading, the browser kind of freaked out.
+To download the two files, *right-click* > *Save Link As...* 192.168.1.254/images/mfg.dat and 192.168.1.254/images/cert.tar to your **local** device. When I clicked on the links, instead of downloading, my browser freaked out.
 
 ## Extract private keys from `mfg.dat` using [mfg_dat_decode tool](https://www.devicelocksmith.com/2018/12/eap-tls-credentials-decoder-for-nvg-and.html)
 
-The `mfg.dat` is a file like you might use to flash a BIOS. It is an entire flash "state" but we only want the certificates. If you're savvy in this field, the data can be manually mounted and extracted. However, there is nifty utility ([mfg_dat_decode tool](https://www.devicelocksmith.com/2018/12/eap-tls-credentials-decoder-for-nvg-and.html)) that does everything for you including bundling the output in a nice file.
+The `mfg.dat` is a file like you might use to flash a BIOS. It is an entire flash "state," but we only want the certificates. The data can be manually mounted and extracted if you're savvy in this field. However, there is nifty utility ([mfg_dat_decode tool](https://www.devicelocksmith.com/2018/12/eap-tls-credentials-decoder-for-nvg-and.html)) that does everything for you including bundling the output in a nice file.
 
 Following the instructions from [here](https://www.devicelocksmith.com/2018/12/eap-tls-credentials-decoder-for-nvg-and.html):
 
@@ -308,7 +307,7 @@ mkdir /mnt/data/podman/wpa_supplicant/
 cp -arfv /tmp/*pem /tmp/wpa_supplicant.conf /mnt/data/podman/wpa_supplicant/
 ```
 
-There is no need to delete the old files as `/tmp/` is purged after every reboot.
+Deleting the old files is unnecessary as `/tmp/` is purged after every reboot.
 
 Update the `wpa_supplicant.conf` file with the correct file paths of your `.pem` certificate files.
 
@@ -344,7 +343,7 @@ network={
 }
 ```
 
-If you see `WARNING! Missing AAA server root CA! Add AAA server root CA to CA_001E46-xxxxxx.pem` you might have done something wrong. I had this happen the first time and it was due to not extracting the certificates in the same directory.
+If you see `WARNING! Missing AAA server root CA! Add AAA server root CA to CA_001E46-xxxxxx.pem` you might have done something wrong. I had this happen the first time, and it was due to not extracting the certificates in the same directory.
 
 ## Podman
 
@@ -419,11 +418,11 @@ Let's breakdown exactly what the command is doing:
 * Run an Alpine container (that runs wpa_supplicant) as root (privileged) with real host networking attached
 * Name the container "wpa_supplicant-udmpro"
 * Mount the certs and config in the container at /etc/wpa_spplicant/conf/
-* Log (k8s default?) and restart always (as recommended)
-* Run the container in background (-d detached) with an interactive terminal (-it)
+* Log (k8s default?) and always restart (as recommended)
+* Run the container in the background (-d detached) with an interactive terminal (-it)
 * Launch `wpa_supplicant` (Docker ENTRYPOINT) with the following options ` -Dwired -ieth8 -c/etc/wpa_supplicant/conf/wpa_supplicant.conf` meaning to use the wired eth8 (-i) device to init 802.1X
 
-You did it! It should be running now, if not read on.
+You did it! It should be running now; if not, read on.
 
 ## Troubleshooting and logs
 
@@ -462,7 +461,7 @@ podman exec -it CONTAINER_ID /bin/bash
 podman rm wpa_supplicant-udmpro
 ```
 
-On the topic of troubleshooting, I read that a lot about people having issues that required spoofing ONT MAC addresses or forcing ONT traffic on [VLAN 0](https://www.cisco.com/c/en/us/td/docs/switches/connectedgrid/cg-switch-sw-master/software/configuration/guide/vlan0/b_vlan_0.pdf). I didn't have to change any of my default settings, but it's worth keeping in mind if you run out of options.
+Regarding troubleshooting, I read many people have issues that require spoofing ONT MAC addresses or forcing ONT traffic on [VLAN 0](https://www.cisco.com/c/en/us/td/docs/switches/connectedgrid/cg-switch-sw-master/software/configuration/guide/vlan0/b_vlan_0.pdf). I didn't have to change any of my default settings, but it's worth keeping in mind if you run out of options.
 
 ## Surviving reboots
 
@@ -484,9 +483,9 @@ if [ -d /mnt/data/on_boot.d ]; then
 fi
 ```
 
-At first I was [sus](https://www.urbandictionary.com/define.php?term=sus) about running a random person's GitHub debian package on my entire home network gateway. After looking at the [source code](https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script/dpkg-build-files), it seemed harmless.
+At first, I was suspicious about running a random person's GitHub debian package on my entire home network gateway. After looking at the [source code](https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script/dpkg-build-files), it seemed harmless.
 
-You can also [build the debian yourself](https://github.com/boostchicken/udm-utilities/blob/master/on-boot-script/build_deb.sh) if you're really tweaking about security.
+You can also [build the debian yourself](https://github.com/boostchicken/udm-utilities/blob/master/on-boot-script/build_deb.sh) if you're concerned about security.
 
 I followed the following steps in [this guide](https://github.com/boostchicken/udm-utilities/tree/master/on-boot-script#steps) to install the debian package.
 
@@ -529,11 +528,11 @@ Test it!
 reboot
 ```
 
-If everything worked, you should have internet access. You can confirm by SSHing into the UDM Pro and running `podman ps` to check for the `wpa_supplicant` container.
+If everything works, you should have internet access. You can confirm by SSHing into the UDM Pro and running `podman ps` to check for the `wpa_supplicant` container.
 
 ## Clean up
 
-Disable SSH on the UDM Pro, it's a good habit to leave it off.
+Disable SSH on the UDM Pro; it's a good habit to leave it off.
 
 Navigate to the UDM Pro's IP > Settings Manage Settings > Advanced > SSH (off)
 
@@ -551,7 +550,7 @@ Put another way:
 
 ![](/img/bypassing-att-fiber-gateway-w4OM6BU.png#center)
 
-I'm now comfortable factory reseting, stopping the container, or otherwise resetting the UDM Pro. I also feel safe in the choices I made to enable bypassing the NVG589.
+I'm now comfortable factory resetting, stopping the container, or otherwise resetting the UDM Pro. I also feel safe in the choices I made to enable bypassing the NVG589.
 
 It also feels good to understand exactly how I'm bypassing the AT&T router and I don't foresee any upgrades impacting my UDM Pro.
 
@@ -563,7 +562,7 @@ But I'm ok with that.
 
 ![](/img/bypassing-att-fiber-gateway-LK1Wxys.png#center)
 
-Even though things are working for me, I still plan on adding additional information about dumping the NAND flash. Once I receive my gear I'll update this post. Good luck!
+Even though things are working for me, I still plan on adding additional information about dumping the NAND flash. Once I receive my gear, I'll update this post. Good luck!
 
 ## Helpful links
 
@@ -590,7 +589,7 @@ podman rm wpa_supplicant-udmpro
 podman run --privileged --network=host \
 --name=wpa_supplicant-udmpro \
 -v /mnt/data/podman/wpa_supplicant/:/etc/wpa_supplicant/conf/ \
---log-driver=k8s-file --restart always -d \
+--log-driver=ak8s-file --restart always -d \
 -ti localhost/jimangel/wpa_supplicant-udmpro:v1.0 \
 -Dwired -ieth9 -c/etc/wpa_supplicant/conf/wpa_supplicant.conf
 

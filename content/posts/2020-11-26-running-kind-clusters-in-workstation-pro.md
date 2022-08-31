@@ -19,23 +19,21 @@ categories: []
 cover:
   image: /img/kind-clusters-featured.png
 
-aliases:
-- "/post/running-kind-clusters-in-workstation-pro/"
-
+slug: "running-kind-clusters-in-workstation-pro"
 ---
 
 VMware Workstation Pro 16 recently announced support for [`kind`](https://docs.vmware.com/en/VMware-Workstation-Pro/16/rn/VMware-Workstation-16-Pro-Release-Notes.html#Whatsnew) Kubernetes clusters. `kind` stands for Kubernetes in Docker.
 
-Additionally, you can run containers on your desktop using `vctl.exe`. For a general comparison think of `vctl.exe` like the `docker` CLI ([commands](https://github.com/VMwareFusion/vctl-docs/blob/master/docs/getting-started.md#vctl-commands)).
+Additionally, you can run containers on your desktop using `vctl.exe`. For a general comparison, think of `vctl.exe` like the `docker` CLI ([commands](https://github.com/VMwareFusion/vctl-docs/blob/master/docs/getting-started.md#vctl-commands)).
 
-To use the new features in Workstation, it's a two step process:
+To use the new features in Workstation, it's a two-step process:
 * Start the [containerd](https://containerd.io/) based runtime with `vctl.exe system start`
 * Do container-y things
   * Run a container on the host with `vctl.exe run IMAGE_NAME` 
   * Launch a `kind` environment with `vctl.exe kind`
     * Create a `kind` cluster with `kind create cluster`
 
-Workstation uses a proprietary container runtime, CRX, based off of containerd. CRX stands for "Container Runtime for ESXi." `vctl.exe` and `kind` create a containers on CRX VMs. Each CRX VM is a new container runtime. A CRX VM includes a fast booting Linux kernel and minimal container runtime inside the guest. Since the Linux kernel couples with the hypervisor it has many tweaks to paravirtualize the container. For more details on CRX VMs, read "[Project Pacific Technical Overview](https://blogs.vmware.com/vsphere/2019/08/project-pacific-technical-overview.html)" or "[vSphere 7 Pods Explained](https://blogs.vmware.com/vsphere/2020/05/vsphere-7-vsphere-pods-explained.html)."
+Workstation uses a proprietary container runtime, CRX, based on containerd. CRX stands for "Container Runtime for ESXi." `vctl.exe` and `kind` create containers on CRX VMs. Each CRX VM is a new container runtime. A CRX VM includes a fast booting Linux kernel and minimal container runtime inside the guest. Since the Linux kernel couples with the hypervisor, it has many tweaks to paravirtualize the container. For more details on CRX VMs, read "[Project Pacific Technical Overview](https://blogs.vmware.com/vsphere/2019/08/project-pacific-technical-overview.html)" or "[vSphere 7 Pods Explained](https://blogs.vmware.com/vsphere/2020/05/vsphere-7-vsphere-pods-explained.html)."
 
 ## Overview
 
@@ -45,16 +43,16 @@ Helpful spoilers:
 * A CRX VM is still a vmx / vmdk on disk
 * Containers running in CRX VMs do not show in the Workstation Pro GUI
     * Discover with the `vmrun.exe` CLI via `& "C:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe" list`
-* By running containers in a VM (CRX), traffic and compute is more isolated between containers than on a traditional host
+* By running containers in a VM (CRX), traffic and compute are more isolated between containers than on a traditional host
 * `kind` accepts a `config.yaml` file to customize clusters
 
 ## Install console tools
 
-Select this option during the install of Workstation Pro 16. Workstation Pro 16 installs a utility called `vctl.exe` in your PATH. After that, the `vctl.exe` utility is accessible in all environments.
+Select this option during the installation of Workstation Pro 16. Workstation Pro 16 installs a utility called `vctl.exe` in your PATH. After that, the `vctl.exe` utility is accessible in all environments.
 
 ![](/img/kind-clusters-setup.png#center)
 
-First start the container runtime. The container runtime doesn't start or stop with the Workstation Player application.
+First, start the container runtime. The container runtime doesn't start or stop with the Workstation Player application.
 
 1. Open up a PowerShell terminal
 1. Run `vctl.exe system start` to start the container runtime
@@ -108,7 +106,7 @@ First make a general config file (`config.yaml`). I was unable to get node label
     '@ | Tee-Object -FilePath "config.yaml"
     ```
     
-    > Note: You can **NOT** supply mutliple control-plane nodes.
+    > Note: You can **NOT** supply multiple control-plane nodes.
 
 1. Create the cluster from the same window
 
@@ -116,11 +114,11 @@ First make a general config file (`config.yaml`). I was unable to get node label
     kind create cluster --config config.yaml
     ```
 
-    The process may take awhile depending on internet speed and configuration complexity.
+    Depending on internet speed and configuration complexity, the process may take a while.
 
 ## Use the cluster
 
-Below are sample commands that can be ran to inspect the new Kubernetes cluster.
+Below are sample commands to inspect the new Kubernetes cluster.
 
 Get cluster info
 
@@ -175,9 +173,9 @@ To purge all container data on your host, delete the content in
 
 Would I use Workstation to run containers instead of Docker on Windows? Probably not.
 
-If I had concerns about container tenant isolation at the host level, I would consider Workstation. Also, if I wanted to push container performance, I would look closer at Workstation's benchmarks. At that point it might be worth evaluating cloud options with temporary high compute workloads.
+If I had concerns about container tenant isolation at the host level, I would consider Workstation. Also, if I wanted to push container performance, I would look closer at Workstation's benchmarks. At that point, it might be worth evaluating cloud options with temporary high compute workloads.
 
-I feel guilty for saying this, but I was hoping to see the containers in the VMware Workstation GUI. It would be great to have all virtualized containers and machines under one system. Also, in my dream world, I could change the state of containers in the GUI. At the very least, a GUI for triggering `vctl.exe` (docker-esque) commands.
+I feel guilty for saying this, but I was hoping to see the containers in the VMware Workstation GUI. Having all virtualized containers and machines under one system would be great. Also, in my dream world, I could change the state of containers in the GUI. At the very least, a GUI for triggering `vctl.exe` (docker-esque) commands.
 
 It's still awesome to see innovative solutions like this for embracing containers in consumer products. I look forward to future iterations of Workstation.
 

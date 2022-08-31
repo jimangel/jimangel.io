@@ -19,22 +19,20 @@ categories: []
 cover:
   image: /img/google-cloud-vpn-pfsense-featured.png
 
-aliases:
-- "/post/google-cloud-vpn-pfsense/"
-
+slug: "google-cloud-vpn-pfsense"
 ---
 
 Google Cloud's HA VPN creates a tunnel between Google's VPC [private LAN](https://en.wikipedia.org/wiki/Private_network) and your [private LAN](https://en.wikipedia.org/wiki/Private_network). All traffic is encrypted between locations by default and BGP dynamically updates each site's routing tables.
 
-GCE VMs created without an external interface can't access the internet by default. The GCE VMs are still accessible from internal via local IPs if there's a VPN in place. As a result, the attack surface is less because it is more difficult for attackers to reach the VMs. If desired, a [Cloud NAT](https://cloud.google.com/solutions/building-internet-connectivity-for-private-vms#create_a_nat_configuration_using_cloud_router) can allow internet access without an external interface. 
+GCE VMs created without an external interface can't access the internet by default. The GCE VMs are still accessible internally via local IPs if there's a VPN in place. As a result, the attack surface is less because it is more difficult for attackers to reach the VMs. A [Cloud NAT](https://cloud.google.com/solutions/building-internet-connectivity-for-private-vms#create_a_nat_configuration_using_cloud_router) can be created to allow internet access without an external interface, if needed.
 
-Cloud VPNs make it easier to share small amounts of data between locations. If there's a need to transfer more than 100GB of data, it's better to use a dedicated interconnect for network performance. VPNs could also connect cloud providers for a true "hybrid-cloud" approach or migration between clouds.
+Cloud VPNs make it easier to share small amounts of data between locations. If there's a need to transfer more than 100GB of data, it's better to use a dedicated interconnect for network performance. VPNs could also connect cloud providers for an authentic "hybrid-cloud" approach or migration between clouds.
 
-A tunnel costs $36 a month billed hourly. The only other cost incurred is the standard network egress price starting at 12￠ a GB. If you don't have a ton of machines to connect, it is more cost effective to install a per-machine VPN using something like [Tailscale](https://tailscale.com/).
+A tunnel costs $36 a month, billed hourly. The only other cost incurred is the standard network egress price starting at 12￠ a GB. If you don't have a ton of machines to connect, it is more cost-effective to install a per-machine VPN using something like [Tailscale](https://tailscale.com/).
 
 ## End goal
 
-A working Cloud HA VPN connected to a local pfSense gateway. HA VPN requires dynamic routing (BGP) and adds an SLA if you run two tunnels. I'm going to only set up a single tunnel and ignore the SLA. For BGP, I'm using a private ASN.
+A working Cloud HA VPN connected to a local pfSense gateway. HA VPN requires dynamic routing (BGP) and adds an SLA if you run two tunnels. I plan to set up a single tunnel and ignore the SLA. For BGP, I'm using a private ASN.
 
 ## GCP Setup
 
@@ -42,19 +40,19 @@ In [Google Cloud Console](https://console.cloud.google.com/), find *Hybrid Conne
 
 ![](/img/google-cloud-vpn-pfsense-hc-vpn-1.png#center)
 
-Next choose *HA VPN*.
+Next, choose *HA VPN*.
 
 ![](/img/google-cloud-vpn-pfsense-hc-vpn-2.png#center)
 
-Create a peer VPN gateway that uses your WAN IP as the interface 0 address. If you're not sure your WAN IP find it at [whatismyipaddress.com](https://whatismyipaddress.com/)
+Create a peer VPN gateway that uses your WAN IP as the interface 0 address. If you're not sure what your WAN IP is, find it at [whatismyipaddress.com](https://whatismyipaddress.com/)
 
 ![](/img/google-cloud-vpn-pfsense-hc-vpn-3.png#center)
 
-Create a Cloud Router. For the ASN you can use any private ASN that is not already in use. I don't currently have any BGP setup, so I'll use `4200000000`.
+Create a Cloud Router. For the ASN, you can use any private ASN that is not already in use. I don't currently have any BGP setup, so I'll use `4200000000`.
 
 ![](/img/google-cloud-vpn-pfsense-hc-vpn-4.png#center)
 
-Give the tunnel a name like `homelab-vpn-tunnel` and generate a pre-shared key. This is important and needed later. For security reasons, you could [generate your own key](https://cloud.google.com/network-connectivity/docs/vpn/how-to/generating-pre-shared-key). You can add more VPN tunnels to the same VPN gateway afterwards.
+Give the tunnel a name like `homelab-vpn-tunnel` and generate a pre-shared key. This is important and needed later. For security reasons, you could [generate your own key](https://cloud.google.com/network-connectivity/docs/vpn/how-to/generating-pre-shared-key). You can add more VPN tunnels to the same VPN gateway afterward.
 
 Save the key somewhere safe as you need it again later!
 
@@ -82,9 +80,9 @@ Once complete, Google shows a full summary.
 
 The first thing to do is allow APIPA (Automatic Private IP Addressing) traffic. By default, pfSense will drop all APIPA IPs since link-local addresses should never come from an external interface.
 
-It is good practice to leave this disabled, in our case Google requires using link-local IPs for BGP sessions. The console refuses to save if you update the BGP session to include a non link-local IP address.
+It is good practice to leave this disabled; in our case, Google requires using link-local IPs for BGP sessions. The console refuses to save if you update the BGP session to include a non-link-local IP address.
 
-Navigate to *System* > *Advanced* > *Firewall & NAT* and select *Allow APIPA traffic* and save.
+Navigate to *System* > *Advanced* > *Firewall & NAT* select *Allow APIPA traffic* and save.
 
 ![](/img/google-cloud-vpn-pfsense-apipa.png#center)
 
@@ -96,7 +94,7 @@ Next, configure the VPN tunnel phase 1 by navigating to *VPN* > *Tunnels* > *Add
 - **Interface:** WAN
 - **Remote Gateway:** 35.242.118.117 (From GCP)
 - **Pre-Shared Key:** (from above)
-- Save (taking the rest of defaults)
+- Save (taking the rest of the defaults)
 
 Now setup the BGP phase 2 by navigating to *VPN* > *Tunnels* > *Add P2*
 
@@ -105,9 +103,9 @@ Now setup the BGP phase 2 by navigating to *VPN* > *Tunnels* > *Add P2*
 - **Mode:** Routed (VTI)
 - **Local Network:** Network / BGP Private IP / 30
 - **Remote Network:** Network / BGP Private IP / 30
-- Save (taking the rest of defaults)
+- Save (taking the rest of the defaults)
 
-We should now see that the tunnel connecting and waiting on a BGP peer.
+We should now see the tunnel connecting and waiting on a BGP peer.
 
 ![](/img/google-cloud-vpn-pfsense-hc-vpn-up.png#center)
 
@@ -141,7 +139,7 @@ allow to 169.254.0.1
 
 ![](/img/google-cloud-vpn-pfsense-raw-config.png#center)
 
-More details on each configuration parameter in the [OpenBGPD man page](https://man.openbsd.org/bgpd.conf.5#GLOBAL_CONFIGURATION). At this point you can confirm that the tunnel and BGP is working with GCP console.
+More details on each configuration parameter in the [OpenBGPD man page](https://man.openbsd.org/bgpd.conf.5#GLOBAL_CONFIGURATION). At this point, you can confirm that the tunnel and BGP is working with GCP console.
 
 ![](/img/google-cloud-vpn-pfsense-hc-vpn-up-bgp.png#center)
 
@@ -153,9 +151,9 @@ Navigate to *Networking* > *VPC network* > *Firewall* and add a rule allowing yo
 
 ![](/img/google-cloud-vpn-pfsense-google-fw.png#center)
 
-For more security Google's Cloud VPN supports `allowlists` and `denylists` for specific IPs to reach Google's VPC. Find more information on restricting IPs in Google's [official documentation](https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview#vpn-org-policy).
+For more securit, Google's Cloud VPN supports `allowlists` and `denylists` for specific IPs to reach Google's VPC. Find more information on restricting IPs in Google's [official documentation](https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview#vpn-org-policy).
 
-Also, depending on how you configured your VPC, the Cloud Router advertises either a single region's subnet or all subnets in the VPC. VPC's dynamic routes, *Regional* or *Global*, control this. I want all subnets advertised so I'll edit the VPC to *Global* ([more info](https://cloud.google.com/vpc/docs/vpc#routing_for_hybrid_networks)).
+Also, depending on how you configured your VPC, the Cloud Router advertises a single region's subnet or all subnets in the VPC. VPC's dynamic routes, *Regional* or *Global*, control this. I want all subnets advertised, so I'll edit the VPC to *Global* ([more info](https://cloud.google.com/vpc/docs/vpc#routing_for_hybrid_networks)).
 
 ![](/img/google-cloud-vpn-pfsense-global-vpc.png#center)
 
@@ -170,17 +168,17 @@ Create a GCE VM with only a private IP by clicking *Management, security, disks,
 
 Once it's up, I can confirm that my local machine can ping GCP private IPs and NOT the other way around.
 
-Let's add a rule to allow GCP to ping our resources as another test. Navigate to the *IPsec* firewall rules in pfSense. We'll add a rule for ANYTHING in Google's [supernet](https://en.wikipedia.org/wiki/Supernetwork) (10.128.0.9/9) to request a ping (ICMP) for ANYTHING on our local network (LAN2). This is with the assumption that LAN2 also accepts ping requests.
+Let's add a rule to allow GCP to ping our resources as another test. Navigate to the *IPsec* firewall rules in pfSense. We'll add a rule for ANYTHING in Google's [supernet](https://en.wikipedia.org/wiki/Supernetwork) (10.128.0.9/9) to request a ping (ICMP) for ANYTHING on our local network (LAN2). We are assuming that LAN2 also accepts ping requests.
 
 ![](/img/google-cloud-vpn-pfsense-pfsense-fw.png#center)
 
 ## Conclusion
 
-A permanent VPN isn't practical for my needs but it would be interesting to automate the setup. That way you would able to establish and tear down VPN connectivity. On demand VPN connectivity would give you the option to extend your homelab as needed.
+An on-demand VPN connectivity allows you to extend your homelab as needed. A permanent VPN isn't practical for my needs, but it would be interesting to automate the setup. That way, you would be able to establish and tear down VPN connectivity.
 
-A lot of the work I do in the cloud represents a single idea or project and rarely requires access between personal devices. For the times that I need access between local machines and the cloud, I would most likely use Tailscale.
+Much of my work in the cloud represents a single idea or project and rarely requires access between personal devices. For the times that I need access between local machines and the cloud, I would most likely use Tailscale.
 
-If you only want to avoid using public IPs, you can use Google's IAP (Identity-Aware Proxy) for that without a VPN. See this [medium article](https://medium.com/google-cloud/connecting-securely-to-google-compute-engine-vms-without-a-public-ip-or-vpn-720e53d1978e) for more info.
+If you only want to avoid utilizing public IPs, you can use Google's IAP (Identity-Aware Proxy) without a VPN. See this [medium article](https://medium.com/google-cloud/connecting-securely-to-google-compute-engine-vms-without-a-public-ip-or-vpn-720e53d1978e) for more info.
 
 ## Helpful links
 

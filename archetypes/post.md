@@ -12,7 +12,16 @@ cover:
     image: /img/featured.png # image path/url
     alt: "" # alt text
 # check config.toml for some of the default options / toggles
+
+slug: ""  # make your URL pretty!
 ---
+
+- Include 'how' or 'why' in the permalink / title (for SEO)
+- Strip out prepositions (to, of, with, at, from, into, for, on by) for permalink
+  - short = better
+- Write question based headers with answer based content that follows a story from a -> z.
+- Keyword research for words / phrases ideal readers would search for / google trends
+- H tag optimization
 
 {{< notice note >}}
 This is a note.

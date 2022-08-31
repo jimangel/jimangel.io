@@ -136,3 +136,5 @@ params:
   images:
     - /images/rizin_preview.png
 ```
+
+soellchecj: https://github.com/crate-ci/typos/releases/download/v1.11.4/typos-v1.11.4-x86_64-apple-darwin.tar.gz

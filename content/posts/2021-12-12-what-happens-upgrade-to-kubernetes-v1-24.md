@@ -21,22 +21,19 @@ comment: true
 cover:
   image: /img/dockershim-kubernetes-v1.24-cover.jpg
 
-aliases:
-- "/post/dockershim-kubernetes-v1.24/"
-
-
+slug: "dockershim-kubernetes-v1.24"
 ---
 
-As Kubernetes grows in popularity, and more folks adopt it, the changes each release become more and more critical to test. In v1.24 there are big changes that may or may not impact you.
+As Kubernetes grows in popularity, the changes each release become more and more critical to test. In v1.24 there are big changes that may or may not impact you.
 
 Most people wait until the first patch release (`vX.XX.1`), after a major `vX.XX.0` version, before getting serious about upgrading. I'll demo how to test even earlier, before the major release.
 
 
 {{< notice note >}}
-Did you know, Kubernetes releases alpha versions for the next release almost immediately after cutting a new release. For example, `v1.23.0` was released on 12/7/21 and `v1.24.0-alpha.1` was cut the very next day.
+Did you know Kubernetes releases alpha versions for the next release almost immediately after cutting a new release? For example, `v1.23.0` was released on 12/7/21 and `v1.24.0-alpha.1` was cut the very next day.
 {{< /notice >}}
 
-The focus of this blog is testing the major breaking changes between releases during a major version upgrade.
+This blog tests the significant breaking changes between releases during a major version upgrade.
 
 ## Why is Kubernetes v1.24 release extra special?
 
@@ -45,7 +42,7 @@ Kubernetes v1.24 removes the dockershim from kubelet. Without getting too deep i
 ![](/img/dockershim-kubernetes-v1.24-dockershim.png#center)
 ([source](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-deprecation-affects-you/#role-of-dockershim))
 
-The dockershim code actually is inside kubelet's code base. This was an early design decision before Container Runtime Interfaces (CRI) existed.
+The dockershim code is actually inside kubelet's code base. This was an early design decision before Container Runtime Interfaces (CRI) existed.
 
 Here's an alternative way to view the differences (I wish it said CAN use vs. USES):
 
@@ -76,7 +73,7 @@ Let's start with a "traditional" single node cluster running an "old" `v1.23.0` 
 
 The first run failed, but I expected that, as I haven't updated kubelet or docker to use the systemd cgroup driver (a change in v1.22+). The first run creates the config files to modify for the fix; specifically `/var/lib/kubelet/config.yaml`.
 
-To fix the error follow [this gist I wrote](https://gist.github.com/jimangel/21568c757b2b374cabb8cc53e6c9125f).
+To fix the error, follow [this gist I wrote](https://gist.github.com/jimangel/21568c757b2b374cabb8cc53e6c9125f).
 
 When finished, re-run `sudo kubeadm reset && sudo kubeadm init`
 
@@ -102,7 +99,7 @@ curl https://docs.projectcalico.org/manifests/calico.yaml -O
 kubectl apply -f calico.yaml
 ```
 
-Ensure the pods / node is ready:
+Ensure the pods/node is ready:
 
 ```shell
 $ kubectl get pods -A
@@ -130,7 +127,7 @@ ubu-servr   Ready    control-plane,master   2m48s   v1.23.0
 kubectl create deployment echo-server --image=inanimate/echo-server --replicas=3
 ```
 
-kubeadm by default [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) the control plane which prevents pods from being scheduled. Let's remove the taint considering we're only running a single node. The `-` at the very end is what indicates removal.
+kubeadm, by default, [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) the control plane, which prevents pods from being scheduled. Let's remove the taint considering we're only running a single node. The `-` at the very end is what indicates removal.
 
 ```shell
 kubectl taint nodes --all node-role.kubernetes.io/master-
@@ -153,13 +150,15 @@ Confirm in a browser by using port-forward.
 kubectl port-forward --address 0.0.0.0 deployment/echo-server 8080:8080
 ```
 
-Open a browser and navigate to: `YOUR_NODE_IP:8080`
+Open a browser and navigate to `YOUR_NODE_IP:8080`
 
 It works! Now onto the fun stuff.
 
 ## Upgrade to v1.24
 
-Since v1.24 isn't released, we have to use an unreleased version (alpha / beta / release-candidate). While adding some complexity, it's really just a bit more manual work to gather all the tooling & container images. `kubeadm` has a guide on their repository about [testing pre-release versions of Kubernetes with kubeadm](https://github.com/kubernetes/kubeadm/blob/main/docs/testing-pre-releases.md).
+Since v1.24 isn't released, we have to use an unreleased version (alpha/beta/release-candidate). While adding some complexity, it's not much more work to manually gather all the tooling & container images. 
+
+`kubeadm` has a guide on their repository about [testing pre-release versions of Kubernetes with kubeadm](https://github.com/kubernetes/kubeadm/blob/main/docs/testing-pre-releases.md).
 
 ### Create local debian files
 
@@ -189,7 +188,7 @@ INFO Successfully walked builds
 
 ### Upgrade kubeadm and kubectl
 
-We know there's a breaking change in `kubelet` and according to the [version skew policy](https://kubernetes.io/releases/version-skew-policy/#kubelet), "`kubelet` must not be newer than `kube-apiserver`, and may be up to two minor versions older."
+We know there's a breaking change in `kubelet`, and according to the [version skew policy](https://kubernetes.io/releases/version-skew-policy/#kubelet), "`kubelet` must not be newer than `kube-apiserver`, and may be up to two minor versions older."
 
 In that case, let's first upgrade `kubeadm` & `kubectl` (not `kubelet`).
 
@@ -230,13 +229,13 @@ Now we're ready to upgrade. Run a preflight check to ensure things are working a
 sudo kubeadm upgrade plan
 ```
 
-Run the upgrade and apply it allowing for experimental upgrades.
+Run the upgrade and apply it, allowing for experimental upgrades.
 
 ```shell
 sudo kubeadm upgrade apply v1.24.0-alpha.1 --allow-experimental-upgrades
 ```
 
-After some time the output is similar to:
+After some time, the output is similar to:
 
 ```shell
 [upgrade/successful] SUCCESS! Your cluster was upgraded to "v1.24.0-alpha.1". Enjoy!
@@ -255,13 +254,13 @@ NAME        STATUS   ROLES                  AGE    VERSION
 ubu-servr   Ready    control-plane,master   171m   v1.23.0
 ```
 
-I'm not too concerned about it still saying `v1.23.0` as I believe `kublet` is responsible for reporting this information to the API server and we have not yet upgraded it. Let's check the running pods / images:
+I'm not too concerned about it still saying `v1.23.0` as I believe `kublet` is responsible for reporting this information to the API server and we have not yet upgraded it. Let's check the running pods/images:
 
 ```shell
 kubectl describe pods -A | grep -i "image:" | uniq
 ```
 
-We can see that the image tags are using 1.24 and nothing references 1.23.
+We can see that the image tags are using 1.24, and nothing references 1.23.
 
 ```shell
     Image:         inanimate/echo-server
@@ -277,13 +276,13 @@ We can see that the image tags are using 1.24 and nothing references 1.23.
     Image:         us-central1-docker.pkg.dev/out-of-pocket-cloudlab/k8s-testing/kube-scheduler:v1.24.0-alpha.1
 ```
 
-So far, pretty pain free. Let's check our ability to port-forward.
+So far, pretty pain-free. Let's check our ability to port forward.
 
 ```shell
 kubectl port-forward --address 0.0.0.0 deployment/echo-server 8080:8080
 ```
 
-Yep! We're in good shape. Next we'll upgrade `kubelet`. Please note, if this was a larger system, you should follow the official upgrade guide including drain / cordon nodes.
+Yep! We're in good shape. Next, we'll upgrade `kubelet`. Please note, if this was a larger system, you should follow the official upgrade guide, including drain/cordon nodes.
 
 ```shell
 sudo apt-mark unhold kubelet
@@ -291,22 +290,22 @@ sudo apt-mark unhold kubelet
 sudo apt install $(pwd)/bin/testing/kubelet_1.24.0-alpha.1-0_amd64.deb
 ```
 
-Running `kubelet --version` we now see that it's `Kubernetes v1.24.0-alpha.1`. However, if we run `service kubelet status` you'll notice it failed (`code=exited, status=1/FAILURE`).
+Running `kubelet --version`, we now see that it's `Kubernetes v1.24.0-alpha.1`. However, if we run `service kubelet status`, you'll notice it failed (`code=exited, status=1/FAILURE`).
 
 Debug further with `journalctl -xeu kubelet`. After looking a bit, boom, here's the culprit:
 
 ```shell
- "Failed to run kubelet" err="failed to run Kubelet: using dockershim is not supported, please consider using a full-fledged CRI implementation"
+ "Failed to run kubelet" err="failed to run Kubelet: using dockershim is not supported, please consider using a full-fledged CRI implementation."
 ```
 
-Cool. Now we have a cluster that contains a 100% working and functional control plane but kubelet (the node's brain) is not working.
+Cool. Now we have a cluster with a 100% working and functional control plane, but kubelet (the node's brain) is not working.
 
 We have two options here:
 * Continue using Docker with a 3rd party CRI
     * Install [cri-dockerd](https://github.com/mirantis/cri-dockerd) (Mirantis' [officially maintained](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/) dockershim replacement)
 * Swap `docker-ce` for `containerd` as kubelet's CRI of choice
  
-I like the idea of running less things on a node, let's see how hard it is to switch to containerd.
+I like the idea of running fewer things on a node; let's see how hard it is to switch to containerd.
 
 Here's the cool thing,
 
@@ -323,7 +322,7 @@ sudo systemctl disable docker.service docker.socket
 
 `systemctl disable` prevents the services from starting on reboot.
 
-Then update the existing `containerd` config to INCLUDE the CRI plugin, which is currently disabled by default. It might seem a bit backwards, but we can enable it by commenting out the disable flag in `/etc/containerd/config.toml`.
+Then update the existing `containerd` config to INCLUDE the CRI plugin, which is currently disabled by default. It might seem a bit backward, but we can enable it by commenting out the disable flag in `/etc/containerd/config.toml`.
 
 ```shell
 # sed adds a "#" to the disabled plugins line.
@@ -332,7 +331,7 @@ sudo sed -i 's/disabled_plugins/#disabled_plugins/g' /etc/containerd/config.toml
 
 Validate with `cat /etc/containerd/config.toml`.
 
-Restart containerd with `sudo systemctl daemon-reload && sudo systemctl restart containerd` and check status with `sudo systemctl status containerd`
+Restart containerd with `sudo systemctl daemon-reload && sudo systemctl restart containerd` and check the status with `sudo systemctl status containerd`
 
 Now that containerd is configured, we need to update kubelet to use the runtime (CRI) instead of Docker.
 
@@ -344,9 +343,9 @@ sudo vi /var/lib/kubelet/kubeadm-flags.env
 
 We need to add `--container-runtime=remote` (has only two arguments, `docker` or `remote`) and `--container-runtime-endpoint=unix:///run/containerd/containerd.sock` (defaults to `unix:///var/run/dockershim.sock`) to the list of arguments. The `--container-runtime-endpoint` argument could be any [valid CRI](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#container-runtimes).
 
-Also, we can get rid of `--network-plugin=cni` as it's a deprecated argument.
+Also, we can eliminate `--network-plugin=cni` as it's a deprecated argument.
 
-The final file should look like:
+The final file should look like this:
 
 ```shell
 KUBELET_KUBEADM_ARGS="--container-runtime=remote --container-runtime-endpoint=unix:///run/containerd/containerd.sock --pod-infra-container-image=k8s.gcr.io/pause:3.6"
@@ -391,7 +390,7 @@ kube-system   kube-proxy-wzrnw                           1/1     Running   2    
 kube-system   kube-scheduler-ubu-servr                   1/1     Running   2          47m
 ```
 
-If currious, we can check that Docker is "off" with:
+If curious, we can check that Docker is "off" with:
 
 ```shell
 $ service docker status
@@ -416,7 +415,7 @@ Open a browser and navigate to: `YOUR_NODE_IP:8080`
 
 ![](/img/dockershim-kubernetes-v1.24-nginx.png#center)
 
-It works in the browser too! My cluster is now healthy and running latest without dockershim.
+It works in the browser too! My cluster is now healthy and running the latest version of Kubernetes without dockershim.
 
 Let's see if it can survive a reboot.
 
@@ -446,7 +445,7 @@ kube-system   kube-proxy-55mhv                           1/1     Running   2 (61
 kube-system   kube-scheduler-ubu-servr                   1/1     Running   2 (61s ago)   83m
 ```
 
-Yay! It all came back up. It took a couple minutes for everything to start running again.
+Yay! It all came back up. It took a couple of minutes for everything to start running again.
 
 Now for the final test, let's delete `docker-ce` & `docker-cli`.
 
@@ -458,13 +457,13 @@ After removing the packages, it wouldn't hurt to reboot again just for a sanity 
 
 ## How do I manage images without the Docker CLI?
 
-It might not be obvious, but when we removed `docker-ce-cli`, we lost the ability to `docker` `push` / `pull` / `tag` / `build` containers.
+It might not be obvious, but when we removed `docker-ce-cli`, we lost the ability to `docker` `push`/`pull`/`tag`/`build` containers.
 
-Considering `containerd` is a CRI, purely, there is no included support for building container images; only running them. This is a good thing. Keep your builds in your build system and your runtimes on your nodes 😃.
+Considering `containerd` is a CRI, there is no included support for building container images, only running them. This is a good thing. Keep your builds in your build system and your runtimes on your nodes 😃.
 
-I get it though, as we hack on our demo cluster, you might want to build and run custom images.
+I get it, though; as we hack on our demo cluster, you might want to build and run custom images.
 
-If you need light oversight on your containers, `ctr` is a command-line client shipped as part of the containerd project. It can do basic `pull` / `tag` / `push` commands and more. For example:
+If you need light oversight on your containers, `ctr` is a command-line client shipped as part of the containerd project. It can do basic `pull`/`tag`/`push` commands and more. For example:
 
 ```shell
 sudo ctr --namespace k8s.io container ls
@@ -497,15 +496,15 @@ OPTIONS:
    --help, -h  show help
 ```
 
-Ivan Velichko has [a great overview of the `ctr` commands](https://iximiuz.com/en/posts/containerd-command-line-clients/). 
+Ivan Velichko has [an excellent overview of the `ctr` commands](https://iximiuz.com/en/posts/containerd-command-line-clients/). 
 
-The containerd team is working on a CLI tool that is closer with feature parity to `docker` called `nerdctl`. You can read more about it in their GitHub repo: https://github.com/containerd/nerdctl.
+The containerd team is working on a CLI tool closer with feature parity to `docker` called `nerdctl`. You can read more about it in their GitHub repo: https://github.com/containerd/nerdctl.
 
-With `nerdctl` you can build containers on a containerd CRI.
+With `nerdctl`, you can build containers on a containerd CRI.
 
 ## Alternatives
 
-There's other, more mature, replacements for the Docker CLI such as:
+There are other, more mature, replacements for the Docker CLI, such as:
 
 - [podman](https://podman.io/) (Manage pods, containers, and container images.)
     - `alias docker=podman`
@@ -514,10 +513,10 @@ There's other, more mature, replacements for the Docker CLI such as:
 
 ## Conclusion
 
-This change is going to impact a lot of folks. The good news is, there's A LOT of options for how you specifically chose to deal with this.
+This change is going to impact a lot of folks. The good news is, there are A LOT of options for how you specifically chose to deal with this.
 
 If you don't want to drop Docker, look for upcoming instructions on using the [officially maintained](https://www.mirantis.com/blog/the-future-of-dockershim-is-cri-dockerd/) `cri-docker` dockershim replacement. The steps are similar to what we did, only replace the container-runtime-endpoint with `--container-runtime-endpoint=/var/run/cri-docker.sock`.
 
-Also this might be an opportunity to explore [other open source CRI's](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#container-runtimes).
+Also, this might be an opportunity to explore [other open source CRI's](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#container-runtimes).
 
-Whatever happens, don't let this change catch you by surprise! Start testing now and continue testing throughout the release cycle. The Kubernetes community values your feedback.
+Whatever happens, don't let this change catch you by surprise! The Kubernetes community values your feedback. Start testing now and continue testing throughout the release cycle.
