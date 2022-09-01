@@ -6,9 +6,8 @@ module:
 # https://github.com/adityatelange/hugo-PaperMod/wiki/Variables
 baseURL: https://jimangel.io
 languageCode: en-us
-title: jimangel.io
+title: "jimangel.io"
 theme: ["hugo-notice", "PaperMod"]
-
 permalinks:
   posts: /posts/:slug/ # uses title if no slug is provided
 
@@ -39,9 +38,9 @@ languages:
         languageName: "English"
         weight: 1
         taxonomies:
-          category: categories
+          # category: categories
           tag: tags
-          series: series
+          # series: series
         menu:
             main:
                 - name: Posts
