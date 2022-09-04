@@ -104,7 +104,7 @@ params:
   tocopen: false
   assets:
     disableHLJS: true # to disable highlight.js
-    disableFingerprinting: true # https://github.com/adityatelange/hugo-PaperMod/issues/89#issuecomment-736549907
+    disableFingerprinting: false # https://github.com/adityatelange/hugo-PaperMod/issues/89#issuecomment-736549907
     favicon: "/favicon.ico"
     favicon16x16: "/favicon.ico"
     favicon32x32: "/favicon.ico"

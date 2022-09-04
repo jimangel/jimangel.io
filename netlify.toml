@@ -2,24 +2,32 @@
 publish = "public"
 command = "hugo --gc --minify"
 
-  [build.environment]
-  HUGO_VERSION = "0.101.0"
-  HUGO_ENV = "production"
+[build.environment]
+HUGO_VERSION = "0.101.0"
+HUGO_ENV = "production"
 
-  [build.processing]
-  # If skip_processing = true, all other settings are ignored
-  skip_processing = false
+[build.processing]
+# If skip_processing = true, all other settings are ignored
+skip_processing = false
 
-    [build.processing.css]
-    bundle = true
-    minify = true
+[build.processing.css]
+bundle = true
+minify = true
 
-    [build.processing.js]
-    bundle = true
-    minify = true
+[build.processing.js]
+bundle = true
+minify = true
 
-    [build.processing.html]
-    pretty_urls = false
+[build.processing.html]
+pretty_urls = false
 
-    [build.processing.images]
-    compress = true
+[build.processing.images]
+compress = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+  Content-Security-Policy = "default-src 'self'; style-src 'self'; img-src 'self' https:; script-src 'self' https://www.googletagmanager.com"
+  X-Frame-Options = "DENY"
+  X-Content-Type-Options = "nosniff"
+  X-XSS-Protection = "1; mode=block"

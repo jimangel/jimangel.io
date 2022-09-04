@@ -1,4 +1,5 @@
 ---
+# not too long or too short (think G-search)
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 # description is usually what's used in a google snippet
