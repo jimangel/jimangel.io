@@ -61,9 +61,16 @@ outputs:
 params:
   env: development # netlify.toml sets this to production (HUGO_ENV) to enable google analytics, opengraph, twitter-cards and schema.
   title: jimangel.io
-  description: "A collection of my walkthroughs, rants, and hacks on emerging cloud technologies."
+  description: "A collection of walkthroughs, rants, and hacks on emerging cloud technologies. Jim Angel is an Infrastructure Cloud Consultant at Google"
   # keywords for homepage SEO
-  keywords: [Blog, Kubernetes, Cloud, Tech]
+  keywords:
+  - blog
+  - kubernetes
+  - cloud
+  - tech
+  - jim angel
+  - cloud native
+  - james angel
   author: Jim Angel
   # author: ["Me", "You"] # multiple authors
   # https://adityatelange.github.io/hugo-PaperMod/posts/papermod/papermod-features/#twitter-cards-support

@@ -15,6 +15,12 @@ tags:
 - kubernetes
 - kind
 categories: []
+keywords:
+- vmware workstation kubernetes
+- vmware
+- homelab
+- kubernetes
+- kind
 
 cover:
   image: /img/kind-clusters-featured.png

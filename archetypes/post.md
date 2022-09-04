@@ -1,6 +1,9 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
+# description is usually what's used in a google snippet
+# informs and interests users with a short, relevant summary of what a particular page is about.
+# They are like a pitch that convince the user that the page is exactly what they're looking for.
 description: "Description placeholder"
 summary: "Summary placeholder"
 tags:

@@ -52,6 +52,18 @@ git submodule add https://github.com/martignoni/hugo-notice.git themes/hugo-noti
 
 > Also had to override the site map?
 
+```
+# https://gohugo.io/templates/sitemap-template/
+# https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_default/sitemap.xml
+
+# I created:
+# layouts/_default/sitemap.xml
+
+# And added the reverse short code
+# {{- if not .Data.Singular -}}
+# {{- end - }}
+```
+
 # Note: I added robots.txt
 
 see https://gohugo.io/templates/robots/
