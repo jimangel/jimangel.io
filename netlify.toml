@@ -11,12 +11,13 @@ HUGO_ENV = "production"
 skip_processing = false
 
 [build.processing.css]
-bundle = true
-minify = true
+bundle = false
+minify = false
 
 [build.processing.js]
-bundle = true
-minify = true
+bundle = false
+# not minifying to maintain sha integrity
+minify = false
 
 [build.processing.html]
 pretty_urls = false
@@ -27,7 +28,7 @@ compress = true
 [[headers]]
   for = "/*"
   [headers.values]
-  Content-Security-Policy = "default-src 'self'; style-src 'self'; img-src 'self' https:; script-src 'self' https://www.googletagmanager.com"
+  Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://jimangel.disqus.com https://c.disquscdn.com https://*.cloudfront.net; prefetch-src 'self' https://c.disquscdn.com https://disqus.com; frame-src 'self' https://disqus.com; style-src-elem 'self' https://c.disquscdn.com 'unsafe-inline'"
   X-Frame-Options = "DENY"
   X-Content-Type-Options = "nosniff"
   X-XSS-Protection = "1; mode=block"
