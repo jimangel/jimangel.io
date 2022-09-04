@@ -6,6 +6,12 @@ summary: "Summary placeholder"
 tags:
 # - kubernetes
 # - cncf
+keywords:
+# - kubeadm upgrade
+# - kubernetes
+# - cncf
+# - dockershim
+
 draft: true
 #comments: false
 cover:
@@ -13,6 +19,7 @@ cover:
     alt: "" # alt text
 # check config.toml for some of the default options / toggles
 
+# contain keywords relevant to the page's topic, and contain no spaces, underscores or other characters. You should avoid the use of parameters when possible, as they make URLs less inviting for users to click or share. Google's suggestions for URL structure specify using hyphens or dashes (-) rather than underscores (_). Unlike underscores, Google treats hyphens as separators between words in a URL.
 slug: ""  # make your URL pretty!
 ---
 

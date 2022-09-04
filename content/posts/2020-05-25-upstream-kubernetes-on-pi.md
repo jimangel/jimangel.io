@@ -12,6 +12,12 @@ tags:
 - kubernetes
 - cncf
 categories: []
+# SEO
+keywords:
+- raspberry pi kubernetes cluster 2020
+- kubernetes raspberry pi 4
+- kubernetes
+- cncf
 
 cover:
   image: /img/upstream-kubernetes-featured.jpg

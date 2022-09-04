@@ -13,6 +13,12 @@ tags:
 - vmware
 - walkthrough
 categories: []
+keywords:
+- install vcsa on esxi
+- vmware
+- walkthrough
+- vcenter iso install
+- 
 
 cover:
   image: /img/automated-vcenter-featured.jpg

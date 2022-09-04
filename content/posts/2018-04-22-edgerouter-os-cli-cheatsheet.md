@@ -11,6 +11,12 @@ authors:
 tags:
 - cheatsheets
 categories: []
+keywords:
+- dns forwarding edgerouter
+- cheatsheets
+- EdgeRouter
+- edgerouter show config
+- edgerouter cli commands
 
 cover:
   image: /img/edgerouter-cheatsheet-featured.jpg

@@ -15,6 +15,22 @@ tags:
 - homelab
 - pfsense
 categories: []
+# SEO
+keywords:
+- google cloud
+- pfsense ha setup
+- pfsense ha
+- vpn
+- homelab
+- pfsense
+- pfsense vpn tunnel
+- pfsense ipsec firewall rules
+- pfsense bgp
+- bgp pfsense
+- gcp ha vpn
+- gcp vpn
+- myhomenetwork att
+- how much vpn
 
 cover:
   image: /img/google-cloud-vpn-pfsense-featured.png

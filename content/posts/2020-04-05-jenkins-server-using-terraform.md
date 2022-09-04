@@ -14,6 +14,12 @@ tags:
 - digitalocean
 - terraform
 categories: []
+keywords:
+- namecheap terraform
+- jenkins
+- automation
+- digitalocean
+- terraform
 
 cover:
   image: /img/jenkins-server-featured.jpg

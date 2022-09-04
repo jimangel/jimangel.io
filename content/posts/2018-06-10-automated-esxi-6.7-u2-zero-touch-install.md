@@ -13,11 +13,21 @@ tags:
 - vmware
 - esxi
 categories: []
+# SEO
+keywords:
+- esxi iso to usb
+- walkthrough
+- vmware
+- esxi
+- installing esxi from usb
+- esxi usb boot
+- create esxi bootable usb
+- vmug onthehub
 
 cover:
   image: /img/esxi-6.7-install-featured.jpg
 
-slug: "scripted-esxi-6.7-install-to-usb"
+slug: "scripted-esxi-6-7-install-to-usb"
 ---
 
 Having a homelab shouldn't revolve around installing ESXi; it should be about what you do on top of it.

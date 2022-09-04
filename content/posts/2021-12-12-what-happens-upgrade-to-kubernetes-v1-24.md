@@ -14,6 +14,12 @@ tags:
 - cncf
 - dockershim
 categories: []
+keywords:
+- kubeadm upgrade
+- kubernetes
+- cncf
+- dockershim
+
 comment: true
 # Featured image
 # To use, add an image named `featured.jpg#center.png#center` to your page's folder.
@@ -21,7 +27,7 @@ comment: true
 cover:
   image: /img/dockershim-kubernetes-v1.24-cover.jpg
 
-slug: "dockershim-kubernetes-v1.24"
+slug: "dockershim-kubernetes-v1-24"
 ---
 
 As Kubernetes grows in popularity, the changes each release become more and more critical to test. In v1.24 there are big changes that may or may not impact you.

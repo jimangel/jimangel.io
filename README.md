@@ -30,6 +30,28 @@ git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git t
 git submodule add https://github.com/martignoni/hugo-notice.git themes/hugo-notice
 ```
 
+# Note: I updated terms.html (layouts/default) to noindex my tags pages
+
+
+```
+# Edited the base of: https://www.datascienceblog.net/post/other/hugo_noindex_taxonomies/
+# via copying the layouts baseof.html to my overlay...
+
+
+# <head>
+#    {{- partial "head.html" . }}
+#   {{ if .Data.Singular }}
+#    <meta name="robots" content="noindex, nofollow">
+#    {{ end }}
+# </head>
+
+# I believe, or read, that the most restrictive wins (so head.html says index, and this says don't for tags / taxonomies)
+
+# https://developers.google.com/search/docs/advanced/crawling/block-indexing
+```
+
+> Also had to override the site map?
+
 # Note: I added robots.txt
 
 see https://gohugo.io/templates/robots/

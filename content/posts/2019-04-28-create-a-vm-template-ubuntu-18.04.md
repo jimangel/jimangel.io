@@ -13,11 +13,16 @@ tags:
 - vmware
 - images
 categories: []
+keywords:
+- virt sysprep ubuntu
+- ubuntu
+- vmware
+- images
 
 cover:
   image: /img/ubuntu-18-04-template-featured.jpg
 
-slug: ""
+slug: "create-a-vm-template-for-ubuntu-18-04-lts"
 ---
 
 ## Why?
