@@ -3,6 +3,12 @@
     color: #089de3;
 }
 
+/* coffee button tweaks */
+.bmc-btn {
+    min-width: 10px !important;
+    height: 20px !important;
+}
+
 /* For whatever reason, this is the background color on home... */
 .list {
     background: white;

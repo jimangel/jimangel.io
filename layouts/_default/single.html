@@ -35,13 +35,14 @@
   </div>
   {{- end }}
 
-  <footer class="post-footer">
+  <footer class="post-footer"></footer>
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     <ul class="post-tags">
       {{- range ($.GetTerms $tags) }}
       <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
       {{- end }}
     </ul>
+    {{ partial "footer-blurb.md" . | markdownify }}
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}

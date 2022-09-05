@@ -30,6 +30,12 @@ git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git t
 git submodule add https://github.com/martignoni/hugo-notice.git themes/hugo-notice
 ```
 
+# NOTE: added buy me a coffee JS
+
+```
+both in the content security stuff and in the footer (footer-blurb.md partial - called in single.html)
+```
+
 # NOTE: created ads...
 
 ```
