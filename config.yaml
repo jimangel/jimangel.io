@@ -49,7 +49,7 @@ languages:
                 - name: Search
                   url: search/
                   weight: 10
-                - name: About Me (GitHub)
+                - name: About (GitHub)
                   url: https://github.com/jimangel
 
 outputs:
