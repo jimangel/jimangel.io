@@ -16,7 +16,14 @@ keywords:
 # - cncf
 # - dockershim
 
+
+# !! DON'T FORGET: https://medium.com/p/import
+# !! DON'T FORGET: https://medium.com/p/import
 draft: true
+# !! DON'T FORGET: https://medium.com/p/import
+# !! DON'T FORGET: https://medium.com/p/import
+
+
 #comments: false
 cover:
     image: /img/featured.png # image path/url
