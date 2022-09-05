@@ -60,7 +60,7 @@ outputs:
 
 params:
   env: development # netlify.toml sets this to production (HUGO_ENV) to enable google analytics, opengraph, twitter-cards and schema.
-  title: jimangel.io
+  #title: jimangel.io
   description: "A collection of walkthroughs, rants, and hacks on emerging cloud technologies. Jim Angel is an Infrastructure Cloud Consultant at Google"
   # added manually via partials
   adsense:
@@ -81,6 +81,8 @@ params:
   #images: ["<link or path of image for opengraph, twitter-cards>"]
   images:
     - /img/social.png # This is the root pic when sharing on social media
+  label:
+    text: jimangel.io # sets the top left blue "home" link text
   DateFormat: "January 2, 2006"
   defaultTheme: auto # dark, light, auto
   disableThemeToggle: false
