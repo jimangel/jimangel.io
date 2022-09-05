@@ -39,6 +39,19 @@ git submodule add https://github.com/martignoni/hugo-notice.git themes/hugo-noti
 partial adsense in article, uses html comment, function to convert....
 
 # RESULTS IN NEW LAYOUT SINGLE.HTML... (where I add the shortcode function to convert...)
+x2!!
+```
+
+EX:
+
+```
+  {{- if .Content }}
+  <div class="post-content">
+    {{- if not (.Param "disableAnchoredHeadings") }}
+    {{- partial "anchored_headings.html" ( replace .Content "<!--adsense-->" (partial "adsense-inarticle.html" . ) | safeHTML ) -}}
+    {{- else }}{{ replace .Content "<!--adsense-->" (partial "adsense-inarticle.html" . ) | safeHTML }}{{ end }}
+  </div>
+  {{- end }}
 ```
 
 # Note: I updated terms.html (layouts/default) to noindex my tags pages
