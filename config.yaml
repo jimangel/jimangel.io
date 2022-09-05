@@ -10,6 +10,7 @@ title: "Jim Angel | jimangel.io"
 theme: ["hugo-notice", "PaperMod"]
 permalinks:
   posts: /posts/:slug/ # uses title if no slug is provided
+# copyright: © 2022 {{ now.Year }} [jimangel.io](https://jimangel.io)
 
 # prevent build failures when using Hugo's Instagram shortcode due to deprecated Instagram API.
 # See https://github.com/gohugoio/hugo/issues/7228#issuecomment-714490456

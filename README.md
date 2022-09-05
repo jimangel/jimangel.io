@@ -36,6 +36,15 @@ git submodule add https://github.com/martignoni/hugo-notice.git themes/hugo-noti
 both in the content security stuff and in the footer (footer-blurb.md partial - called in single.html)
 ```
 
+# NOTE: updated footer to cut the title (alternately could have genreated the copywrite dynamically...)
+
+```
+# Craeted:
+<span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ ( replace site.Title "Jim Angel | " "") }}</a></span>
+
+# auto genrates year and loks cleaner..
+```
+
 # NOTE: created ads...
 
 ```
