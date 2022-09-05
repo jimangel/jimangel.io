@@ -118,6 +118,8 @@ As an experienced operator, you will know when you have a question 100% because 
 
 Lastly, don't forget to read the [FAQ](https://www.cncf.io/certification/cka/faq/), more specifically, the [browser compatibility check tool](https://www.examslocal.com/ScheduleExam/Home/CompatibilityCheck).
 
+<!--adsense-->
+
 ## Curve balls
 
 I can't go into details about the actual content of the exam, but make sure you have experience in the following areas:

@@ -160,6 +160,8 @@ Open a browser and navigate to `YOUR_NODE_IP:8080`
 
 It works! Now onto the fun stuff.
 
+<!--adsense-->
+
 ## Upgrade to v1.24
 
 Since v1.24 isn't released, we have to use an unreleased version (alpha/beta/release-candidate). While adding some complexity, it's not much more work to manually gather all the tooling & container images. 

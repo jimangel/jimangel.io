@@ -40,6 +40,7 @@ slug: ""  # make your URL pretty!
 - Write question based headers with answer based content that follows a story from a -> z.
 - Keyword research for words / phrases ideal readers would search for / google trends
 - H tag optimization
+- `<!--adsense-->`
 
 {{< notice note >}}
 This is a note.

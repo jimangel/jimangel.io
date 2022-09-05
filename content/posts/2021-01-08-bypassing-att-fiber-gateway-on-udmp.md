@@ -221,6 +221,7 @@ ssh remotessh@192.168.1.254
 
 Type `!` to switch to root shell.
 
+<!--adsense-->
 
 ### Copy certificates and `mfg.dat`
 

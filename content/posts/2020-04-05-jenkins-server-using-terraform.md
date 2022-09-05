@@ -183,6 +183,8 @@ terraform apply
 
 ![](/img/jenkins-server-terminal-out.png#center)
 
+<!--adsense-->
+
 ## Generate SSL certs and nginx config
 
 Automating SSL with Terraform is a "chicken and egg" problem.

@@ -30,6 +30,17 @@ git submodule add --depth=1 https://github.com/adityatelange/hugo-PaperMod.git t
 git submodule add https://github.com/martignoni/hugo-notice.git themes/hugo-notice
 ```
 
+# NOTE: created ads...
+
+```
+#adsense-inarticle.html
+#https://www.godo.dev/tutorials/hugo-in-article-ad/
+
+partial adsense in article, uses html comment, function to convert....
+
+# RESULTS IN NEW LAYOUT SINGLE.HTML... (where I add the shortcode function to convert...)
+```
+
 # Note: I updated terms.html (layouts/default) to noindex my tags pages
 
 

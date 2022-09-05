@@ -359,6 +359,8 @@ raspberrypi-case-2   Ready    <none>   43s     v1.18.2-beta.0
 raspberrypi-case-3   Ready    <none>   43s     v1.18.2-beta.0
 
 ```
+
+<!--adsense-->
     
 ## Ansible playbook breakdown
 

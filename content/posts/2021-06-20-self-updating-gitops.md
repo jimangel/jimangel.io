@@ -272,6 +272,8 @@ If you want to test it out, you can; however, keep in mind that you're upgrading
 sudo unattended-upgrade –dry-run –debug
 ```
 
+<!--adsense-->
+
 ## Crontab scripts
 
 Since `kubectl`, `kubeadm`, `kubelet`, and `docker` are automatically updated, I wrote a crude script to try to get `kubeadm` to upgrade the control plane by using the new versions. **As root**, ad the following contents to `/etc/upgrade-node.sh`

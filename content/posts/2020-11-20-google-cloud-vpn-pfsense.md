@@ -159,6 +159,8 @@ More details on each configuration parameter in the [OpenBGPD man page](https://
 
 ![](/img/google-cloud-vpn-pfsense-hc-vpn-up-bgp.png#center)
 
+<!--adsense-->
+
 ## Update pfSense and GCP firewalls
 
 A key concept in stateful firewalls is that they usually allow outbound traffic unless a deny rule exists. What I'd like to do is allow my network to reach Googles but not the other way around. To do this, I'll add an inbound GCP firewall rule and leave pfSense as is (default deny).

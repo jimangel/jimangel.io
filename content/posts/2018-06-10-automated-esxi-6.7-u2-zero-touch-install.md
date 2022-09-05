@@ -235,6 +235,8 @@ nano /usbdisk/efi/boot/boot.cfg
 
 After you're complete, unmount the flash drive `umount /usbdisk` and the ISO `umount /esxi_cdrom`.
 
+<!--adsense-->
+
 ## Boot the ESXi host
 
 Insert the USB stick into the powered-down ESXi server and turn it on. You may need to configure your BIOS to boot from USB (or select it from a menu).

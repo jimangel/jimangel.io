@@ -148,6 +148,8 @@ Right Click VM > Edit Settings > deselect...
 
 * Right Click VM > convert to template
 
+<!--adsense-->
+
 ## Conclusion
 
 That's it! I plan on using these VM templates for my Kubernetes clusters.

@@ -521,7 +521,12 @@ For the final test, can I access the machines with no changes to my Ansible inve
 
 ```
 
+
+sdf
+
 ```
+
+<!--adsense-->
 
 ## Real life
 
