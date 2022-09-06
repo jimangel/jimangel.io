@@ -38,7 +38,7 @@ That got me thinking about the next evolution for cloud-native practitioners.
 
 I posted a silly question on Twitter about "turning on all the automation."
 
-{{< tweet user="jimmangel" id="1297254167262769159" >}}
+{{< twitter user="jimmangel" id="1297254167262769159" >}}
 
 In this proposal, the cluster would self-upgrade, and GitOps would update applications, including itself. High-level overview: 
 
