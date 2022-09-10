@@ -1,9 +1,18 @@
 ---
-title: "No-touch Ubuntu 22.04 install with USB"
-description: "Never touch a keyboard again while provisioning bare metal servers."
-summary: "Auto-provision bare metal Ubuntu servers from 2 USB sticks"
-date: 2022-08-24T11:51:56-05:00
+title: "How to automate bare metal Ubuntu 22.04 LTS installs via USB"
+description: "Automate the complete provisioning of bare metal servers from power-on to SSH using USB sticks with cloud-init. No additional infrastructure to support."
+summary: "Auto-provision bare metal Ubuntu servers with 2 USB sticks"
+date: 2022-09-01T11:51:56-05:00
 tags:
+- walkthrough
+- automation
+- homelab
+- ubuntu
+- cloud-init
+keywords:
+- ubuntu 22.04 lts
+- usb cloud-init ubuntu
+- how to automate Ubuntu 22.04
 - walkthrough
 - automation
 - homelab
@@ -17,64 +26,86 @@ comments: true
 ShowWordCount: false
 cover:
     image: /img/ubuntu-usb-install-22-04-cover.png # image path/url
-    alt: "Ubuntu desktop for 22.04" # alt text
+    alt: "Ubuntu desktop image for 22.04" # alt text
 
-slug: ""  # make your URL pretty!
+slug: "automate-ubuntu-22-04-lts-bare-metal"  # make your URL pretty!
 ---
 
-this post outlines using xyz resulting xyz
+## Why?
 
-using this posrt as foiundation, i did the same for pi:
+I want to treat my physical machines like VMs with easy, **complete**, provisioning and automation. I don't want to manage additional infrastructure like custom [DHCP](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) settings, hosting a [TFTP](https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol) server, or configuring [PXE boot](https://en.wikipedia.org/wiki/Preboot_Execution_Environment). My goal is to create a repeatable way for me to care less about my servers and more about the things I build on them.
 
-- Automated install of Ubuntu 22.04 LTS on RasperryPi using cloud-init
+While this meets my homelab needs, please consider using the aforementioned approaches for any "real" production server management.
 
-## TL;DR
+## Overview
 
-Automatically provision Ubuntu 22.04 LTS servers by performing the following steps:
-
-* Create bootable Ubuntu live server USB from ISO
-* Create another USB named "CIDATA" containing 2 cloud-init files
-* Plug in both USBs -> boot to a new provisioned OS
+* Create a bootable Ubuntu live server USB from an ISO file
+* Create another USB named "CIDATA" containing two `cloud-init` files
+* Plug in both USBs
+* Boot to a new custom provisioned OS
 
 {{< notice tip >}}
-I'm chasing my dream of booting up a server without a keyboard and resulting with a newly provisioned machine.
+I'm chasing my dream of booting up a server without a keyboard and resulting with a fully provisioned machine.
 
-The bulk of this post is adjusting a grub file on the live ISO to automatically trigger the autoinstaller. Making it truely **zero touch.**
+The bulk of this post is modifying a single file on the Ubuntu live ISO to automatically trigger the installer. Making it truly **zero touch.**
 
-An alternative would be to use a keyboard at boot time to modify the grub file. This would be the **single touch** and the rest would be automated. If you like this option better, skip to the [cloud-init section](#cloud-init)!
+An alternative would be to use a keyboard at boot time to modify the boot configuration. This would be the **one/only touch** and the rest would be automated. If you like this option better, skip to the [cloud-init USB section](#create-a-fat32-usb-named-cidata) and use the [manual override options at boot](#manual-override-ubuntu-grub-options)!
 {{< /notice >}}
 
-If you want to skip the additional context, [click here](#prerequisites) to jump to the prerequisites.
+## Key components
 
-## My dream
+As I started to explore this solution, I quickly realized most blogs and 
+Stack Overflow questions only applied to a portion of the larger solution. As a result, I had a hard time viewing the "big picture."
 
-I like to wipe and reinstall my homelab servers semi-frequently. I didn’t find the pain bad enough to automate, so I just clicked through the defaults each time I needed.
+I'm a visual learner, so here's a visual aid of the key compenents to be explained:
 
-This approach goes against my loosly held beliefs, that, “anything done more than 3 times should be automated” and “servers should be treated like cattle, not pets.”
+![cloud-init boot process via usb](/img/cloud-init-overview.svg#center)
 
-> I want to treat bare metal servers like cloud servers without having to increasing my homelab tech-debt (like maintaining custom [DHCP](https://en.wikipedia.org/wiki/Dynamic_Host_Configuration_Protocol) / [TFTP](https://en.wikipedia.org/wiki/Trivial_File_Transfer_Protocol) / [PXE boot](https://en.wikipedia.org/wiki/Preboot_Execution_Environment) infrastructure).
+The `user-data` file on the `CIDATA` USB tells Ubuntu how you want to install the OS and the `ubuntu-live-[arch].iso` boots the provisioning software (`cloud-init`). The reason for two USBs is to allow for folks to skip part of this tutorial. In theory, the configuration for `CIDATA` could be mounted on the live ISO USB to simplify the install. `meta-data` is used by cloud providers, not us, but still required for `cloud-init` to recognize `CIDATA`.
 
-I just want to hack on clusters and "reset" them with low effort. The biggest perk is the ability pre-seed SSH public keys. Allowing for further config automation via tools like Ansible.
+It took me some time to understand the following key takeaways:
 
-To acomplish this, we **only** need to understand *[autoinstall](https://ubuntu.com/server/docs/install/autoinstall)*, er, *[cloud-init](https://cloudinit.readthedocs.io/en/latest/)*, I mean; *[subiquity](https://github.com/canonical/subiquity)* - but I think that's, uh, really *[curtin](https://curtin.readthedocs.io/en/latest/topics/config.html)*? This topic gets really confusing. Let's try to untangle some of it...
+- Ubuntu's `autoinstall` process <mark>selects the best suitable OS disk</mark> to format as the main install "target."
+  - Defaults to largest non-cidata / non-livecd disk
+  - Exact partitions and volumes can (optionally) be specified.
+- `cloud-init` (launched by `autoinstall`) automatically looks for a mounted volume <mark>named exactly "CIDATA"</mark> as a [`NoCloud`](https://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html) data source.
+- Directory and filename(s) are important.
 
-## Key Understandings
+If you want to skip the component overview, [click here](#prerequisites) to jump to the prerequisites.
 
-UNWIND KEY DEFINITIONS, KEY UNDERTSANDINGS, (move any details to the walk trhough), show image
+### Ubuntu's `autoinstall`
 
-This whole topic is confusing with spotty documentation. I hope this doc meets your need, but if not, at least I can try to leave you better off...
+The biggest gap for me was learning that [autoinstall](https://ubuntu.com/server/docs/install/autoinstall), Ubuntu's tool for automation, is _very close_ to cloud-init but not exact.
 
-cloud-init > DS
+As far as I can tell, autoinstall wraps some (not all) of cloud-init's functionality, so some things that might work for cloud-init do NOT work for autoinstall, even though they are the same?.
 
-boot > ISO
+Autoinstall wraps cloud-init while triggering the installation automation required to provision your OS.
 
-USB > boot able 
+[autoinstall](https://ubuntu.com/server/docs/install/autoinstall): Ubuntu's wrapper around cloud-init for automatic installs
 
-UEFI vs. not
+([official docs](https://ubuntu.com/server/docs/install/autoinstall-reference))
 
-maybe kill this section or move to the end. Or trim to "need to understand at sysdmin 101 - me at AU?"
+### `cloud-init` "the industry standard multi-distribution method for cross-platform cloud instance initialization."
 
-cutain, "Curtin is intended to be a bare bones “installer”. Its goal is to take data from a source, and get it onto disk as quick as possible and then boot it. The key difference from traditional package based installers is that curtin assumes the thing its installing is intelligent and will do the right thing." (mainly) > 'The key difference from traditional package based installers is that curtin assumes the thing its installing is intelligent and will do the right thing.'
+[cloud-init](https://cloudinit.readthedocs.io/en/latest/)
+
+datasources / datastores (defualts to noCD?)
+
+The installer kicks off automatically and finds the CIDATA volume for the configuration. The process chooses that best disk for the install and completely wipes the drive and all contents. The process adds my SSH keys to the hosts, so I disable password based login for SSH. Lastly, the SSH key for Ansible is added for server provisioning.
+
+I try to keep my automated OS installs to purely *the OS* (to avoid compatability issues installing or using in the future). It's worth mentioning, cloud-init can be used to do MASSIVE configuration of your server and the options should be explored if they fit your use case.
+
+([official docs](https://cloudinit.readthedocs.io/en/latest/))
+
+### `subiquity`
+
+[subiquity](https://github.com/canonical/subiquity)
+
+([subiquity GitHub](https://github.com/canonical/subiquity))
+
+### `curtin`
+
+cutain, "Curtin is intended to be a bare bones “installer”. Its goal is to take data from a source, and get it onto disk as quick as possible and then boot it. The key difference from traditional package based installers is that curtin assumes the thing its installing is intelligent and will do the right thing." (mainly) > 'The key difference from traditional package based installers is that curtin assumes the thing its installing is intelligent and will do the right thing.' Actually does:
 
 * Install Environment boot
 * Early Commands
@@ -84,46 +115,28 @@ cutain, "Curtin is intended to be a bare bones “installer”. Its goal is to t
 * Hook for installed OS to customize itself
 * Final Commands
 
+[curtin](https://curtin.readthedocs.io/en/latest/topics/config.html)
+
 At the moment, curtin doesn’t address how the system that it is running on is booted. It could be booted from a live-cd or from a pxe boot environment. It could even be booted off a disk in the system (although installation to that disk would probably break things).
 
 Curtin’s assumption is that a fairly rich Linux (Ubuntu) environment is booted.
 
-The installer kicks off automatically and finds the CIDATA volume for the configuration. The process chooses that best disk for the install and completely wipes the drive and all contents. The process adds my SSH keys to the hosts, so I disable password based login for SSH. Lastly, the SSH key for Ansible is added for server provisioning.
-
-I try to keep my automated OS installs to purely *the OS* (to avoid compatability issues installing or using in the future). It's worth mentioning, cloud-init can be used to do MASSIVE configuration of your server and the options should be explored if they fit your use case.
-
-My goal is to quickly bootstrap a server and then let Ansible manage the config. I should be able to complete this without the need to ever SSH into a server or use a monitor / keyboard.
-
-As far as I can tell, autoinstall wraps some (not all) of cloud-init's functionality, so some things that might work for cloud-init do NOT work for autoinstall, even though they are the same? ...
-
-FIX ^^
-
-
-Overview via pic:
-
-![](https://i.imgur.com/9dbVpKz.png#center)
+([official docs](https://curtin.readthedocs.io/en/latest/topics/config.html))
 
 ## Prerequisites
 
-{{< notice warning >}}
-An existing Ubuntu install / CLI is **required**
-{{< /notice >}}
+- (2) USB sticks with over 4GB of space
+- An existing Ubuntu install / CLI is **required***
 
-I tried so hard to avoid this chicken-and-egg issue, but having a single OS/shell requirement allows for more reliable docs.
-
-Worst case scenario, configure a server manually, setup the USBs and then use them the automate reformat.
-
-{{< notice tip >}}
-I recently found these USB 3.0 sticks that have 2 ends (USB-A & USB-C) for the same on-chip data. This is awesome as I exchange this drive between machines for creating, editing, or launching installs. (INSERT LINK HERE)
-
-Also, if limited on front facing USBs, I found that using an adapater helps. I plug both USBs and a keyboard dongle in the same adapater. (INSERT LINK HERE)
-{{< /notice >}}
+> *I tried so hard to avoid this chicken-and-egg issue, but having a single OS/shell requirement allows for more reliable docs.
+>
+> Worst case scenario, configure a server manually, setup the USBs and then use them the automate reformat.
 
 ## Create bootable Ubuntu live server USB
 
 The reason we can't unpack / repack the ISO easily has a lot to do with the ISO format limitations when it comes to modifying data. Which makes sense considering it would be even more challenge to modify a "real" CD.
 
-As a result, we get the ISO, unpack it for the latest file, and use a tool `livefs-edit` to inject the file. The ending result is a modified, bootable, Ubuntu ISO.
+As a result, download the ISO, unpack it for the latest file, and use a tool `livefs-edit` to inject the file. The ending result is a modified, bootable, Ubuntu ISO.
 
 ### Get the latest live server ISO
 
@@ -139,7 +152,7 @@ export ISO="https://releases.ubuntu.com/22.04/ubuntu-22.04.1-live-server-amd64.i
 wget $ISO
 ```
 
-### (Optional) Modify the GRUB boot menu file
+### (optional) Modify the GRUB boot menu file
 
 When the live server ISO is booted, the first prompt is a menu to select what type of boot should be performed. For example, one option is for launching the live OS in memory and another is to install the OS on the system.
 
@@ -492,10 +505,10 @@ This is potentially dangerous if I boot while the magical USBs are inserted or b
 In the future, I can plug in these USBs, reboot, and have a fresh install.
 {{< /notice >}}
 
-### Override Ubuntu grub options (manual method)
+### (manual) Override Ubuntu grub options 
 
 {{< notice note >}}
-Skip this step if you are using a modified ISO, as it jumps into action 1 second after the USB is selected to boot.
+Skip this step if you are using a modified ISO.
 {{< /notice >}}
 
 Not to be confused with the USB being selected as the media to boot from, we now need to choose how Ubuntu lanches from the USB. If you didn't configure a custom ISO to auto-boot and autoinstall, you'll need to enter a few parameters when prompted to select your Ubuntu boot option.
@@ -598,16 +611,3 @@ Servers can be completely wiped and rebuilt with low effort
 Might look at creating a meta data based install for more automation of the config? idk...
 
 Since we're modifying the ISO, we potentially _could_ jam the CIDATA on the ISO and reduce the amount of USBs. I would rather have the flexibility of seperate USBs, as you saw earlier how big of a pain it is to edit an ISO. Lastly, by not combing the process, I can skip the first step and jump strait into using my CIDATA for booting a new server.
-
-# TODO:
-- I should probably try `curtin in-target --target=/target -- lvextend ...`
-- backup my own working data and add a note for my config tweaks.
-
-While not required, here's a quick "ssh key purge" script:
-
-for i in $(echo "192.168.65.11 192.168.80.38 192.168.126.60 192.168.74.115 192.168.68.65 192.168.93.163 192.168.127.21"); do ssh-keygen -R $i; done
-
-sudo $HOME/.ssh/known_hosts
-
-# -R removes assicaited hosts
-ssh-keygen -R $i

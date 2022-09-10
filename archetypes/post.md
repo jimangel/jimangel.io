@@ -34,6 +34,10 @@ cover:
 slug: ""  # make your URL pretty!
 ---
 
+H1 = # = Main keywords and subject matter, what the overall post is about
+H2 = ## = Sections to break up content, using similar keywords to the H1 tag
+H3 = ### = Subcategories to further break up the content, making it easily scannable
+
 - Include 'how' or 'why' in the permalink / title (for SEO)
 - Strip out prepositions (to, of, with, at, from, into, for, on by) for permalink
   - short = better
