@@ -43,6 +43,17 @@ both in the content security stuff and in the footer (footer-blurb.md partial - 
 <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ ( replace site.Title "Jim Angel | " "") }}</a></span>
 
 # auto genrates year and loks cleaner..
+
+# Had to do this in the singles partial as well as the header partial
+
+# partial/templates/head
+{{- /* Title */}}
+<title>{{ if .IsHome }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ end }}{{ site.Title }}</title>
+
+# BECOMES
+# the IsHome "Jim Angel" gives me the title bar of "Jim Angel | jimangel.io" but leaves pages with their title + site. I should look at fixing this with a custom logo class vs. the title patches...
+<title>{{ if .IsHome }}Jim Angel | {{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ end }}{{ ( replace site.Title "Jim Angel | " "") }}</title>
+
 ```
 
 # NOTE: created ads...

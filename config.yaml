@@ -4,7 +4,7 @@ module:
     - path: github.com/martignoni/hugo-notice
 
 # https://github.com/adityatelange/hugo-PaperMod/wiki/Variables
-baseURL: https://jimangel.io
+baseURL: https://jimangel.io/
 languageCode: en-us
 title: "Jim Angel | jimangel.io"
 theme: ["hugo-notice", "PaperMod"]

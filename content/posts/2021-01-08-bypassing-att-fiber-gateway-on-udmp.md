@@ -30,12 +30,15 @@ keywords:
 - best router for att fiber
 - how to remove at&t fiber box
 - at&t optical network terminal
+- at&t fiber modems
 - udm pro podman
 - unifi os shell commands
 - ssh to udm pro
 - can i buy my own router for at&t
 - udm pro fiber
 - what modem does att fiber use
+- can i use my own modem with at&t fiber
+- eap proxy
 
 cover:
   image: /img/bypassing-att-fiber-gateway-featured.jpg
