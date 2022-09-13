@@ -113,10 +113,10 @@ params:
     disableHLJS: true # to disable highlight.js
     disableFingerprinting: false # https://github.com/adityatelange/hugo-PaperMod/issues/89#issuecomment-736549907
     favicon: "/favicon.ico"
-    favicon16x16: "/favicon.ico"
-    favicon32x32: "/favicon.ico"
-    apple_touch_icon: "/favicon.ico"
-    safari_pinned_tab: "/favicon.ico"
+    favicon16x16: "/img/favicon-16x16.png"
+    favicon32x32: "/img/favicon-32x32.png"
+    apple_touch_icon: "/img/apple-touch-icon.png"
+    safari_pinned_tab: "/img/safari-pinned-tab.svg"
     # theme_color: "#089de3" for the browser bar color...
   profileMode:
         enabled: true

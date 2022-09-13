@@ -226,3 +226,16 @@ params:
 ```
 
 soellchecj: https://github.com/crate-ci/typos/releases/download/v1.11.4/typos-v1.11.4-x86_64-apple-darwin.tar.gz
+
+# Also added icons for apple via photoshop (icon saved on toaster)
+
+```
+# messing with svg icon
+Delete the contents of the following folder:
+
+~/Library/Safari/Template Icons
+And then restart Safari.
+
+rm -r ~/Library/SafariTechnologyPreview/Template\ Icons/
+
+```
