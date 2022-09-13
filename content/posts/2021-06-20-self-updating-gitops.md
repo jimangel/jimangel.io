@@ -1,7 +1,8 @@
 ---
-title: "Self-Updating GitOps"
+title: "Auto-updating and self-healing GitOps Kubernetes monster"
+description: "Building a platform that requires no maintenance. Auto updating and self-healing"
 summary: "Self-hosted, Self-healing, Self-updating, Self-patching Kubernetes madness"
-subtitle: "Trying to build a platform that requires no maintenance. Auto updating and self healing"
+subtitle: "Trying to build a platform that requires no maintenance. Auto updating and self-healing"
 date: 2021-06-20
 lastmod: 2021-06-20
 #publishDate: You only need to specify this option if you wish to set date in the future but publish the page now.
@@ -15,6 +16,17 @@ tags:
 - automation
 - homelab
 - ansible
+keywords:
+- kubernetes
+- walkthrough
+- automation
+- homelab
+- ansible
+- GitOps
+- Auto-updating
+- self-healing
+- patching
+- kubernetes operations
 categories: []
 
 # Featured image

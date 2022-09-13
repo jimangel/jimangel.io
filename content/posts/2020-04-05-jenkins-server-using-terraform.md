@@ -1,5 +1,6 @@
 ---
 title: "Low-Cost Public Jenkins Server using Terraform and DigitalOcean"
+description: "How to deploy a Jenkins server on DigitalOcean with Terraform"
 subtitle: "Deploy a public Jenkins server on a $5 DigitalOcean Droplet with `terraform apply`."
 summary: "Deploy a public Jenkins server on a $5 DigitalOcean Droplet with `terraform apply`."
 date: 2020-04-05

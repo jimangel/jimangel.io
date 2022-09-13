@@ -62,6 +62,15 @@ This is a very good tip.
 General info
 {{< /notice >}}
 
+```
+Check to make sure each page has:
+A clear title tag.
+H1 tags that define the page’s main topic.
+Alt tags and descriptions on all of your images.
+Internal links to help guide visitors and search engines to your most important pages.
+Breadcrumbs across the site especially if there are multiple lessons and chapters in your courses.
+```
+
 ### Task lists
 
 ```markdown

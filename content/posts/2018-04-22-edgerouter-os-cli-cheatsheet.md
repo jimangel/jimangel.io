@@ -1,7 +1,8 @@
 ---
 title: 'EdgeRouter OS CLI Cheatsheet'
-subtitle: 'My goto commands when using my Ubiquiti ERL'
-summary: 'My goto commands when using my Ubiquiti EdgeRouter Lite'
+subtitle: 'Most common commands used on my Ubiquiti EdgeRouter Lite ERL'
+description: "Most common commands used on my Ubiquiti EdgeRouter Lite ERL"
+summary: 'Most common commands used on my Ubiquiti EdgeRouter Lite ERL'
 date: 2018-04-22
 lastmod: 2018-04-22
 featured: false

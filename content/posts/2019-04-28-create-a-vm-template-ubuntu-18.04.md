@@ -1,5 +1,6 @@
 ---
 title: "Create a VM Template for Ubuntu 18.04 LTS"
+description: "Walk-through creating a Ubuntu template on VMware"
 subtitle: "Script the Boring Stuff"
 summary: "Walk through creating a Ubuntu template on VMware"
 date: 2019-04-28

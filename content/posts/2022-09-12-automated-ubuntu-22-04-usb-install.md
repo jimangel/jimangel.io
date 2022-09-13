@@ -79,35 +79,59 @@ Worst case scenario, you can configure a server manually, setup the USBs and the
 
 ## Component overview
 
-While I was hacking on this solution, I discovered that most blogs and StackOverflow questions only applied to a subset of a larger stack of software.
+{{< notice warning >}}
+If you'd like to skip the following component overview, [click here](#create-a-bootable-ubuntu-live-server-usb) to jump to the first step, creating a bootable Ubuntu live-server USB.
+{{< /notice >}}
 
-There were times when I didn't know where to look for logs or I would apply a solution with incorrect formatting based on an answer.
+While I was hacking on this solution, I discovered that most blogs and StackOverflow questions only applied to a subset of a larger stack of software. There were times when I didn't know where to look for logs or I would apply a solution with incorrect formatting based on an answer.
 
-I had a hard time viewing the bigger picture. It wasn't clear how each component interacted and I felt like I was always working with a half-baked solution. I'm hoping I can save you from some of my pain.
+I had a hard time viewing the bigger picture. It wasn't clear how each component interacted and I felt like I was always working with a half-baked solution.
+
+By learning some of the components and how they interact should lead to an easier time debugging. I've highlighted the following components specifically because I had to learn them based on some strange blocker they caused. :smile:
 
 {{< notice note >}}
 If you'd like to skip the following component overview, [click here](#create-a-bootable-ubuntu-live-server-usb) to jump to the first step, creating a bootable Ubuntu live-server USB.
 {{< /notice >}}
 
+### What is `live-server`?
+
+I confused `live-server` with a lot of other components, but generally `live-server` refers to the special ISO used to install Ubuntu. There's a couple different ISO images to choose from such as `desktop`, `server`, etc. For example, I use `ubuntu-22.04.1-live-server-amd64.iso` in this post.
+
+The `live-server` ISO is special because it is purpose built to run in memory with installation capabilities. This is possible thanks to [`casper`](https://manpages.ubuntu.com/manpages/jammy/man7/casper.7.html) "a hook for `initramfs-tools` used to generate an `initramfs` capable to boot live systems." `initramfs` is for linux kernels over 2.6, previously called `initrd` (The "initial RAM disk"). `initrd` creates the RAM (in-memory) disk image and the `vmlinuz` executable descompresses a linux kernel into memory. It's not critical to understand this, but it helps when you see the GRUB boot menu edits I make.
+
+While not tested, Ubuntu's minimal cloud images ([https://cloud-images.ubuntu.com/minimal/releases/](https://cloud-images.ubuntu.com/minimal/releases/)) are created with similar intentions with the goal of providing a smaller image. Keep in mind they are pre-installed disk images vs. live-server (booting) ISO. 
+
+I believe Ubuntu uses [squashfs images for the kernel](https://unix.stackexchange.com/a/672410/419083) that `casper` decompresses based on a `casper/extras/modules.squashfs-*` wildcard inclution. Part of that expansion includes the systemd configuration of `cloud-init`
+
 ### What is `cloud-init`?
 
-Around 2009, Canonical launched `cloud-init` as the provisioning mechanism fo Amazon's "new" EC2 isntances. Later on, `cloud-init` was opensourced and is now the defacto provisioning model for cloud VMs.
+Around 2009, Canonical launched [`cloud-init`](https://cloudinit.readthedocs.io/en/latest/) as the provisioning mechanism fo Amazon's "new" EC2 isntances. Later on, `cloud-init` was opensourced and is now the defacto provisioning model for cloud VMs.
 
 `cloud-init` is popular due to the flexible, declaritive, machine configuration options. With `cloud-init` you can copy SSH keys, provision disks, install applicaitons, setup users, harden OSes, and many more.
 
-Upon boot, the `cloud-init` searches for a configuration [datasource](https://cloudinit.readthedocs.io/en/latest/topics/datasources.html). A datasource is the location (or _source_) of data. Specifcally `cloud-init` configuration data. `cloud-init`, after failing to find any configurations, defaults automatically to the mounted volume <mark>named exactly "CIDATA"</mark> as a [`NoCloud`](https://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html) datasource.
+Since our `live-server` is ephemeral and boots to memory, each time we boot from the `live-server` USB it appears to the `cloud-init` service as the first boot; triggering provisioning. As such, it's important to remove the USBs if you don't want to completely reset your server.
 
-The `user-data` file on the `CIDATA` USB tells Ubuntu how you want to install the OS and the `ubuntu-live-[arch].iso` boots the provisioning software (`cloud-init`). `meta-data` is used by cloud providers, not us, but still required for `cloud-init` to leverage the `CIDATA` volume.
+`cloud-init` is "usually a service that runs on boot before most other things. When it starts with the init subcommand—there are some others as well—it runs a sequence of modules that specialize the machine in different ways." ([source](https://www.hashicorp.com/resources/cloudinit-the-good-parts))
+
+`cloud-init` is installed by default and runs multiple stages through-out the boot process. Upon boot, the `cloud-init` checks to see if it's the first boot*, then searches for a configuration [datasource](https://cloudinit.readthedocs.io/en/latest/topics/datasources.html). A datasource is the location (or _source_) of data. Specifcally `cloud-init` configuration data. `cloud-init`, after failing to find any configurations, defaults automatically to the mounted volume <mark>named exactly "CIDATA"</mark> as a [`NoCloud`](https://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html) datasource.
+
+> \* Unless configured to do otherwise, `cloud-init` runs once on the first boot only. It compares the instance ID in the cache against the instance ID it determines at runtime. It appears that this was a descison to avoid security issues outlined in cloud-int bug [#1879530](https://bugs.launchpad.net/ubuntu/+source/cloud-init/+bug/1879530).
+
+The configuration of `cloud-init` comes from two places, a `user-data` file and a `meta-data` file. The `meta-data` file is required but can be empty. If I managed a fleet of hardware / VMs, I could create a metadata server to dynamically define machine-specific `meta-data`.
+
+The `user-data` file on the `CIDATA` volume tells `cloud-init` how to install the OS and the `ubuntu-live-[arch].iso` boots the provisioning software (`cloud-init`). `meta-data` is used by cloud providers, not us, but still required for `cloud-init` to leverage the `CIDATA` volume.
+
+As of Ubuntu 20.04, a top-level `autoinstall:` key can be provided in `#cloud-config` from `user-data` to support Ubuntu live-server(`subiquity`).
 
 {{< notice warning >}}
-`cloud-init` looks for very specific names and filesystems. Directories and filenames are important.
+`cloud-init`'s datasource `nocloud` looks for very specific names and filesystems. Directory and filenames are important.
 {{< /notice >}}
-
-I'll go more into `cloud-init` later, feel free to check out the [official docs](https://cloudinit.readthedocs.io/en/latest/).
 
 ### What is Ubuntu's `autoinstall`?
 
-`autoinstall`, introduced in Ubuntu Ubuntu 20.04.5 LTS (Focal Fossa), "lets you answer all those configuration questions ahead of time with an autoinstall config and lets the installation process run without any interaction."
+`autoinstall`, introduced in Canonical's Ubuntu 20.04.5 LTS (Focal Fossa), "lets you answer all those configuration questions ahead of time with an autoinstall config and lets the installation process run without any interaction."
+
+The live-installer will use autoinstall directives to seed answers to configuration prompts during system install to allow for a “touchless” or non-interactive Ubuntu system install. ([source](https://cloudinit.readthedocs.io/en/latest/topics/modules.html#ubuntu-autoinstall))
 
 The biggest gap for me was learning that [autoinstall](https://ubuntu.com/server/docs/install/autoinstall) is _very close_ to cloud-init but not exactly cloud-init. In fact, "The `autoinstall config` is provided via `cloud-init` configuration." The [`autoinstall` quickstart](https://ubuntu.com/server/docs/install/autoinstall-quickstart) guide leaves a lot to be desired, the biggest problem for me is the use of a VM. It's not a "real world" example, there's no consideration for the complexities to leverage `autoinstall` with no context.
 
@@ -120,6 +144,15 @@ When any system is installed using the server installer, an `autoinstall` file f
 `cloud-init` and `autoinstall` can do some pretty amazing stuff, however, I prefer to keep the "raw" infrastructure configuration seperate from my configuration management stack (Ansible). If that's not a concern to you, consider using this automation to include adding packages and repositories beyond the general OS install.
 
 ### What is `subiquity`?
+
+[`subiquity`](https://github.com/canonical/subiquity) is a python client-server application based on `ubiquity`, Ubuntu's installer created by Canonical. By default, `subiquity` is installed through snap on the live-server ISO. Subiquity opens up an API [socket](https://github.com/canonical/subiquity/blob/main/subiquity/cmd/tui.py#L117) (`/run/subiquity/socket`) and runs controllers that respond to events.
+
+The purpose of subiquity is to launch the installer Text-UI ([TUI](https://github.com/canonical/subiquity/blob/main/subiquity/cmd/tui.py)); which we want to ignore...
+
+> Autoinstalls are `subiquity`'s way of doing a automated, or partially automated install. This mostly impacts the server, which loads the config and the server controllers have methods that are called to load and apply the autoinstall data for each controller. The only real difference to the client is that it behaves totally differently if the install is to be totally automated: in this case it does not start the urwid-based UI at all and mostly just "listens" to install progress via journald and the meta.status.GET() API call.
+([_source_](https://github.com/canonical/subiquity/blob/main/DESIGN.md#autoinstalls))
+
+`subiquity` defaults to an `iso_autoinstall_path` file that usualy is `autoinstall.yaml`.
 
 From the [design doc](https://github.com/canonical/subiquity/blob/main/DESIGN.md) on subiquity's Github page, [`autoinstall`](https://github.com/canonical/subiquity/blob/main/DESIGN.md#autoinstalls) is `subiquity`'s way of doing a automated, or paritally automated install.
 
@@ -136,7 +169,10 @@ From the [design doc](https://github.com/canonical/subiquity/blob/main/DESIGN.md
 
 From the `cloud-init` [docs](https://cloudinit.readthedocs.io/en/latest/topics/modules.html#ubuntu-autoinstall), Ubuntu’s `autoinstall` YAML supports single-system automated installs using the live-server install via the subiquity snap. I didn't find the source, but it appears that the live-server ISO is created with the subiquity snap pre-installed (based on what I found in [this script](https://github.com/canonical/subiquity/blob/main/scripts/make-edge-iso.sh#L13)).
 
-([`subiquity` on GitHub](https://github.com/canonical/subiquity))
+> Subiquity is mostly a UI [...] the model is sometimes quite trivial, because it's basically defined by the curtin config.
+>
+> Once the view code and the model exist, the [`subiquity`] controller "just" sits between them.
+([_source_](https://github.com/canonical/subiquity/blob/main/DESIGN.md#development-process))
 
 ### What is `curtin`?
 
@@ -156,8 +192,6 @@ Some of the tasks `curtin` may perform:
 * Network Discovery and Setup
 * Hook for installed OS to customize itself
 * Final Commands
-
-
 
 {{< notice tip >}}
 Search (`CTRL + F`) for the term `curtin` on Ubuntu's official [autoinstall-reference](https://ubuntu.com/server/docs/install/autoinstall-reference) to see the areas managed by curtin such as disk selection ([additonal curtin docs](https://curtin.readthedocs.io/en/latest/topics/config.html)).
@@ -650,3 +684,9 @@ Since we're modifying the ISO, we potentially _could_ jam the CIDATA on the ISO 
 This cool link: https://discourse.ubuntu.com/t/cloud-init-and-the-live-server-installer/14597 (talking about the solution they are working on that I wrote about in MArch 2020....)
 
 https://ubunlog.com/en/subiquity-ubuntu-prepara-un-nuevo-instalador-que-podremos-ver-en-ubuntu-21-10/
+
+Cool guide about installing cloud-init "from scratch"
+
+https://askubuntu.com/questions/1390827/how-to-make-ubuntu-autoinstall-iso-with-cloud-init-in-ubuntu-21-10/1391309#1391309
+
+https://gist.github.com/s3rj1k/55b10cd20f31542046018fcce32f103e

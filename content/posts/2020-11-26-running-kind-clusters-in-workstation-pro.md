@@ -1,5 +1,6 @@
 ---
 title: "Running kind clusters in VMware Workstation Pro 16"
+description: "Local, fast, Kubernetes cluster testing with kind and VMware Workstation Pro"
 subtitle: "kind provides local, fast, Kubernetes cluster testing"
 summary: "Play with some of the new container features in VMware Workstation Pro"
 date: 2020-11-26

@@ -1,5 +1,6 @@
 ---
 title: "Configure Google Cloud HA VPN with BGP on pfSense"
+description: "Securely extend your homelab network into the cloud with pfSense"
 subtitle: "The idea of extending your local compute into a private cloud has always intrigued me"
 summary: "Extend your personal datacenter into the cloud"
 date: 2020-11-20

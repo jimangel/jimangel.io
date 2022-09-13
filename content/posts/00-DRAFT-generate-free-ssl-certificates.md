@@ -1,6 +1,7 @@
 ---
 title: "Generate Free SSL Certificates"
 subtitle: "Various ways to use LetsEncrypt for your side project"
+description: "Use LetsEncrypt to generate SSL certificates"
 summary: "Use LetsEncrypt to generate SSL certificates"
 date: 2019-06-30
 lastmod: 2019-06-30
@@ -10,6 +11,9 @@ draft: true
 authors:
 - jimangel
 tags:
+- ssl
+- letsencrypt
+keywords:
 - ssl
 - letsencrypt
 categories: []

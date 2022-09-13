@@ -1,5 +1,6 @@
 ---
 title: "Upstream Kubernetes on a Raspberry Pi cluster"
+description: "Test unreleased versions Kubernetes on Raspberry Pi 4"
 subtitle: "Test unreleased versions Kubernetes on Raspberry Pi 4"
 summary: "Test unreleased versions Kubernetes on Raspberry Pi 4"
 date: 2020-05-25

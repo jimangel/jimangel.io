@@ -46,7 +46,7 @@ both in the content security stuff and in the footer (footer-blurb.md partial - 
 
 # Had to do this in the singles partial as well as the header partial
 
-# partial/templates/head
+# INn partials/head
 {{- /* Title */}}
 <title>{{ if .IsHome }}{{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ end }}{{ site.Title }}</title>
 

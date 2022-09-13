@@ -1,5 +1,6 @@
 ---
 title: "Automated ESXi 6.7 U2 Zero Touch Install via USB"
+description: "How to deploy a self-provisioning ESXi thumb drive"
 subtitle: "Almost zero-touch, after you create a file"
 summary: "How to deploy a self-provisioning ESXi thumb drive"
 date: 2018-06-10

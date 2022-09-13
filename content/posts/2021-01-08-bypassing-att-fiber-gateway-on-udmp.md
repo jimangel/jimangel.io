@@ -1,5 +1,6 @@
 ---
 title: "Bypassing AT&T's fiber gateway on Unifi Dream Machine Pro using WPA supplicant"
+description: "Step by step instructions for bypassing AT&T"
 subtitle: "I can't believe there's not a better answer in 2021."
 summary: "Step by step instructions for bypassing AT&T"
 date: 2021-01-08

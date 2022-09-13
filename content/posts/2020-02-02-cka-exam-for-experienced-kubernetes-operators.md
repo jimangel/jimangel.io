@@ -1,5 +1,6 @@
 ---
-title: "Passing The CKA Exam For Experienced Kubernetes Operators"
+title: "Passing the CKA exam for experienced Kubernetes operators"
+description: "Tips and tricks for passing the CKA exam"
 subtitle: "Tips and tricks to help you pass confidently"
 summary: "For experienced operators wanting to advance their Kubernetes journey by getting certified"
 date: 2020-02-02
@@ -12,6 +13,13 @@ authors:
 tags:
 - kubernetes
 - cncf
+keywords:
+- kubernetes
+- cncf
+- Certified Kubernetes Administrator
+- CKA
+- exam
+- kubernetes certification
 categories: []
 
 cover:

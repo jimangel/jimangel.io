@@ -1,6 +1,7 @@
 ---
 title: 'Building a vSphere 6.5 Homelab 2017'
 subtitle: 'For Under $600, If Possible...'
+description: "Building an enterprise datacenter with a small footprint"
 summary: 'Building an enterprise datacenter with a small footprint'
 date: 2017-10-13
 lastmod: 2017-10-13
@@ -12,6 +13,16 @@ authors:
 tags:
 - homelab
 - vmware
+keywords:
+- homelab
+- vmware
+- nuc
+- small server
+- home datacenter
+- learning lab
+- sysadmin
+- system administration
+- servers
 categories: []
 
 cover:

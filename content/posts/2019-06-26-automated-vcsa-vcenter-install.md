@@ -1,5 +1,6 @@
 ---
 title: "Automated VCSA 6.7 Install using CLI"
+description: "Quickly deploy vCenter to an ESXi host"
 subtitle: "So easy it will leave you feeling warm and fuzzy"
 summary: "Quickly deploy vCenter to an ESXi host"
 date: 2019-06-26
