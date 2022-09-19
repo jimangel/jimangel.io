@@ -2,6 +2,11 @@
 title: "Archive" # in any language you want
 layout: "archives" # is necessary
 url: "/archive"
-# description: ""
-# summary: "Collection of posts"
+description: ""
+summary: "Collection of old posts"
+keywords:
+- archive
+- jimangel
+- posts
+- blog
 ---

@@ -26,7 +26,7 @@ cover:
 slug: "automated-vcsa-vcenter-install"
 ---
 
-This post is an extension of my [ESXi setup]("/posts/scripted-esxi-6-7-install-to-usb"), usually what I do after the host is up.
+This post is an extension of my [ESXi setup](/posts/scripted-esxi-6-7-install-to-usb), usually what I do after the host is up.
 
 We will use a file to automate 100% of the configuration.
 
@@ -38,7 +38,7 @@ Our goal is to make this process easy, boring, and repeatable.
 
 ## Get the vCenter ISO
 
-Covered in an [earlier post]("/posts/scripted-esxi-6-7-install-to-usb#get-vmware-isos""). Get the ISO any way you'd like.
+Covered in an [earlier post](/posts/scripted-esxi-6-7-install-to-usb#get-vmware-isos). Get the ISO any way you'd like.
 
 
 {{< notice note >}}
