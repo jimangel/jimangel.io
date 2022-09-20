@@ -26,10 +26,11 @@ pretty_urls = false
 [build.processing.images]
 compress = true
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-  Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://jimangel.disqus.com https://c.disquscdn.com https://*.cloudfront.net https://gist.github.com https://pagead2.googlesyndication.com https://github.githubassets.com https://cdnjs.buymeacoffee.com; prefetch-src 'self' https://c.disquscdn.com https://disqus.com; frame-src 'self' https://disqus.com; style-src-elem 'self' https://c.disquscdn.com 'unsafe-inline' https://github.githubassets.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
-  X-Frame-Options = "DENY"
-  X-Content-Type-Options = "nosniff"
-  X-XSS-Protection = "1; mode=block"
+# removed content security policy and x fram options for G4A
+#[[headers]]
+#  for = "/*"
+#  [headers.values]
+#  Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https:; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://jimangel.disqus.com https://c.disquscdn.com https://*.cloudfront.net https://gist.github.com https://pagead2.googlesyndication.com https://github.githubassets.com https://cdnjs.buymeacoffee.com; prefetch-src 'self' https://c.disquscdn.com https://disqus.com; frame-src 'self' https://disqus.com; style-src-elem 'self' https://c.disquscdn.com 'unsafe-inline' https://github.githubassets.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
+#  X-Frame-Options = "DENY"
+#  X-Content-Type-Options = "nosniff"
+#  X-XSS-Protection = "1; mode=block"
