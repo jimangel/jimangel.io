@@ -40,13 +40,11 @@ Our goal is to make this process easy, boring, and repeatable.
 
 Covered in an [earlier post](/posts/scripted-esxi-6-7-install-to-usb#get-vmware-isos). Get the ISO any way you'd like.
 
-
 {{< notice note >}}
 This demo uses: VMware-VCSA-all-6.7.0-13010631.iso
 {{< /notice >}}
 
 Put the ISO in your `~/Downloads` folder if you plan on following my exact commands
-
 
 ## Create the config file
 
