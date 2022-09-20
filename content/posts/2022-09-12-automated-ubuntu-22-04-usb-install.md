@@ -52,9 +52,9 @@ For a complete "no touch" installation, I use 2 USB sticks, one for booting a te
 
 ![](/img/ubuntu-usb-install-22-04-USB-rack.jpg)
 
-I found this whole topic pretty confusing when I started to explore it. The first half of this post is a deep-dive into the automation components used, and the second half is the actual technical steps – feel free to [jump directly to the second half](#create-a-bootable-live-server-usb).
+I found this whole topic pretty confusing when I started to explore it. The first half of this post is a deep dive into the automation components used, and the second half is the actual technical steps – feel free to [jump directly to the second half](#create-a-bootable-live-server-usb).
 
-After reading this article, you'll have an in-depth understanding about how to automate Ubuntu server installations using `cloud-init`.
+After reading this article, you'll have an in-depth understanding of how to automate Ubuntu server installations using `cloud-init`.
 
 > ## What is cloud-init?
 >
@@ -68,11 +68,11 @@ After reading this article, you'll have an in-depth understanding about how to a
 
 ## Why not Ansible?
 
-Most people quickly click through their OS setup and _then_ use Ansible. When there are 5 servers or to rebuild, it becomes a daunting task that should be automated. I rebuild servers often because I like to start from scratch when writing posts, and it's a good security practice.
-
 Ansible requires a fully provisioned OS that you have SSH access to before running playbooks. By using `cloud-init` and autoinstall, I can automatically include my SSH keys that Ansible uses and configure things like the hostname, proxies, or DNS settings before the machine boots. I've included a couple of sample Ansible commands in my [real-life demo](#check-ansible-connections).
 
-Lastly, you can use `cloud-init` to do a lot of the server configuration steps, as Ansible would. It's then a matter of personal preference of where you manage your server config. I personally like the idea of keeping `cloud-init` focused only on the OS provisioning automation and then using Ansible for everything "on top."
+Most people quickly click through their OS setup and _then_ use Ansible. When there are 5+ servers to rebuild, it becomes a daunting task that should be automated. I rebuild servers often because I like to start from scratch when writing posts, and it's a good security practice.
+
+Lastly, you _could_ use `cloud-init` to do a lot of the server configuration steps, as Ansible would. It's then a matter of personal preference regarding how you want to manage your servers. I personally like the idea of keeping `cloud-init` focused only on the OS provisioning automation and then using Ansible for everything "on top."
 
 My solution also lends itself to repeatable OS base installs too, so each server setup is close, if not identical.
 
@@ -87,7 +87,7 @@ To make the process 100% "no touch," I also set the host's BIOS to give USB devi
 
 - [Create a bootable live-server USB](#create-a-bootable-live-server-usb) to act as the live, in memory, OS provisioner
 - Modify the grub boot file to allow unprompted destructive installs (optional)
-- [Create another USB for a cloud-init config](#create-cloud-init-files) to launch a [autoinstall module](https://cloudinit.readthedocs.io/en/latest/topics/modules.html#ubuntu-autoinstall).<sup>1</sup>
+- [Create another USB for a cloud-init config](#create-cloud-init-files) to launch an [autoinstall module](https://cloudinit.readthedocs.io/en/latest/topics/modules.html#ubuntu-autoinstall).<sup>1</sup>
 - [Plug in both USBs](#insert-both-usbs-and-power-on-your-server)
 - Boot to an auto-provisioned OS
 
@@ -112,7 +112,8 @@ My homelab consists of Intel NUCs and Raspberry Pis. I was hoping to share the s
 The two-step process solution (pictured below) for bare metal is:
 - Boot a temporary OS to memory
 - Remotely provision the target host disk (via cloud-init [#1])
-  - The remote provisioning includes generating a new `cloud-init` for the future host disk's first boot (via `cloud-init` [#2]).
+
+The remote provisioning includes generating a new `cloud-init` for the future host disk's first boot (via `cloud-init` [#2]).
 
 ![diagram depicting cloud-init as a cloud and the boot process from live-server to target hard drive as colored shapes and arrows](/img/overview-components.jpg)
 
@@ -154,7 +155,7 @@ When **any** Ubuntu system is installed (manual or automated) an autoinstall fil
 
 Since I want to provision a bunch of servers, with no screen or keyboard, I needed to know when to remove the USB. Otherwise, each reboot would relaunch the live OS – causing a continuous OS installation loop.
 
-The solution I came up with is adding in power off events at key times.
+The solution I came up with is adding power off events at key times.
 
 - The first power off is in the liver-server user-data's `late-commands`. This gives me an indication it's time to remove the USBs because cloud-init/autoinstall has completed the initial provisioning via the live-server.
 
@@ -238,7 +239,7 @@ When I was first debugging my installation errors, I felt like I was running in 
 Search (`CTRL + F`) for the term `curtin` on Ubuntu's official [autoinstall reference docs](https://ubuntu.com/server/docs/install/autoinstall-reference) to see the areas managed by curtin such as disk selection ([additional curtin docs](https://curtin.readthedocs.io/en/latest/topics/config.html)).
 {{< /notice >}}
 
-### Summary
+## Solution summary
 
 A live OS is booted to memory via casper; triggering cloud-init to launch subiquity, a bunch of python controllers, to generate a cloud-init configuration for the new host and to launch `curtin install` for provisioning the host's new – future – disk.
 
@@ -398,9 +399,9 @@ Output:
 1474353152 bytes (1.5 GB, 1.4 GiB) copied, 20.6316 s, 71.5 MB/s
 ```
 
-<!--adsense-->
-
 The hard part of creating the bootable ISO is over. Next, let's create a volume to host our `cloud-init` user-data configuration.
+
+<!--adsense-->
 
 ## Create a USB named CIDATA for a cloud-init datasource
 
@@ -625,4 +626,4 @@ ansible all -m shell -a "stat / | awk '/Birth: /{print $2}'"
 ansible all -m setup -a 'filter=ansible_distribution,ansible_distribution_version,ansible_memfree_mb,ansible_memtotal_mb,ansible_processor_cores*,ansible_architecture' 2>/dev/null
 ```
 
-At this point I'll run upgrade scripts to update the systems via Ansible. :sunglasses:
+At this point, I'll run upgrade scripts to update the systems via Ansible. :sunglasses:
