@@ -50,6 +50,17 @@ H3 = ### = Subcategories to further break up the content, making it easily scann
 This is a note.
 {{< /notice >}}
 
+```
+Check to make sure each page has:
+A clear title tag.
+H1 tags that define the page’s main topic.
+Alt tags and descriptions on all of your images.
+Internal links to help guide visitors and search engines to your most important pages.
+Breadcrumbs across the site especially if there are multiple lessons and chapters in your courses.
+```
+
+- ending posts with 2 to 3 questions
+
 {{< notice warning >}}
 This is a warning notice. Be warned!
 {{< /notice >}}
@@ -61,26 +72,3 @@ This is a very good tip.
 {{< notice info >}}
 General info
 {{< /notice >}}
-
-```
-Check to make sure each page has:
-A clear title tag.
-H1 tags that define the page’s main topic.
-Alt tags and descriptions on all of your images.
-Internal links to help guide visitors and search engines to your most important pages.
-Breadcrumbs across the site especially if there are multiple lessons and chapters in your courses.
-```
-
-### Task lists
-
-```markdown
-- [x] Task 1
-- [ ] Task 2
-- [ ] Task 3
-```
-
-Result:
-
-- [x] Task 1
-- [ ] Task 2
-- [ ] Task 3

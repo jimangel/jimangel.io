@@ -197,7 +197,7 @@ Let's get a bit deeper into the weeds. The following section isn't critical to u
 >
 > `/casper/installer.squashfs` contains the entire Ubuntu Live Server OS, including a `cloud-init` and `systemd` configuration.
 >
-> `casper` leverages `initrd` (initializes a disk from RAM) and `vmlinuz` (a compressed kernel for the RAM disk) to provide the bootable layer for the `/casper/installer.squashfs` filesystem. This is why everything "just works" - `cloud-init` runs on every boot (finding our 'CIDATA' SUB volume for setup).
+> `casper` leverages `initrd` (initializes a disk from RAM) and `vmlinuz` (a compressed kernel for the RAM disk) to provide the bootable layer for the `/casper/installer.squashfs` filesystem. This is why everything "just works" - `cloud-init` runs on every boot (finding our 'CIDATA' USB volume for setup).
 
 I tried to sketch out a different view of how all the components interact. It reads from the top to bottom; from boot to provisioned host. Pay attention to the bottom components `subiquity` & `curtin` as they're covered in subsequent sections.
 
