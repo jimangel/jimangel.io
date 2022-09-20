@@ -66,6 +66,16 @@ After reading this article, you'll have an in-depth understanding about how to a
 >
 > There's one **required** configuration object named "**meta-data**", with no extension, and is typically used by cloud providers to parameterize their instance data (left intentionally blank in this demo). The "**user-data**" file or object is used for configuring the "on boot" OS instructions.
 
+## Why not Ansible?
+
+Most people quickly click through their OS setup and _then_ use Ansible. When there are 5 servers or to rebuild, it becomes a daunting task that should be automated. I rebuild servers often because I like to start from scratch when writing posts, and it's a good security practice.
+
+Ansible requires a fully provisioned OS that you have SSH access to before running playbooks. By using `cloud-init` and autoinstall, I can automatically include my SSH keys that Ansible uses and configure things like the hostname, proxies, or DNS settings before the machine boots. I've included a couple of sample Ansible commands in my [real-life demo](#check-ansible-connections).
+
+Lastly, you can use `cloud-init` to do a lot of the server configuration steps, as Ansible would. It's then a matter of personal preference of where you manage your server config. I personally like the idea of keeping `cloud-init` focused only on the OS provisioning automation and then using Ansible for everything "on top."
+
+My solution also lends itself to repeatable OS base installs too, so each server setup is close, if not identical.
+
 ## Prerequisites
 
 - 2 USBs with 4 GB+ storage
