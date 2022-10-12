@@ -239,3 +239,10 @@ And then restart Safari.
 rm -r ~/Library/SafariTechnologyPreview/Template\ Icons/
 
 ```
+
+## added a custom schema json in layouts/partials/templates/schema_json.html to help with SEO
+```
+# look at the bottom chunk
+layouts/partials/templates/schema_json.html
+
+```
