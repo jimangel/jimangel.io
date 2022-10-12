@@ -5,4 +5,37 @@ Disallow: /category/systems/
 {{- else }}
 Disallow: /
 {{- end }}
+
+#Search blocking
+User-agent: *
+Disallow: /?s= 
+Disallow: /search
+
+#Trackback blocking
+User-agent: *
+Disallow: /trackback
+Disallow: /*trackback
+Disallow: /*trackback*
+Disallow: /*/trackback
+
+#Rss Feed Blocking
+User-agent: *
+Allow: /feed/$ 
+Disallow: /feed/ 
+Disallow: /comments/feed/
+Disallow: /*/feed/$ 
+Disallow: /*/feed/rss/$ 
+Disallow: /*/trackback/$ 
+Disallow: /*/*/feed/$ 
+Disallow: /*/*/feed/rss/$ 
+Disallow: /*/*/trackback/$ 
+Disallow: /*/*/*/feed/$ 
+Disallow: /*/*/*/feed/rss/$ 
+Disallow: /*/*/*/trackback/$ 
+
+#Prevents resource problems blocked in Google Webmaster Tools
+User-Agent: Googlebot
+Allow: /*.css$
+Allow: /*.js$
+
 Sitemap: {{ "sitemap.xml" | absURL }}
