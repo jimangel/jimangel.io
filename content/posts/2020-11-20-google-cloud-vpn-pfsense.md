@@ -160,7 +160,7 @@ More details on each configuration parameter in the [OpenBGPD man page](https://
 
 ![](/img/google-cloud-vpn-pfsense-hc-vpn-up-bgp.png#center)
 
-<!--adsense-->
+
 
 ## Update pfSense and GCP firewalls
 

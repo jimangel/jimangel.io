@@ -65,7 +65,7 @@ A [Samsung 850 EVO](https://amzn.to/2yKLG8B) with 250GB is the perfect complemen
 #### RAM
 Using a single stick of [Crucial 16GB RAM](https://amzn.to/2ylpbDP), I leave the option open to expand to a MAX of 32GB if needed.
 
-<!--adsense-->
+
 
 ### Conclusion
 This setup will be _plenty_ to get my feet wet with vRealize. It's also built so that I can add more hosts (VMware Datacenter Cluster) or expand my existing server hardware. For now, this will be perfect for leaving in my living room without overtaking any other device. I'm thrilled with my homelab's bang for the buck.

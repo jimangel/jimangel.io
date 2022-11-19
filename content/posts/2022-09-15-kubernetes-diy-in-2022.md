@@ -26,4 +26,3 @@ slug: "kubernetes-diy-homelab-2022"  # make your URL pretty!
 
 ## Why?
 
-<!--adsense-->

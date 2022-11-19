@@ -184,7 +184,7 @@ terraform apply
 
 ![](/img/jenkins-server-terminal-out.png#center)
 
-<!--adsense-->
+
 
 ## Generate SSL certs and nginx config
 

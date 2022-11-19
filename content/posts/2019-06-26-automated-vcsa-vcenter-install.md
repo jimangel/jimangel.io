@@ -97,7 +97,7 @@ If you plan on using FQDN for the vCenter hostname, make sure the address resolv
 
 If you run into any issues, you can replace `--terse` with `--verbose`.
 
-<!--adsense-->
+
 
 ## Validate vCenter install
 

@@ -96,7 +96,7 @@ set service dns forwarding name-server 1.1.1.1
 set service dns forwarding name-server 1.0.0.1
 ```
 
-<!--adsense-->
+
 
 ### Add Cloudflare DDNS provider
 

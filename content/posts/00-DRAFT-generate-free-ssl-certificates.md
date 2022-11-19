@@ -43,7 +43,7 @@ Outline what will be acomplished and what's out of scope.
 * 2
 * 3
 
-<!--adsense-->
+
 
 
 callout about this

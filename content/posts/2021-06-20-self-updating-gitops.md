@@ -284,7 +284,7 @@ If you want to test it out, you can; however, keep in mind that you're upgrading
 sudo unattended-upgrade –dry-run –debug
 ```
 
-<!--adsense-->
+
 
 ## Crontab scripts
 

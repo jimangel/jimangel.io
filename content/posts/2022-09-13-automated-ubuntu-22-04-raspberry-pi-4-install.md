@@ -149,7 +149,7 @@ curl -fsSL https://gist.githubusercontent.com/jimangel/72a4d140e7fbde1b7e7fd64f2
 umount /tmp/pi-disk/
 ```
 
-<!--adsense-->
+
 
 ## Boot the Raspberry Pi
 

@@ -401,7 +401,7 @@ Output:
 
 The hard part of creating the bootable ISO is over. Next, let's create a volume to host our `cloud-init` user-data configuration.
 
-<!--adsense-->
+
 
 ## Create a USB named CIDATA for a cloud-init datasource
 

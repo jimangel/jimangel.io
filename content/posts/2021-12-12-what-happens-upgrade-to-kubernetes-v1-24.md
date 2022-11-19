@@ -161,7 +161,7 @@ Open a browser and navigate to `YOUR_NODE_IP:8080`
 
 It works! Now onto the fun stuff.
 
-<!--adsense-->
+
 
 ## Upgrade to v1.24
 

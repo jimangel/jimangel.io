@@ -149,7 +149,7 @@ Right Click VM > Edit Settings > deselect...
 
 * Right Click VM > convert to template
 
-<!--adsense-->
+
 
 ## Conclusion
 

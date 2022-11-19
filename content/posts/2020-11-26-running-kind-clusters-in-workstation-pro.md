@@ -123,7 +123,7 @@ First make a general config file (`config.yaml`). I was unable to get node label
 
     Depending on internet speed and configuration complexity, the process may take a while.
 
-<!--adsense-->
+
 
 ## Use the cluster
 

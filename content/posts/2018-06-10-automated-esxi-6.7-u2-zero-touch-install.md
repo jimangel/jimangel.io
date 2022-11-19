@@ -236,7 +236,7 @@ nano /usbdisk/efi/boot/boot.cfg
 
 After you're complete, unmount the flash drive `umount /usbdisk` and the ISO `umount /esxi_cdrom`.
 
-<!--adsense-->
+
 
 ## Boot the ESXi host
 
