@@ -34,3 +34,9 @@ compress = false
 #  X-Frame-Options = "DENY"
 #  X-Content-Type-Options = "nosniff"
 #  X-XSS-Protection = "1; mode=block"
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+  # cache images for a week
+  Cache-Control = "public, max-age=604800"

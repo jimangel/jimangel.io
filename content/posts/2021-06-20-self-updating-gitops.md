@@ -86,7 +86,7 @@ In mid-February of 2021, [central Texas lost power](https://en.wikipedia.org/wik
 
 Below is the final screen grab before I took the cluster offline. The gap on the right side are when the script fails due to the lack of a working Kubernetes cluster.
 
-![](https://i.imgur.com/rDmKoIN.png#center)
+![](/img/self-updating-gitops-status.png#center)
 
 ## We can rebuild it
 
@@ -137,12 +137,12 @@ git clone git@github.com:jimangel/kubeleak.git
 
 Update `inventory.yaml` by replacing the IP addresses with your node IPs
 
-![](https://i.imgur.com/s92kA5z.png#center)
+![](/img/self-updating-gitops-inventory.png#center)
 
 
 Also replace the remote_user with the USER on the remote VMs.
 
-![](https://i.imgur.com/oLSV0B3.png#center)
+![](/img/self-updating-gitops-user.png#center)
 
 Once finished, test the connections by running:
 
@@ -152,7 +152,7 @@ ansible all -m ping
 
 If it all comes back successful, you're ready to go!
 
-![](https://i.imgur.com/zMNMbzf.png#center)
+![](/img/self-updating-gitops-ping.png#center)
 
 ## Playbook-1: Update everything and snapshot
 
@@ -208,7 +208,7 @@ ansible-playbook playbooks/install-k8s.yaml -K
 
 In a few minutes, you'll have a cluster!
 
-![](https://i.imgur.com/ZOiae5K.png#center)
+![](/img/self-updating-gitops-cluster.png#center)
 
 ## Manually: Configure Flux v2 and Kubernetes
 
@@ -229,7 +229,7 @@ sudo kubectl --kubeconfig="/etc/kubernetes/admin.conf" -n monitoring create secr
 
 Before setting up Flux, let's create a [GitHub Token](https://github.com/settings/tokens) to use. A token is needed for read/write access to your GitOps repo. The documentation indicates the token needs full repo access.
 
-![](https://i.imgur.com/5tYYGKF.png#center)
+![](/img/self-updating-gitops-gh.png#center)
 
 Next export the information for `flux` CLI to use.
 
