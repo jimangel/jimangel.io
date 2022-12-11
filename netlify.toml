@@ -12,11 +12,11 @@ HUGO_ENV = "production"
 skip_processing = false
 
 [build.processing.css]
-bundle = false
+bundle = true
 minify = false
 
 [build.processing.js]
-bundle = false
+bundle = true
 # not minifying to maintain sha integrity
 minify = false
 
@@ -24,7 +24,7 @@ minify = false
 pretty_urls = false
 
 [build.processing.images]
-compress = true
+compress = false
 
 # removed content security policy and x from options for G4A
 #[[headers]]

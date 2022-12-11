@@ -18,6 +18,9 @@ hugo serve --buildDrafts --buildFuture --ignoreCache
 git submodule update --remote --merge
 
 # ensure to check https://github.com/martignoni/hugo-notice
+
+# to "force reset" them
+git submodule foreach --recursive git clean -xfd
 ```
 
 # Original setup
@@ -242,7 +245,7 @@ rm -r ~/Library/SafariTechnologyPreview/Template\ Icons/
 
 ## added a custom schema json in layouts/partials/templates/schema_json.html to help with SEO
 ```
-# look at the bottom chunk
 layouts/partials/templates/schema_json.html
 
+# most of this is in the config under Params.schema
 ```

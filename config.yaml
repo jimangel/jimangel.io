@@ -41,7 +41,7 @@ languages:
         taxonomies:
           # category: categories
           tag: tags
-          series: series
+          # series: series
         menu:
             main:
                 - name: Posts
@@ -56,8 +56,8 @@ languages:
                 # - name: Series
                 #   url: series/
                 #   weight: 20
-                - name: About Me
-                  url: /
+                # - name: About Me
+                #   url: /
 
 outputs:
     home:
@@ -73,6 +73,10 @@ params:
   # adsense:
   #   client: "ca-pub-8156053398572049"
   #   inArticleSlot: "6076177664"
+  # schema for search / SEO
+  schema:
+    publisherType: Website
+
   # keywords for homepage SEO
   keywords:
   - blog
@@ -107,7 +111,7 @@ params:
   # ShowFullTextinRSS: false
   ShowRssButtonInSectionTermList: false # don't show RSS on the post link
   UseHugoToc: true
-  #disableSpecial1stPost: false
+  disableSpecial1stPost: true
   displayFullLangName: true
   disableScrollToTop: true
   comments: true
