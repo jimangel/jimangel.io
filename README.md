@@ -39,10 +39,10 @@ both in the content security stuff and in the footer (footer-blurb.md partial - 
 # NOTE: updated footer to cut the title (alternately could have genreated the copywrite dynamically...)
 
 ```
-# Craeted:
+# Created:
 <span>&copy; {{ now.Year }} <a href="{{ "" | absLangURL }}">{{ ( replace site.Title "Jim Angel | " "") }}</a></span>
 
-# auto genrates year and loks cleaner..
+# auto generates year and looks cleaner..
 
 # Had to do this in the singles partial as well as the header partial
 

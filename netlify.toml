@@ -4,7 +4,7 @@ command = "hugo --gc"
 # removed --minify
 
 [build.environment]
-HUGO_VERSION = "0.102.3"
+HUGO_VERSION = "0.108.0"
 HUGO_ENV = "production"
 
 [build.processing]
@@ -26,7 +26,7 @@ pretty_urls = false
 [build.processing.images]
 compress = true
 
-# removed content security policy and x fram options for G4A
+# removed content security policy and x from options for G4A
 #[[headers]]
 #  for = "/*"
 #  [headers.values]

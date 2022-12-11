@@ -41,7 +41,7 @@ languages:
         taxonomies:
           # category: categories
           tag: tags
-          # series: series
+          series: series
         menu:
             main:
                 - name: Posts
@@ -50,8 +50,14 @@ languages:
                 - name: Search
                   url: search/
                   weight: 10
+                - name: Tags
+                  url: tags/
+                  weight: 15
+                # - name: Series
+                #   url: series/
+                #   weight: 20
                 - name: About Me
-                  url: https://github.com/jimangel
+                  url: /
 
 outputs:
     home:
@@ -64,9 +70,9 @@ params:
   #title: jimangel.io
   description: "A collection of walkthroughs, rants, and hacks on emerging cloud technologies. Jim Angel is an Infrastructure Cloud Consultant at Google"
   # added manually via partials
-  adsense:
-    client: "ca-pub-8156053398572049"
-    inArticleSlot: "6076177664"
+  # adsense:
+  #   client: "ca-pub-8156053398572049"
+  #   inArticleSlot: "6076177664"
   # keywords for homepage SEO
   keywords:
   - blog
@@ -94,8 +100,8 @@ params:
   #  - twitter
   #  - linkedin
   #  - reddit
-  ShowPostNavLinks: false # Show Previous and Next Posts below a Post
-  ShowBreadCrumbs: false
+  ShowPostNavLinks: true # Show Previous and Next Posts below a Post
+  ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
   ShowWordCount: false
   # ShowFullTextinRSS: false
@@ -118,6 +124,7 @@ params:
     apple_touch_icon: "/img/apple-touch-icon.png"
     safari_pinned_tab: "/img/safari-pinned-tab.svg"
     # theme_color: "#089de3" for the browser bar color...
+
   profileMode:
         enabled: true
         title: "Jim Angel" # optional default will be site title
@@ -128,9 +135,9 @@ params:
         imageUrl: "/img/me.jpeg" # optional
         imageWidth: 120 # custom size
         imageHeight: 120 # custom size
-        buttons:
-          - name: Blog Archive
-            url: "/archive"
+        # buttons:
+        #   - name: Blog Archive
+        #     url: "/archive"
         #  - name: Github
         #    url: "https://github.com/jimangel"
   socialIcons:
@@ -143,7 +150,7 @@ params:
     - name: rss
       url: "index.xml"
   cover:
-    hiddenInList: false # hide on list pages and home
+    hiddenInList: true # hide on list pages and home
     hiddenInSingle: false # hide on single page
   fuseOpts:
     isCaseSensitive: false
