@@ -16,7 +16,7 @@ bundle = true
 minify = false
 
 [build.processing.js]
-bundle = true
+bundle = false
 # not minifying to maintain sha integrity
 minify = false
 
@@ -35,8 +35,13 @@ compress = false
 #  X-Content-Type-Options = "nosniff"
 #  X-XSS-Protection = "1; mode=block"
 
+# cache images for a week
 [[headers]]
   for = "/img/*"
   [headers.values]
-  # cache images for a week
-  Cache-Control = "public, max-age=604800"
+    Cache-Control = "public, s-max-age=604800"
+
+[[headers]]
+  for = "/assets/css/*.css"
+  [headers.values]
+    Cache-Control = "public, s-max-age=604800"
