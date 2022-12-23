@@ -35,13 +35,13 @@ compress = false
 #  X-Content-Type-Options = "nosniff"
 #  X-XSS-Protection = "1; mode=block"
 
-# cache images for a week
+# cache css & images for a week
 [[headers]]
   for = "/img/*"
   [headers.values]
-    Cache-Control = "public, s-max-age=604800"
+    Cache-Control = "public, max-age=604800"
 
 [[headers]]
   for = "/assets/css/*.css"
   [headers.values]
-    Cache-Control = "public, s-max-age=604800"
+    Cache-Control = "public, max-age=604800"
