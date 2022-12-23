@@ -136,7 +136,7 @@ params:
            Infrastructure Cloud Consultant at <span style="color:#4285F4">G</span><span style="color:#DB4437">o</span><span style="color:#F4B400">o</span><span style="color:#4285F4">g</span><span style="color:#0F9D58">l</span><span style="color:#DB4437">e</span>
 
            _Littering the internet with documentation since 2017_
-        imageUrl: "/img/me.jpeg" # optional
+        imageUrl: "/img/me.jpg" # optional
         imageWidth: 120 # custom size
         imageHeight: 120 # custom size
         # buttons:

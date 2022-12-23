@@ -62,7 +62,7 @@ It turns out, KTHW is less relevant if you already have experience debugging clu
 
 The proctoring was very fair and not nearly as intimidating as I thought. I had to pan my camera around the room to show that there were no additional electronics, phones, people, etc. I did have some audio gear and mics on the desk that caused no problems. (They are watching you on the webcam the whole time, so there's that too)
 
-![My Desk](/img/cka-exam-my-desk.jpeg)
+![My Desk](/img/cka-exam-my-desk.jpg)
 
 The proctor also made me open up Task Manager to prove no other apps were running. All interactions with the proctor were through a chat window, and there were easy controls to interact with them.
 
