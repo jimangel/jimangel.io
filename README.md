@@ -59,7 +59,7 @@ both in the content security stuff and in the footer (footer-blurb.md partial - 
 
 ```
 
-# NOTE: created ads...
+# NOTE: created ads... (and reverted later after making 29 cents)
 
 ```
 #adsense-inarticle.html
@@ -132,7 +132,7 @@ see https://gohugo.io/templates/robots/
 https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/disqus.html -> layouts/partials/comments.html
 ```
 
-# update modified iamges from lazy loading
+# update modified images from lazy loading
 ```
 # https://github.com/adityatelange/hugo-PaperMod/commit/c353447d8e6dbbec9e21c8ef57b1da1e177f2a16
 mkdir -p layouts/_default/_markup/
@@ -142,6 +142,12 @@ cp themes/PaperMod/layouts/shortcodes/figure.html layouts/shortcodes/figure.html
 cp themes/PaperMod/layouts/partials/cover.html layouts/partials/cover.html
 
 sed 's/loading="lazy"//g'
+
+# reverted on 12/23/22
+rm -rf layouts/partials/cover.html
+rm -rf layouts/shortcodes/figure.html
+rm -rf layouts/_default/_markup/render-image.html
+
 ```
 
 # update code syntax CSS:
