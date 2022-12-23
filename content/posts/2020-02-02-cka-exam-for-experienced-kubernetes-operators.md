@@ -56,7 +56,7 @@ There's SO MUCH information out there; it's easy to get overwhelmed. I found mys
 * How will I deal with YAML manifests?
 * Is 3 hours enough time? (yes)
 
-![going crazy](/img/cka-exam-dizzy.gif#center)
+![going crazy](/img/cka-exam-dizzy.gif)
 
 It turns out, KTHW is less relevant if you already have experience debugging clusters. Don't doubt what you already know about Kubernetes.
 
@@ -86,7 +86,7 @@ I just wanted to know: **Can I pass this exam?**
 
 Then I hit the jackpot on Udemy. A course that had mock exams that were similar to taking the real exam. The mock exams also had solutions too if I was really stumped.
 
-![major key](/img/cka-exam-major-key.gif#center)
+![major key](/img/cka-exam-major-key.gif)
 
 Sign up for [this Udemy course](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/), jump straight to the practice exams, and see how you do. Please don't purchase it at full price, Udemy always has sales making their courses more affordable.
 
@@ -106,7 +106,7 @@ Once complete, use that as your starting point and dive into any areas you strug
 
 You can use bookmarks during the exam; however, I mainly used the two links above 90% of the time. It never hurts to have more bookmarks handy. An example of my partial bookmark bar:
 
-![bookmarks](/img/cka-exam-bookmarks.png#center)
+![bookmarks](/img/cka-exam-bookmarks.png)
 
 Since it's not multiple choice, there was no way for me to know which questions I completed. As a result, I started to track my progress in the browser-based notepad with the following format: `Question Number - My Confidence - Weight`
 
@@ -148,7 +148,7 @@ Around the 2-hour mark, I was done with what I "knew" or grabbed from the docs. 
 
 I ended up completing the exam with 15 minutes to spare. Then I waited, and waited, and. waited.
 
-![waiting](/img/cka-exam-wait.gif#center)
+![waiting](/img/cka-exam-wait.gif)
 
 When you finish, you'll receive an email saying it takes up to 36 hours to get the results. I received mine around the 32-hour mark. I probably DDoSed the CNCF portal with my obsessive checking. While I felt good about it... it's not over until you get the results.
 

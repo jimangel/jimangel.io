@@ -29,9 +29,6 @@ keywords:
 - kubernetes operations
 categories: []
 
-# Featured image
-# To use, add an image named `featured.jpg#center.png#center` to your page's folder.
-# Focal point options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
 cover:
   image: /img/self-updating-gitops-cover.jpg
 
@@ -54,11 +51,11 @@ I posted a silly question on Twitter about "turning on all the automation."
 
 In this proposal, the cluster would self-upgrade, and GitOps would update applications, including itself. High-level overview: 
 
-[![Overview](/img/self-updating-gitops-high-level.png#center)](/img/self-updating-gitops-high-level.png#center)
+[![Overview](/img/self-updating-gitops-high-level.png)](/img/self-updating-gitops-high-level.png)
 
 Or more detailed:
 
-[![Flow Chart](/img/self-updating-gitops-flow-chart.png#center)](/img/self-updating-gitops-flow-chart.png#center)
+[![Flow Chart](/img/self-updating-gitops-flow-chart.png)](/img/self-updating-gitops-flow-chart.png)
 
 {{< notice note >}}
 There's so much that could go wrong with this. I should remind everyone that this is for fun and NOT production. Upgrades could conflict, packages could break dependencies, releases could be tainted, etc.
@@ -86,7 +83,7 @@ In mid-February of 2021, [central Texas lost power](https://en.wikipedia.org/wik
 
 Below is the final screen grab before I took the cluster offline. The gap on the right side are when the script fails due to the lack of a working Kubernetes cluster.
 
-![](/img/self-updating-gitops-status.png#center)
+![](/img/self-updating-gitops-status.png)
 
 ## We can rebuild it
 
@@ -137,12 +134,12 @@ git clone git@github.com:jimangel/kubeleak.git
 
 Update `inventory.yaml` by replacing the IP addresses with your node IPs
 
-![](/img/self-updating-gitops-inventory.png#center)
+![](/img/self-updating-gitops-inventory.png)
 
 
 Also replace the remote_user with the USER on the remote VMs.
 
-![](/img/self-updating-gitops-user.png#center)
+![](/img/self-updating-gitops-user.png)
 
 Once finished, test the connections by running:
 
@@ -152,7 +149,7 @@ ansible all -m ping
 
 If it all comes back successful, you're ready to go!
 
-![](/img/self-updating-gitops-ping.png#center)
+![](/img/self-updating-gitops-ping.png)
 
 ## Playbook-1: Update everything and snapshot
 
@@ -208,7 +205,7 @@ ansible-playbook playbooks/install-k8s.yaml -K
 
 In a few minutes, you'll have a cluster!
 
-![](/img/self-updating-gitops-cluster.png#center)
+![](/img/self-updating-gitops-cluster.png)
 
 ## Manually: Configure Flux v2 and Kubernetes
 
@@ -229,7 +226,7 @@ sudo kubectl --kubeconfig="/etc/kubernetes/admin.conf" -n monitoring create secr
 
 Before setting up Flux, let's create a [GitHub Token](https://github.com/settings/tokens) to use. A token is needed for read/write access to your GitOps repo. The documentation indicates the token needs full repo access.
 
-![](/img/self-updating-gitops-gh.png#center)
+![](/img/self-updating-gitops-gh.png)
 
 Next export the information for `flux` CLI to use.
 

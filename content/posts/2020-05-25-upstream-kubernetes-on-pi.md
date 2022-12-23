@@ -40,7 +40,7 @@ This post builds on top of the incredible work that [Christian Schlichtherle](ht
 
 In most blogs involving Raspberry Pi's, you never see the back of their cluster. I'm very proud that there is a single cord to power the entire cluster:
 
-![](/img/upstream-kubernetes-back.jpg#center)
+![](/img/upstream-kubernetes-back.jpg)
 
 
 ## The hardware
@@ -66,12 +66,12 @@ I had some of these parts lying around or reused things like SD cards from older
 
 1. Download the latest [Raspbian Lite](https://downloads.raspberrypi.org/raspbian_lite/images/) zip
 
-    ![](/img/upstream-kubernetes-zip.png#center)
+    ![](/img/upstream-kubernetes-zip.png)
 
 
 1. Flash the SD card using [balenaEtcher](https://www.balena.io/etcher/)
 
-    ![](/img/upstream-kubernetes-bal.png#center)
+    ![](/img/upstream-kubernetes-bal.png)
 
 1. Enable SSH
 
@@ -99,7 +99,7 @@ Since there are four similar devices, I power them on one at a time. I have the 
 
 For added peace of mind, I created static maps for the Pi's MAC address. I set the configurations using the router's GUI.
 
-![](/img/upstream-kubernetes-static.png#center)
+![](/img/upstream-kubernetes-static.png)
 
 If you can't get the IP addresses quickly, you can always plug in a monitor & keyboard for initial discovery. The Raspberry Pi 4 uses micro HDMI for video out. Alternatively, you can create a [static IP](https://pimylifeup.com/raspberry-pi-static-ip-address/).
 
@@ -318,7 +318,7 @@ kubectl port-forward deployment/nginx 8080:80
 
 Browse to localhost:8080
 
-![](/img/upstream-kubernetes-nginx.png#center)
+![](/img/upstream-kubernetes-nginx.png)
 
 ## Clean up
 
@@ -391,7 +391,7 @@ The next most crucial directory is `roles/` which contains instruction sets for 
 │   ├── kubeadm-config.j2
 │   └── kubelet.service
 ├── img
-│   └── pi.jpg#center
+│   └── pi.jpg
 ├── inventory.yaml
 ├── playbooks
 │   ├── copy-admin-kubeconf.yaml

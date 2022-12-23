@@ -45,7 +45,7 @@ I'll use this homelab to explore [vRealize Automation](https://www.vmware.com/pr
 * Crucial 16GB RAM ($145)
 * **TOTAL COST:** $580
 
-![nuc-promo](/img/nuc-promo.jpg#center)
+![nuc-promo](/img/nuc-promo.jpg)
 
 ### Breakdown
 #### Intel NUC
@@ -55,7 +55,7 @@ A 120-watt PSU, using less than 20 watts idle, makes it a perfect server to run 
 
 Also, it is SMALL. I think the specs and promo pics don't do it justice.
 
-![nuc](/img/nuc.jpg#center)
+![nuc](/img/nuc.jpg)
 
 This Intel NUC has everything I need.
 

@@ -99,7 +99,7 @@ One USB boots a temporary live-server OS in memory :cd: and discovers the instal
 >
 >The live-server ISO is special because it is preconfigured to boot in memory (from USB) and comes prepackaged with installation software.
 
-![cloud-init boot process via usb](/img/cloud-init-overview.svg#center)
+![cloud-init boot process via usb](/img/cloud-init-overview.svg)
 
 > <sup>1</sup> (not pictured) autoinstall leverages `subiquity` to act as the provisioning controller; watching for events. The bulk of `subiquity` is interfacing with `curtin`, a "smart installer" that handles the important tasks such as creating disks, connecting to networks, etc.
 >
@@ -201,7 +201,7 @@ Let's get a bit deeper into the weeds. The following section isn't critical to u
 
 I tried to sketch out a different view of how all the components interact. It reads from the top to bottom; from boot to provisioned host. Pay attention to the bottom components `subiquity` & `curtin` as they're covered in subsequent sections.
 
-![rough sketch of all the components in use to install ubuntu](/img/component-sketch.jpg#center)
+![rough sketch of all the components in use to install ubuntu](/img/component-sketch.jpg)
 
 > ### What is subiquity?
 > 

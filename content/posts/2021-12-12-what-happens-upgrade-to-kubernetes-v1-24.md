@@ -22,8 +22,6 @@ keywords:
 - dockershim
 
 comment: true
-# Featured image
-# To use, add an image named `featured.jpg#center.png#center` to your page's folder.
 # Focal point options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
 cover:
   image: /img/dockershim-kubernetes-v1.24-cover.jpg
@@ -46,14 +44,14 @@ This blog tests the significant breaking changes between releases during a major
 
 Kubernetes v1.24 removes the dockershim from kubelet. Without getting too deep into the problem, this picture is helpful:
 
-![](/img/dockershim-kubernetes-v1.24-dockershim.png#center)
+![](/img/dockershim-kubernetes-v1.24-dockershim.png)
 ([source](https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/check-if-dockershim-deprecation-affects-you/#role-of-dockershim))
 
 The dockershim code is actually inside kubelet's code base. This was an early design decision before Container Runtime Interfaces (CRI) existed.
 
 Here's an alternative way to view the differences (I wish it said CAN use vs. USES):
 
-![](/img/dockershim-kubernetes-v1.24-containerd.png#center)
+![](/img/dockershim-kubernetes-v1.24-containerd.png)
 ([source](https://iximiuz.com/en/posts/containerd-command-line-clients/))
 
 For additional context and information, read more [about the removal here](https://k8s.io/dockershim).
@@ -420,7 +418,7 @@ kubectl port-forward --address 0.0.0.0 deployment/nginx 8080:80
 
 Open a browser and navigate to: `YOUR_NODE_IP:8080`
 
-![](/img/dockershim-kubernetes-v1.24-nginx.png#center)
+![](/img/dockershim-kubernetes-v1.24-nginx.png)
 
 It works in the browser too! My cluster is now healthy and running the latest version of Kubernetes without dockershim.
 

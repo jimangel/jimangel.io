@@ -213,7 +213,13 @@ find content/posts -type f -name '*.md' -exec sed -i '' s/this/that/g {} +
 find content/posts -type f -name '*.md' -exec sed -i '' 's/{{% callout note %}}//g' {} +
 
 # example center images:
-find content/posts -type f -name '*.md' -exec sed -i '' 's/.png/.png#center/g' {} +
+# reverted on 12/23/22 with the same but reverse...
+# ex: 
+# find content/posts -type f -name '*.md' -exec sed -i '' 's/.png#center/.png/g' {} +
+# find content/posts -type f -name '*.md' -exec sed -i '' 's/.gif#center/.gif/g' {} +
+# find content/posts -type f -name '*.md' -exec sed -i '' 's/.jpg#center/.jpg/g' {} +
+
+# find content/posts -type f -name '*.md' -exec sed -i '' 's/.png/.png#center/g' {} +
 
 # example, moving all images to a new folder (from static/media to static/img):
 find content/posts -type f -name '*.md' -exec sed -i '' 's/media\//img\//g' {} +
@@ -254,4 +260,16 @@ rm -r ~/Library/SafariTechnologyPreview/Template\ Icons/
 layouts/partials/templates/schema_json.html
 
 # most of this is in the config under Params.schema
+```
+
+## I realized netlify was caching jpgs but not pngs to cloudfront? Attempted to convert one post to all jpgs
+
+```
+brew install imagemagick
+
+cd /static/img/
+
+# Convert PNG to JPEG
+magick ubuntu-usb-install-22-04-cover.png ubuntu-usb-install-22-04-cover.jpg
+
 ```

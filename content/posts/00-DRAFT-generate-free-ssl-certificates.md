@@ -18,9 +18,6 @@ keywords:
 - letsencrypt
 categories: []
 
-# Featured image
-# To use, add an image named `/img/free-ssl-featured.jpg#center.png#center` to your page's folder.
-# Focal point options: Smart, Center, TopLeft, Top, TopRight, Left, Right, BottomLeft, Bottom, BottomRight
 image:
   caption: 'Image credit: [**Unsplash**](https://unsplash.com/photos/KGbX1f3Uxtg/)'
 
@@ -87,7 +84,7 @@ This step may require root (`sudo su -`)
 stuff
 
 ```bash
-!.png#center](./picture.png#center)
+!.png](./picture.png)
 ```
 
 ## Conclusion

@@ -57,7 +57,7 @@ Helpful spoilers:
 
 Select this option during the installation of Workstation Pro 16. Workstation Pro 16 installs a utility called `vctl.exe` in your PATH. After that, the `vctl.exe` utility is accessible in all environments.
 
-![](/img/kind-clusters-setup.png#center)
+![](/img/kind-clusters-setup.png)
 
 First, start the container runtime. The container runtime doesn't start or stop with the Workstation Player application.
 
