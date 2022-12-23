@@ -273,3 +273,25 @@ cd /static/img/
 magick ubuntu-usb-install-22-04-cover.png ubuntu-usb-install-22-04-cover.jpg
 
 ```
+
+Automated:
+
+```
+# generate pngs
+for i in $(grep -rnw content/posts -e "png" | awk -F".png" '{print $1}' | sed -n 's~^.*/img/~~p' | uniq); do magick "static/img/${i}.png" "static/img/${i}.jpg"; done
+
+# replace pngs in posts
+find content/posts -type f -name '*.md' -exec sed -i '' 's/.png/.jpg/g' {} +
+
+# rm post pngs (had to change grep to key off of jpg)
+for i in $(grep -rnw content/posts -e "jpg" | awk -F".jpg" '{print $1}' | sed -n 's~^.*/img/~~p' | uniq); do rm -f "static/img/${i}.png"; done
+
+# validate no other files use png:
+grep -rnw content/posts -e "png"
+
+# see if there's any png's left over:
+ls -a static/img | grep "png"
+
+# not used:
+# clean up: static/img/featured.png
+```

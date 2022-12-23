@@ -80,7 +80,7 @@ If you want a "clean" reset, download backups, factory reset, and restore.
 
 Before getting started, let's understand exactly what the problem is. Below is a traditional NVG589 setup with [802.1X](https://www.securew2.com/solutions/802-1x/) EAP-TLS details.
 
-![](/img/bypassing-att-fiber-gateway-LSniStq.png)
+![](/img/bypassing-att-fiber-gateway-LSniStq.jpg)
 
 The Optical Network Terminal, ONT, converts "light" data (fiber) to electrical signal to pass through ethernet wires in your home. The actual optical network terminal is the white box (top right).
 
@@ -88,7 +88,7 @@ The Optical Network Terminal, ONT, converts "light" data (fiber) to electrical s
 For AT&T Fiber to work, the ONT port must *also* provide EAP-TLS 802.1X authentication to AT&T.
 {{< /notice >}}
 
-![](/img/bypassing-att-fiber-gateway-2s8OU3K.png)
+![](/img/bypassing-att-fiber-gateway-2s8OU3K.jpg)
 
 802.1X is usually used for enterprise WiFi authentication. AT&T fiber uses 802.1X to authenticate their customer's residential gateway.
 
@@ -100,7 +100,7 @@ Let's break down what 802.1X is; only three components are needed for 802.1X aut
 
 A [supplicant](https://en.wikipedia.org/wiki/Supplicant_(computer)) is an entity at one end of a point-to-point LAN segment that seeks to be authenticated by an authenticator attached to the other end of that link.
 
-![](/img/bypassing-att-fiber-gateway-9nnDG82.png)
+![](/img/bypassing-att-fiber-gateway-9nnDG82.jpg)
 
 In AT&T's default setup, we have:
 * **NVG589**: The supplicant (client)
@@ -115,7 +115,7 @@ Steps (**1**) and (**2**) are EAP. EAP stands for Extensible Authentication Prot
 One very significant factor about EAP-TLS is that it requires mutual TLS (mTLS). Notice a couple of pictures above that AT&T provides identification (TLS) and the NVG589 (TLS).
 {{< /notice >}}
 
-![](/img/bypassing-att-fiber-gateway-zEACvlp.png)
+![](/img/bypassing-att-fiber-gateway-zEACvlp.jpg)
 
 ## How do we bypass the AT&T gateway?
 
@@ -133,7 +133,7 @@ This article focuses on using `wpa_supplicant`, but it's worth understanding wha
 
 This is a way to trick your AT&T connection using a switch and MAC spoofing. You trick the optical network terminal into thinking your WAN network interface is the ONT interface on your AT&T gateway. There's more detailed information in this [dslreports.com post](https://www.dslreports.com/forum/r32491796-bypass-att-pace-gateway) or this [unifi post](https://community.ui.com/questions/How-to-eliminate-ATandT-gateway-from-a-UniFi-setup/6f471739-7694-4512-9bb9-d1c8728d929f?page=4). The process is, authenticate with the NVG589 then swap gateway cables to your WAN spoofed uplink. Once completed, the connection operates as intended until reset or rebooted.
 
-![](/img/bypassing-att-fiber-gateway-hVt3jAy.png)
+![](/img/bypassing-att-fiber-gateway-hVt3jAy.jpg)
 
 It's a [blue-green deployment](https://en.wikipedia.org/wiki/Blue-green_deployment) for WAN uplinks. It seems very simple to test but not easy to maintain long term.
 
@@ -145,7 +145,7 @@ Note: AT&T is currently installing fiber infrastructure that uses different auth
 
 This method proxies EAP packets between network interfaces for authentication, leaving other packets alone for a direct connection. The proxy is ran as a process, or a container, on your gateway. It looks for EAP traffic and forces it to talk to the NVG589.
 
-![](/img/bypassing-att-fiber-gateway-EdVc7Vz.png)
+![](/img/bypassing-att-fiber-gateway-EdVc7Vz.jpg)
 
 The EAP proxy listens on both interfaces for EAP over LAN frames and forwards EAP packets between interfaces. It works well because there is no need for an advanced setup.
 
@@ -159,7 +159,7 @@ Made popular by GitHub user MonkWho, [this option](https://github.com/MonkWho/pf
 
 This is the method we're implementing. Earlier I mentioned that 802.1X only needs a supplicant, controller, and RADIUS server to work. If the AT&T gateway certificates exchanged for 802.1X authentication are valid, does it matter what the supplicant is? 🙃
 
-![](/img/bypassing-att-fiber-gateway-w4OM6BU.png)
+![](/img/bypassing-att-fiber-gateway-w4OM6BU.jpg)
 
 [`wpa_supplicant`](https://linux.die.net/man/8/wpa_supplicant) is a binary that acts as a supplicant for 802.1X (AT&T). I like this option because of the lack of devices and cables; it's "clean."
 
@@ -202,7 +202,7 @@ I **abruptly** learned that AT&T patched most of the exploits on modern, interne
 
 As I went deeper down the rabbit hole, it seemed like my only option was going to be exploiting the hardware. So I bought another NVG589 off of eBay to avoid bricking my only working device.
 
-![](/img/bypassing-att-fiber-gateway-Jc6hWUx.png)
+![](/img/bypassing-att-fiber-gateway-Jc6hWUx.jpg)
 
 When the NVG589 arrived, I plugged it in offline.
 
@@ -377,7 +377,7 @@ If you see `WARNING! Missing AAA server root CA! Add AAA server root CA to CA_00
 
 Let's talk about Podman.
 
-![](/img/bypassing-att-fiber-gateway-u3WTnjE.png)
+![](/img/bypassing-att-fiber-gateway-u3WTnjE.jpg)
 
 UDM Pro runs the `unifi-os` in a container on Podman. Podman is almost a 1:1 replacement for Docker. Without getting too deep into how containerization works, let's understand that a container is simply a process. A process running on the host like any other.
 
@@ -564,7 +564,7 @@ Disable SSH on the UDM Pro; it's a good habit to leave it off.
 
 Navigate to the UDM Pro's IP > Settings Manage Settings > Advanced > SSH (off)
 
-![](/img/bypassing-att-fiber-gateway-XYrLTAY.png)
+![](/img/bypassing-att-fiber-gateway-XYrLTAY.jpg)
 
 ## Conclusion
 
@@ -572,11 +572,11 @@ It works! If you step back, all you're doing is running a (wpa_supplicant) proce
 
 If you look at "real" running processes on the UDM Pro you see the `wpa_supplicant` because we launched it in a container.
 
-![](/img/bypassing-att-fiber-gateway-lyMVBam.png)
+![](/img/bypassing-att-fiber-gateway-lyMVBam.jpg)
 
 Put another way:
 
-![](/img/bypassing-att-fiber-gateway-w4OM6BU.png)
+![](/img/bypassing-att-fiber-gateway-w4OM6BU.jpg)
 
 I'm now comfortable factory resetting, stopping the container, or otherwise resetting the UDM Pro. I also feel safe in the choices I made to enable bypassing the NVG589.
 
@@ -584,11 +584,11 @@ It also feels good to understand exactly how I'm bypassing the AT&T router and I
 
 A minor side note, [myhomenetwork.att.com](https://myhomenetwork.att.com/), which previously reported my home internet as "up" is now set to "down."
 
-![](/img/bypassing-att-fiber-gateway-MvXJ4x7.png)
+![](/img/bypassing-att-fiber-gateway-MvXJ4x7.jpg)
 
 But I'm ok with that.
 
-![](/img/bypassing-att-fiber-gateway-LK1Wxys.png)
+![](/img/bypassing-att-fiber-gateway-LK1Wxys.jpg)
 
 Even though things are working for me, I still plan on adding additional information about dumping the NAND flash. Once I receive my gear, I'll update this post. Good luck!
 

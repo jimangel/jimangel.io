@@ -96,7 +96,7 @@ This step may require root (`sudo su -`)
 
 It helps to double-check the size from another source for comparison. Accuracy is crucial!
 
-![](/img/esxi-6.7-install-fdisk-check-bytes.png)
+![](/img/esxi-6.7-install-fdisk-check-bytes.jpg)
 
 As you can see above, **I will use `/dev/sda` as MY USB location; please validate YOUR USB location.**
 

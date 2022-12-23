@@ -45,7 +45,7 @@ By using Terraform, I can build and destroy the entire stack with a single comma
   - pipelines
 - A custom domain with HTTPS (using Let's Encrypt)
 
-![](/img/jenkins-server-jenkins-arch.png)
+![](/img/jenkins-server-jenkins-arch.jpg)
 
 ## Tools and infrastructure used
 
@@ -67,7 +67,7 @@ For HTTPS certificates, you need a fully qualified domain name (FQDN) that is pu
 
 Use your favorite domain registrar to purchase a domain. For this tutorial, I'm using [Namecheap](https://www.namecheap.com/).
 
-![](/img/jenkins-server-jenkins-domain.png)
+![](/img/jenkins-server-jenkins-domain.jpg)
 
 {{< notice note >}}
 This tutorial does not support subdomains (ex: **jenkins**.myserver.com).
@@ -79,7 +79,7 @@ Using DigitalOcean for DNS means there is no need to configure multiple provider
 
 Under **Manage** domains in Namecheap:
 
-![](/img/jenkins-server-digitalocean-ns.png)
+![](/img/jenkins-server-digitalocean-ns.jpg)
 
 If you're following along, use these exact nameservers:
 
@@ -91,7 +91,7 @@ ns3.digitalocean.com
 
 [DNS propagation](https://www.namecheap.com/support/knowledgebase/article.aspx/9622/10/dns-propagation--explained) takes up to 24 hours. However, in my testing, it usually is faster. To validate the nameserver records are public, check the domain at [who.is](https://who.is).
 
-![](/img/jenkins-server-whois-lookup.png)
+![](/img/jenkins-server-whois-lookup.jpg)
 
 ### Export the domain name
 
@@ -105,7 +105,7 @@ Navigate to https://cloud.digitalocean.com/account/api/tokens and click **Genera
 
 Give the token **write** access.
 
-![](/img/jenkins-server-do-token.png)
+![](/img/jenkins-server-do-token.jpg)
 
 ### Export DigitalOcean API access token
 
@@ -182,7 +182,7 @@ This part takes ~10 minutes; don't be alarmed if it occasionally hangs
 terraform apply
 ```
 
-![](/img/jenkins-server-terminal-out.png)
+![](/img/jenkins-server-terminal-out.jpg)
 
 
 
@@ -221,7 +221,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ## That's it! Let's check it out
 
-![](/img/jenkins-server-webpage-done.png)
+![](/img/jenkins-server-webpage-done.jpg)
 
 The credentials for initial login are:
 - User: admin

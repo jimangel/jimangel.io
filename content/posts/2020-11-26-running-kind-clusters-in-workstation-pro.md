@@ -24,7 +24,7 @@ keywords:
 - kind
 
 cover:
-  image: /img/kind-clusters-featured.png
+  image: /img/kind-clusters-featured.jpg
 
 slug: "running-kind-clusters-in-workstation-pro"
 ---
@@ -57,7 +57,7 @@ Helpful spoilers:
 
 Select this option during the installation of Workstation Pro 16. Workstation Pro 16 installs a utility called `vctl.exe` in your PATH. After that, the `vctl.exe` utility is accessible in all environments.
 
-![](/img/kind-clusters-setup.png)
+![](/img/kind-clusters-setup.jpg)
 
 First, start the container runtime. The container runtime doesn't start or stop with the Workstation Player application.
 

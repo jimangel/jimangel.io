@@ -26,7 +26,7 @@ draft: true
 
 #comments: false
 cover:
-    image: /img/featured.png # image path/url
+    image: # image path/url
     alt: "" # alt text
 # check config.toml for some of the default options / toggles
 

@@ -106,7 +106,7 @@ Once complete, use that as your starting point and dive into any areas you strug
 
 You can use bookmarks during the exam; however, I mainly used the two links above 90% of the time. It never hurts to have more bookmarks handy. An example of my partial bookmark bar:
 
-![bookmarks](/img/cka-exam-bookmarks.png)
+![bookmarks](/img/cka-exam-bookmarks.jpg)
 
 Since it's not multiple choice, there was no way for me to know which questions I completed. As a result, I started to track my progress in the browser-based notepad with the following format: `Question Number - My Confidence - Weight`
 

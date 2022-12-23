@@ -34,7 +34,7 @@ keywords:
 - how much vpn
 
 cover:
-  image: /img/google-cloud-vpn-pfsense-featured.png
+  image: /img/google-cloud-vpn-pfsense-featured.jpg
 
 slug: "google-cloud-vpn-pfsense"
 ---
@@ -55,19 +55,19 @@ A working Cloud HA VPN connected to a local pfSense gateway. HA VPN requires dyn
 
 In [Google Cloud Console](https://console.cloud.google.com/), find *Hybrid Connectivity* under *Networking* and navigate to *VPN*.
 
-![](/img/google-cloud-vpn-pfsense-hc-vpn-1.png)
+![](/img/google-cloud-vpn-pfsense-hc-vpn-1.jpg)
 
 Next, choose *HA VPN*.
 
-![](/img/google-cloud-vpn-pfsense-hc-vpn-2.png)
+![](/img/google-cloud-vpn-pfsense-hc-vpn-2.jpg)
 
 Create a peer VPN gateway that uses your WAN IP as the interface 0 address. If you're not sure what your WAN IP is, find it at [whatismyipaddress.com](https://whatismyipaddress.com/)
 
-![](/img/google-cloud-vpn-pfsense-hc-vpn-3.png)
+![](/img/google-cloud-vpn-pfsense-hc-vpn-3.jpg)
 
 Create a Cloud Router. For the ASN, you can use any private ASN that is not already in use. I don't currently have any BGP setup, so I'll use `4200000000`.
 
-![](/img/google-cloud-vpn-pfsense-hc-vpn-4.png)
+![](/img/google-cloud-vpn-pfsense-hc-vpn-4.jpg)
 
 Give the tunnel a name like `homelab-vpn-tunnel` and generate a pre-shared key. This is important and needed later. For security reasons, you could [generate your own key](https://cloud.google.com/network-connectivity/docs/vpn/how-to/generating-pre-shared-key). You can add more VPN tunnels to the same VPN gateway afterward.
 
@@ -75,7 +75,7 @@ Save the key somewhere safe as you need it again later!
 
 Click *Configure BGP Session* to set up the BGP session on the `homelab-cloud-router` for the tunnel. We take the defaults and input custom values.
 
-![](/img/google-cloud-vpn-pfsense-hc-vpn-5.png)
+![](/img/google-cloud-vpn-pfsense-hc-vpn-5.jpg)
 
 Once complete, click "Save BGP configurations." It would be a good idea at this point to capture all the relevant data in a table, such as:
 
@@ -91,7 +91,7 @@ Once complete, click "Save BGP configurations." It would be a good idea at this 
 
 Once complete, Google shows a full summary.
 
-![](/img/google-cloud-vpn-pfsense-hc-vpn-6.png)
+![](/img/google-cloud-vpn-pfsense-hc-vpn-6.jpg)
 
 ## Setup a VPN tunnel on pfSense
 
@@ -101,11 +101,11 @@ It is good practice to leave this disabled; in our case, Google requires using l
 
 Navigate to *System* > *Advanced* > *Firewall & NAT* select *Allow APIPA traffic* and save.
 
-![](/img/google-cloud-vpn-pfsense-apipa.png)
+![](/img/google-cloud-vpn-pfsense-apipa.jpg)
 
 Next, configure the VPN tunnel phase 1 by navigating to *VPN* > *Tunnels* > *Add P1*
 
-![](/img/google-cloud-vpn-pfsense-p1-tunnel.png)
+![](/img/google-cloud-vpn-pfsense-p1-tunnel.jpg)
 
 - **Key Exchange version:** IKEv2
 - **Interface:** WAN
@@ -115,7 +115,7 @@ Next, configure the VPN tunnel phase 1 by navigating to *VPN* > *Tunnels* > *Add
 
 Now setup the BGP phase 2 by navigating to *VPN* > *Tunnels* > *Add P2*
 
-![](/img/google-cloud-vpn-pfsense-p2-tunnel.png)
+![](/img/google-cloud-vpn-pfsense-p2-tunnel.jpg)
 
 - **Mode:** Routed (VTI)
 - **Local Network:** Network / BGP Private IP / 30
@@ -124,7 +124,7 @@ Now setup the BGP phase 2 by navigating to *VPN* > *Tunnels* > *Add P2*
 
 We should now see the tunnel connecting and waiting on a BGP peer.
 
-![](/img/google-cloud-vpn-pfsense-hc-vpn-up.png)
+![](/img/google-cloud-vpn-pfsense-hc-vpn-up.jpg)
 
 ## Setup BGP on pfSense
 
@@ -154,11 +154,11 @@ allow from 169.254.0.1
 allow to 169.254.0.1
 ```
 
-![](/img/google-cloud-vpn-pfsense-raw-config.png)
+![](/img/google-cloud-vpn-pfsense-raw-config.jpg)
 
 More details on each configuration parameter in the [OpenBGPD man page](https://man.openbsd.org/bgpd.conf.5#GLOBAL_CONFIGURATION). At this point, you can confirm that the tunnel and BGP is working with GCP console.
 
-![](/img/google-cloud-vpn-pfsense-hc-vpn-up-bgp.png)
+![](/img/google-cloud-vpn-pfsense-hc-vpn-up-bgp.jpg)
 
 
 
@@ -168,13 +168,13 @@ A key concept in stateful firewalls is that they usually allow outbound traffic 
 
 Navigate to *Networking* > *VPC network* > *Firewall* and add a rule allowing your internal network inbound. Replace the Source IP ranges with your local subnet(s).
 
-![](/img/google-cloud-vpn-pfsense-google-fw.png)
+![](/img/google-cloud-vpn-pfsense-google-fw.jpg)
 
 For more securit, Google's Cloud VPN supports `allowlists` and `denylists` for specific IPs to reach Google's VPC. Find more information on restricting IPs in Google's [official documentation](https://cloud.google.com/network-connectivity/docs/vpn/concepts/overview#vpn-org-policy).
 
 Also, depending on how you configured your VPC, the Cloud Router advertises a single region's subnet or all subnets in the VPC. VPC's dynamic routes, *Regional* or *Global*, control this. I want all subnets advertised, so I'll edit the VPC to *Global* ([more info](https://cloud.google.com/vpc/docs/vpc#routing_for_hybrid_networks)).
 
-![](/img/google-cloud-vpn-pfsense-global-vpc.png)
+![](/img/google-cloud-vpn-pfsense-global-vpc.jpg)
 
 We should now be able to communicate from our homelab to our VPC resources but **not** the other way around! 🎉
 
@@ -183,13 +183,13 @@ We should now be able to communicate from our homelab to our VPC resources but *
 
 Create a GCE VM with only a private IP by clicking *Management, security, disks, networking, sole tenancy* and selecting the *Networking* tab in the *Create an instance* menu.
 
-![](/img/google-cloud-vpn-pfsense-priv-network.png)
+![](/img/google-cloud-vpn-pfsense-priv-network.jpg)
 
 Once it's up, I can confirm that my local machine can ping GCP private IPs and NOT the other way around.
 
 Let's add a rule to allow GCP to ping our resources as another test. Navigate to the *IPsec* firewall rules in pfSense. We'll add a rule for ANYTHING in Google's [supernet](https://en.wikipedia.org/wiki/Supernetwork) (10.128.0.9/9) to request a ping (ICMP) for ANYTHING on our local network (LAN2). We are assuming that LAN2 also accepts ping requests.
 
-![](/img/google-cloud-vpn-pfsense-pfsense-fw.png)
+![](/img/google-cloud-vpn-pfsense-pfsense-fw.jpg)
 
 ## Conclusion
 

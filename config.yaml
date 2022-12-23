@@ -91,7 +91,7 @@ params:
   # https://adityatelange.github.io/hugo-PaperMod/posts/papermod/papermod-features/#twitter-cards-support
   #images: ["<link or path of image for opengraph, twitter-cards>"]
   images:
-    - /img/social.png # This is the root pic when sharing on social media
+    - /img/social.jpg # This is the root pic when sharing on social media
   label:
     text: jimangel.io # sets the top left blue "home" link text
   DateFormat: "January 2, 2006"

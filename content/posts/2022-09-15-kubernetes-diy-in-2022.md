@@ -18,7 +18,7 @@ hidemeta: false
 comments: true
 ShowWordCount: false
 cover:
-    image: /img/homelab-cover-k8s-2022.png # image path/url
+    image: /img/homelab-cover-k8s-2022.jpg # image path/url
     alt: "My homelab. A couple raspberry pi servers and a switch with network cables." # alt text
 
 slug: "kubernetes-diy-homelab-2022"  # make your URL pretty!

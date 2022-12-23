@@ -84,7 +84,7 @@ This step may require root (`sudo su -`)
 stuff
 
 ```bash
-!.png](./picture.png)
+!.jpg](./picture.jpg)
 ```
 
 ## Conclusion

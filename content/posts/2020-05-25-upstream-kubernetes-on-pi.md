@@ -66,12 +66,12 @@ I had some of these parts lying around or reused things like SD cards from older
 
 1. Download the latest [Raspbian Lite](https://downloads.raspberrypi.org/raspbian_lite/images/) zip
 
-    ![](/img/upstream-kubernetes-zip.png)
+    ![](/img/upstream-kubernetes-zip.jpg)
 
 
 1. Flash the SD card using [balenaEtcher](https://www.balena.io/etcher/)
 
-    ![](/img/upstream-kubernetes-bal.png)
+    ![](/img/upstream-kubernetes-bal.jpg)
 
 1. Enable SSH
 
@@ -99,7 +99,7 @@ Since there are four similar devices, I power them on one at a time. I have the 
 
 For added peace of mind, I created static maps for the Pi's MAC address. I set the configurations using the router's GUI.
 
-![](/img/upstream-kubernetes-static.png)
+![](/img/upstream-kubernetes-static.jpg)
 
 If you can't get the IP addresses quickly, you can always plug in a monitor & keyboard for initial discovery. The Raspberry Pi 4 uses micro HDMI for video out. Alternatively, you can create a [static IP](https://pimylifeup.com/raspberry-pi-static-ip-address/).
 
@@ -318,7 +318,7 @@ kubectl port-forward deployment/nginx 8080:80
 
 Browse to localhost:8080
 
-![](/img/upstream-kubernetes-nginx.png)
+![](/img/upstream-kubernetes-nginx.jpg)
 
 ## Clean up
 
