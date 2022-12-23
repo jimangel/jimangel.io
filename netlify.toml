@@ -35,13 +35,14 @@ compress = false
 #  X-Content-Type-Options = "nosniff"
 #  X-XSS-Protection = "1; mode=block"
 
+# removed as Netlify support does not recommend modifying the default.
 # cache css & images for a week
-[[headers]]
-  for = "/img/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/assets/css/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
+#[[headers]]
+#  for = "/img/*"
+#  [headers.values]
+#    Cache-Control = "public, max-age=604800"
+#
+#[[headers]]
+#  for = "/assets/css/*.css"
+#  [headers.values]
+#    Cache-Control = "public, max-age=604800"
