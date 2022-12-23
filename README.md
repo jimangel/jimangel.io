@@ -295,3 +295,12 @@ ls -a static/img | grep "png"
 # not used:
 # clean up: static/img/featured.png
 ```
+
+## modified
+
+archives.html in layouts/_default/archives.html so the posts are grouped by year, not month..:
+
+```
+# line 23 (not to be confused with the earlier line)
+  {{- range .Pages.GroupByDate "2022" }}
+```

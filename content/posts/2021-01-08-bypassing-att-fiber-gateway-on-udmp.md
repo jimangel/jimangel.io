@@ -88,8 +88,6 @@ The Optical Network Terminal, ONT, converts "light" data (fiber) to electrical s
 For AT&T Fiber to work, the ONT port must *also* provide EAP-TLS 802.1X authentication to AT&T.
 {{< /notice >}}
 
-![](/img/bypassing-att-fiber-gateway-2s8OU3K.jpg)
-
 802.1X is usually used for enterprise WiFi authentication. AT&T fiber uses 802.1X to authenticate their customer's residential gateway.
 
 Let's break down what 802.1X is; only three components are needed for 802.1X authentication.

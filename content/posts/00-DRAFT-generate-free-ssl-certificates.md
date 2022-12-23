@@ -3,7 +3,7 @@ title: "Generate Free SSL Certificates"
 subtitle: "Various ways to use LetsEncrypt for your side project"
 description: "Use LetsEncrypt to generate SSL certificates"
 summary: "Use LetsEncrypt to generate SSL certificates"
-date: 2019-06-30
+date: 2023-12-23
 lastmod: 2019-06-30
 #publishDate: You only need to specify this option if you wish to set date in the future but publish the page now.
 featured: false
