@@ -40,7 +40,7 @@ hidemeta: false
 comments: true
 ShowWordCount: false
 cover:
-    image: /img/ubuntu-usb-install-22-04-cover.png # image path/url
+    image: /img/ubuntu-usb-install-22-04-cover.jpg # image path/url
     alt: "Ubuntu desktop image for 22.04" # alt text
 
 slug: "automate-ubuntu-22-04-lts-bare-metal"  # make your URL pretty!
@@ -201,7 +201,7 @@ Let's get a bit deeper into the weeds. The following section isn't critical to u
 
 I tried to sketch out a different view of how all the components interact. It reads from the top to bottom; from boot to provisioned host. Pay attention to the bottom components `subiquity` & `curtin` as they're covered in subsequent sections.
 
-![rough sketch of all the components in use to install ubuntu](/img/component-sketch.png#center)
+![rough sketch of all the components in use to install ubuntu](/img/component-sketch.jpg#center)
 
 > ### What is subiquity?
 > 
@@ -225,7 +225,7 @@ I tried to sketch out a different view of how all the components interact. It re
 
 It's worth getting into this level of detail because you'll occasionally need to debug errors that come from screens that look like this:
 
-![subiquity install arguments on a terminal calling curtin install](/img/subiquity-curtin.png)
+![subiquity install arguments on a terminal calling curtin install](/img/subiquity-curtin.jpg)
 
 When I was first debugging my installation errors, I felt like I was running in circles...
 
@@ -552,7 +552,7 @@ This post covered _a lot_ of ground, and I think that leads to things appearing 
 
 Sometimes, these topics can get noisy, and you might wonder what the actual process looks like. **Here's what my server automation process – looks like managing 7 servers – today**.
 
-![usbs plugged in a hub](/img/autoinstall-usb.png)
+![usbs plugged in a hub](/img/autoinstall-usb.jpg)
 
 ### Modifying the liver-server ISO
 
