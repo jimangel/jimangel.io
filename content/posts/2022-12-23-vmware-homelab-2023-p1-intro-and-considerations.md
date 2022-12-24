@@ -1,6 +1,6 @@
 ---
 # not too long or too short (think G-search)
-title: "VMware homelab 2023 (Part 3): How to configure VMware ESXi 7.1 networking and setup shared storage"
+title: "VMware homelab 2023 [Part 1]: Introduction & Considerations"
 date: 2022-12-23
 # description is usually what's used in a google snippet
 # informs and interests users with a short, relevant summary of what a particular page is about.

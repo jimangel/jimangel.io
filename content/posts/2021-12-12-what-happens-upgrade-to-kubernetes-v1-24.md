@@ -1,5 +1,5 @@
 ---
-title: "What happens when you upgrade to Kubernetes v1.24?"
+title: "Upgrade gotchas for Kubernetes v1.24"
 description: "How to prepare for the dockershim removal in Kubernetes 1.24"
 summary: "How to prepare for the dockershim removal in Kubernetes 1.24"
 subtitle: "Break your cluster when you want to, not when you have to"

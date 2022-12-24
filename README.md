@@ -20,7 +20,8 @@ git submodule update --remote --merge
 # ensure to check https://github.com/martignoni/hugo-notice
 
 # to "force reset" them
-git submodule foreach --recursive git clean -xfd
+git submodule deinit -f .
+git submodule update --init --remote --merge
 ```
 
 # Original setup
@@ -303,4 +304,17 @@ archives.html in layouts/_default/archives.html so the posts are grouped by year
 ```
 # line 23 (not to be confused with the earlier line)
   {{- range .Pages.GroupByDate "2022" }}
+```
+
+## cdn
+
+Found out that relative images are moved to cloudfront and absURL (https://gohugobrasil.netlify.app/functions/absurl/) are local. On my browser, cloudfront out performs netlify's CDN so all assets should be relative...
+
+```
+cp themes/PaperMod/layouts/partials/cover.html layouts/partials/cover.html
+
+cp themes/PaperMod/layouts/partials/index_profile.html layouts/partials/index_profile.html
+
+# all uses of absURL can be replaced (~4 in cover and 1 in index)
+# sed s/absURL/relURL/g
 ```

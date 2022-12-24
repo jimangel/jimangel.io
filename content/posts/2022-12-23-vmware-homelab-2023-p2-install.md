@@ -1,6 +1,6 @@
 ---
 # not too long or too short (think G-search)
-title: "VMware homelab 2023 (Part 1): Considerations when building a NUC VMware homelab"
+title: "VMware homelab 2023 [Part 2]: How to install vSphere 7.0 (ESXi / vCenter) on a NUC 11"
 date: 2022-12-23
 # description is usually what's used in a google snippet
 # informs and interests users with a short, relevant summary of what a particular page is about.
@@ -8,13 +8,21 @@ date: 2022-12-23
 description: "Description placeholder"
 summary: "Summary placeholder"
 tags:
-# - kubernetes
-# - cncf
+- vmware
+- homelab
+- walkthrough
+- nuc
 keywords:
-# - kubeadm upgrade
-# - kubernetes
-# - cncf
-# - dockershim
+- VMware
+- ESXi 7.0 U3
+- vCenter 7.0 U3
+- VCSA
+- homelab
+- NUC11PAHi7
+- NUC11PAHi5
+- Intel NUC 11 Pro
+- NUC 11 Canyon
+
 
 
 # !! DON'T FORGET: https://medium.com/p/import
