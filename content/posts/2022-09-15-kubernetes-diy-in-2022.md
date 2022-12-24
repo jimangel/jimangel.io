@@ -1,6 +1,6 @@
 ---
 title: "Kubernetes for your homelab in 2022"
-description: "Building a repeatable Kubernetes cluster for experiements. Documenting any failures or wins along the way"
+description: "Building a repeatable Kubernetes cluster for experiments. Documenting any failures or wins along the way"
 summary: "How would I build a homelab Kubernetes cluster from scratch?"
 date: 2022-09-15
 tags:

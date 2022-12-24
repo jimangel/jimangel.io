@@ -5,16 +5,24 @@ date: 2022-12-23
 # description is usually what's used in a google snippet
 # informs and interests users with a short, relevant summary of what a particular page is about.
 # They are like a pitch that convince the user that the page is exactly what they're looking for.
-description: "Description placeholder"
-summary: "Summary placeholder"
+description: "Things to consider when planning to build a VMware homelab"
+summary: "What to consider when building a VMware homelab like how many hosts, networking, storage, and more! This is the first post of a series that follows the complete process when building a multi-host VMware cluster at home"
+
 tags:
-# - kubernetes
-# - cncf
+- vmware
+- homelab
+- walkthrough
+- nuc
 keywords:
-# - kubeadm upgrade
-# - kubernetes
-# - cncf
-# - dockershim
+- VMware
+- ESXi 7.0 U3
+- vCenter 7.0 U3
+- VCSA
+- homelab
+- NUC11PAHi7
+- NUC11PAHi5
+- Intel NUC 11 Pro
+- NUC 11 Canyon
 
 
 # !! DON'T FORGET: https://medium.com/p/import
@@ -26,51 +34,14 @@ draft: true
 
 #comments: false
 cover:
-    image: # image path/url
-    alt: "" # alt text
+    image: /img/vmware-lab-featured-p1.jpg
+    alt: "7 NUC computers mounted in a server rack with blue power on lights" # alt text
 # check config.toml for some of the default options / toggles
 
 # contain keywords relevant to the page's topic, and contain no spaces, underscores or other characters. You should avoid the use of parameters when possible, as they make URLs less inviting for users to click or share. Google's suggestions for URL structure specify using hyphens or dashes (-) rather than underscores (_). Unlike underscores, Google treats hyphens as separators between words in a URL.
-slug: ""  # make your URL pretty!
+slug: "vmware-series-p1-considerations"  # make your URL pretty!
 
 
 ---
 
-H1 = # = Main keywords and subject matter, what the overall post is about
-H2 = ## = Sections to break up content, using similar keywords to the H1 tag
-H3 = ### = Subcategories to further break up the content, making it easily scannable
-
-- Include 'how' or 'why' in the permalink / title (for SEO)
-- Strip out prepositions (to, of, with, at, from, into, for, on by) for permalink
-  - short = better
-- Write question based headers with answer based content that follows a story from a -> z.
-- Keyword research for words / phrases ideal readers would search for / google trends
-- H tag optimization
-- ``
-
-{{< notice note >}}
-This is a note.
-{{< /notice >}}
-
-```
-Check to make sure each page has:
-A clear title tag.
-H1 tags that define the page’s main topic.
-Alt tags and descriptions on all of your images.
-Internal links to help guide visitors and search engines to your most important pages.
-Breadcrumbs across the site especially if there are multiple lessons and chapters in your courses.
-```
-
-- ending posts with 2 to 3 questions
-
-{{< notice warning >}}
-This is a warning notice. Be warned!
-{{< /notice >}}
-
-{{< notice tip >}}
-This is a very good tip.
-{{< /notice >}}
-
-{{< notice info >}}
-General info
-{{< /notice >}}
+CONTENT HERE (start with series back links and overview summary)
