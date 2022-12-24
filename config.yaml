@@ -156,6 +156,7 @@ params:
   cover:
     hiddenInList: true # hide on list pages and home
     hiddenInSingle: false # hide on single page
+    responsiveImages: true
   fuseOpts:
     isCaseSensitive: false
     shouldSort: true

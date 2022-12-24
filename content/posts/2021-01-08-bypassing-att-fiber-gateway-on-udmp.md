@@ -43,6 +43,7 @@ keywords:
 
 cover:
   image: /img/bypassing-att-fiber-gateway-featured.jpg
+  alt: "UDMP pro by Unifi"
 
 slug: "bypassing-att-fiber-gateway-on-udmp"
 
@@ -80,7 +81,7 @@ If you want a "clean" reset, download backups, factory reset, and restore.
 
 Before getting started, let's understand exactly what the problem is. Below is a traditional NVG589 setup with [802.1X](https://www.securew2.com/solutions/802-1x/) EAP-TLS details.
 
-![](/img/bypassing-att-fiber-gateway-LSniStq.jpg)
+![Diagram of a router communicating with an ISP to authenticate using 802.1X EAP TLS](/img/bypassing-att-fiber-gateway-LSniStq.jpg)
 
 The Optical Network Terminal, ONT, converts "light" data (fiber) to electrical signal to pass through ethernet wires in your home. The actual optical network terminal is the white box (top right).
 
