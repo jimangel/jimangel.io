@@ -22,6 +22,9 @@ git submodule update --remote --merge
 # to "force reset" them
 git submodule deinit -f .
 git submodule update --init --remote --merge
+
++ ??
+hugo mod get -u
 ```
 
 # Original setup
@@ -317,4 +320,14 @@ cp themes/PaperMod/layouts/partials/index_profile.html layouts/partials/index_pr
 
 # all uses of absURL can be replaced (~4 in cover and 1 in index)
 # sed s/absURL/relURL/g
+```
+
+## Fixed some responsive images
+
+Fixed the cover image generation by moving to page bundle resources. The code as it existed didn't appear to work with Global resources and I just want the thing to work. Look for the PR of restructuring the repo to page bundles. Not much but the cover image moved to the bundle.
+
+```
+for i in $(ls -1 content/posts | grep -v "_index.md" | sed -e 's/\.md$//'); do mkdir content/posts/$i; done
+
+for i in $(ls -1 content/posts | grep -v "_index.md" | sed -e 's/\.md$//'); do mv "content/posts/${i}.md" "content/posts/$i/index.md"; done
 ```

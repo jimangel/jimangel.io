@@ -17,6 +17,11 @@ permalinks:
 ignoreErrors:
   - error-remote-getjson
 
+
+staticDir:
+  - static
+#  - assets
+
 # enableInlineShortcodes: true
 enableRobotsTXT: true
 buildDrafts: false
