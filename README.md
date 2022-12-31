@@ -9,7 +9,7 @@ hugo new --kind post posts/$(date '+%Y-%m-%d')-$URL.md
 # local preview
 
 ```
-hugo serve --buildDrafts --buildFuture --ignoreCache
+hugo serve --cleanDestinationDir --gc --ignoreCache --buildDrafts
 ```
 
 # Update theme
