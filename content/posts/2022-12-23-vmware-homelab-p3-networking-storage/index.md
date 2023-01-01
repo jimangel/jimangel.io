@@ -1,6 +1,6 @@
 ---
 # not too long or too short (think G-search)
-title: "VMware homelab 2023 [Part 3]: How to configure vSphere networking and storage"
+title: "VMware homelab [Part 3]: How to configure vSphere networking and storage"
 date: 2022-12-31
 # description is usually what's used in a google snippet
 # informs and interests users with a short, relevant summary of what a particular page is about.
@@ -50,7 +50,7 @@ In the fall of 2022, I decided to build a VMware homelab so I could explore [Ant
 
 At first I was going to update my older VMware install posts but, after hitting enough issues, it was clear I needed to start over. My goal is to start with an overview of things to consider before jumping in. Reading my series should save you many hours of problems if you have similar ambitions to build a multi-node lab.
 
-This is Part **3** of a **3** part series I've called **_VMware homelab 2023_**:
+This is **Part 3** of a **3** part series I've called **VMware homelab**:
 
 - [[Part 1]: Introduction & Considerations](/posts/vmware-series-p1-considerations/)
 - [[Part 2]: How to install vSphere on a NUC](/posts/vmware-series-p2-installation/)
@@ -618,3 +618,5 @@ Needed to do a storage vmotion then remove NAS hosts...
 ## Conclusion
 
 It would be great to automate all of this with Terraform, maybe some day soon. That way the cluster can be destroyed and rebuilt easily.
+
+- Traffic misconceptions: https://devstime.com/2021/07/19/misconception-about-vmotion-traffic-usage/

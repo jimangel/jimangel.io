@@ -1,6 +1,6 @@
 ---
 # not too long or too short (think G-search)
-title: "VMware homelab 2023 [Part 2]: How to install vSphere on a NUC"
+title: "VMware homelab [Part 2]: How to install vSphere on a NUC"
 date: 2022-12-31
 # description is usually what's used in a google snippet
 # informs and interests users with a short, relevant summary of what a particular page is about.
@@ -49,7 +49,7 @@ In the fall of 2022, I decided to build a VMware homelab so I could explore [Ant
 
 At first I was going to update my older VMware install posts but, after hitting enough issues, it was clear I needed to start over. My goal is to start with an overview of things to consider before jumping in. Reading my series should save you many hours of problems if you have similar ambitions to build a multi-node lab.
 
-This is Part **2** of a **3** part series I've called **_VMware homelab 2023_**:
+This is **Part 2** of a **3** part series I've called **VMware homelab**:
 
 - [[Part 1]: Introduction & Considerations](/posts/vmware-series-p1-considerations/)
 - [This Page]: How to install vSphere on a NUC
@@ -237,6 +237,11 @@ scp ~/Downloads/ESXi703-VMKUSB-NIC-FLING-55634242-component-19849370.zip root@17
 
 ssh root@172.16.6.102
 ```
+
+### Do you need IPV6?
+
+This is more opinion, I don't have IPV6 on my router, why waste the option...
+
 
 ```
 esxcli system maintenanceMode set -e true
