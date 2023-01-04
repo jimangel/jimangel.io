@@ -79,11 +79,11 @@ By the end of the series, you should feel comfortable designing a VMware homelab
 
 There's a couple soft assumptions:
 
-- Familiarity of networking concepts.
+- Familiar with networking concepts
   - VLANs
   - OSI model
   - General routing
-- Familiarity of VMware concepts.
+- Familiar with VMware concepts
   - VCSA: vCenter Server Appliance VM to manage clusters and hosts
   - ESXi: The OS for vSphere hosts
   - DRS: Distributed Resource Scheduler that spreads the VMs across hosts inside a cluster
@@ -220,7 +220,7 @@ After there's a complete network design with VLANs/subnets defined, I would stro
 
 I use a Google sheet as a basic inventory for hosts and VMs.
 
-![](https://i.imgur.com/oiBviDO.png)
+![](/img/google-sheets-vmware.jpg)
 
 ### Network security considerations
 
@@ -299,7 +299,7 @@ Early automation blogs, including mine, self installed (booted to memory, instal
 
 ESXi 7.0 requires a boot disk of at least 32 GB of persistent storage. I believe the preferred amount is 128GB and I ended up using 1TB NVMe drives. The following picture shows a sample auto-partition between ESXi 6.x and 7.x:
 
-![](https://i.imgur.com/vLhZHsw.png)
+![](/img/storage-disk-esxi7.jpg)
 
 {{< notice note >}}
 If possible, I would prioritize shared storage over large/fast local disk if you're using more than 1 host.
