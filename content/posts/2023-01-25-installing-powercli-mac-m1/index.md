@@ -31,7 +31,8 @@ keywords:
 - VMware PowerCLI
 - custom VMware ISO
 
-
+showToc: true
+TocOpen: false
 
 # !! DON'T FORGET: https://medium.com/p/import
 # !! DON'T FORGET: https://medium.com/p/import
