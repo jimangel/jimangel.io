@@ -15,6 +15,7 @@ tags:
 - homelab
 - kubernetes
 - kind
+- powershell
 categories: []
 keywords:
 - vmware workstation kubernetes
