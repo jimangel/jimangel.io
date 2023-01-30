@@ -57,7 +57,7 @@ With PowerCLI you could:
 - Manage a fleet of Virtual Machines with PowerShell scripts
 - Write a custom health check script that prunes snapshots
 
-The possibilities are endless, and now they can be ran on any platform. After reading this article, you'll be able to run PowerCLI on a mac with an Apple silicon processor.
+After reading this article, you'll be able to run PowerCLI on a mac with an Apple silicon processor.
 
 ## Why?
 
