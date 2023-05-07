@@ -49,11 +49,20 @@ slug: "bypassing-att-fiber-gateway-on-udmp"
 
 ---
 
+{{< notice warning >}}
+This blog's solution is only for Dream Machines running Unifi OS v1.0 using containers.
+
+In early 2023, Ubiquiti released version 2.0 and shortly after 3.0 ([releases](https://community.ui.com/releases?q=Dream+Machines)). The newer versions require modifications to my solution. Luckily, the comments at the bottom discuss how to update or modify the solution to work on the newest Unifi OS!
+
+Thanks [@Stephen](https://disqus.com/by/disqus_NMDzZVI3az/) and [@Matt](https://disqus.com/by/matthewfkoch/) for the solution and prompt replies in the comments.
+{{< /notice >}}
+
+---
+
+
 The fundamental problem is: 
 
-{{< notice info >}}
-AT&T does not allow you to remove their residential gateway, even if you'd prefer to use something better.
-{{< /notice >}}
+> AT&T does not allow you to remove their residential gateway, even if you'd prefer to use something better.
 
 You must use AT&T's provided residential gateway, such as an NVG5x9, BGW210, or 5268AC, to authenticate to AT&T's fiber internet service.
 
@@ -223,8 +232,6 @@ ssh remotessh@192.168.1.254
 ```
 
 Type `!` to switch to root shell.
-
-
 
 ### Copy certificates and `mfg.dat`
 
@@ -631,3 +638,7 @@ podman logs -f wpa_supplicant-udmpro
 # reboot for good luck
 reboot
 ```
+
+## Extra: Extract certificates from hardware
+
+I tried to get the certificates from the hardware without using any exploits. Instead of making this post any longer, you can see my [live tweet](https://twitter.com/JimmAngel/status/1350515999540441089), from 2021, outlining my steps.
