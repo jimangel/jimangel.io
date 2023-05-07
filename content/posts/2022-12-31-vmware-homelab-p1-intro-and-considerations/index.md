@@ -45,6 +45,8 @@ slug: "vmware-series-p1-considerations"  # make your URL pretty!
 
 ---
 
+## Intro
+
 In the fall of 2022, I decided to build a VMware homelab so I could explore [Anthos clusters on VMware](https://cloud.google.com/anthos/clusters/docs/on-prem/latest/overview) a bit closer. A few jobs back I administered VMware and in 2017 I blogged about [creating a single node VMware homelab](/posts/vmware-homelab-build-2017). I thought it _couldn't be that hard_ to build a multi-node VMware homelab with a few Intel NUCs. I was wrong.
 
 > The difference in settings up a single node ESXi host vs. a cluster of 3 ESXi hosts was staggering. Mainly the networking design required.
@@ -54,8 +56,10 @@ At first I was going to update my older VMware install posts but, after hitting 
 This is **Part 1** of a **3** part series I've called **VMware homelab**:
 
 - [Part 1]: Introduction & Considerations
-- [Part 2]: How to install vSphere on a NUC (coming soon)
-- [Part 3]: How to configure vSphere networking and storage (coming soon)
+- [[Part 2]: How to install a vSphere cluster at home](/posts/vmware-series-p2-installation/)
+- [[Part 3]: How to configure vSphere networking and storage](/posts/vmware-series-p3-network-storage/)
+
+---
 
 **TL;DR:** Running a single node cluster avoids most of the following issues, but I wanted to run a VMware cluster closer to "real" production. Focusing on network design before jumping into ESXi installations will pay dividends.
 
@@ -67,9 +71,11 @@ Consider this guide to be more of a "choose your own adventure." I'll explain wh
 
 The 2nd and 3rd part of this series are more technical, covering the exact steps I took to build my lab.
 
-## Audience
+## Why you should read this
 
-Anyone interested in homelabs and VMware with a general infrastructure background. It's a bonus if you've used VMware before as this might serve as a refresher.
+If you desire to rebuild your entire vSphere environment under 2 hours and with less than 10 commands ([my exact commands](https://gist.github.com/jimangel/5bd4f5d19380f487c9c82c4b5405ab42)). You can also jump to the [Conclusion in Part 3](/posts/vmware-series-p3-network-storage/#conclusion).
+
+This post is written for anyone that's interested in homelabs and VMware. It's a bonus if you've used VMware before as this might serve as a refresher.
 
 It's important to understand the distinction between **homelab** and a **production**. My choices would be very different if I was designing a production system. They would also be different if I didn't use NUCs for hosts, as you'll find out.
 
@@ -349,4 +355,17 @@ I now have a clear solution to target:
 
 The next part of this series is the technical steps to build the lab. Starting with the ISO creation and install of ESXi and VCSA.
 
-Check out Part 2 here: (coming soon)
+Check out Part 2 here: [How to install a vSphere cluster at home](/posts/vmware-series-p2-installation/)
+
+
+
+
+
+
+
+
+
+
+
+
+
