@@ -9,21 +9,21 @@ hugo new --kind post posts/$(date '+%Y-%m-%d')-$URL.md
 # local preview
 
 ```
-hugo serve --cleanDestinationDir --gc --ignoreCache --buildDrafts
+hugo serve --cleanDestinationDir --gc --ignoreCache --buildDrafts --logLevel debug
 ```
 
 # Update theme
 
 ```
-git submodule update --remote --merge
-
-# ensure to check https://github.com/martignoni/hugo-notice
+# DON'T: git submodule update --remote --merge
+# ensure to check https://github.com/martignoni/hugo-notice (installed as a hugo module)
+# https://github.com/martignoni/hugo-notice#hugo-module
 
 # to "force reset" them
 git submodule deinit -f .
 git submodule update --init --remote --merge
 
-+ ??
++ It seems like below does it all?
 hugo mod get -u
 ```
 

@@ -17,6 +17,9 @@ permalinks:
 ignoreErrors:
   - error-remote-getjson
 
+# Ignore the README.md file from being watched for changes
+ignoreFiles:
+  - "README.md"
 
 staticDir:
   - static
@@ -31,13 +34,9 @@ enableEmoji: true
 pygmentsUseClasses: true
 # https://gohugo.io/content-management/syntax-highlighting/#generate-syntax-highlighter-css
 
-googleAnalytics: G-7X0S9Y56NW # Updated to G4A 8/27/2022
-disqusShortname: jimangel
-
 minify:
   disableXML: true
   # minifyOutput: true
-
 
 languages:
     en:
@@ -198,8 +197,14 @@ privacy:
         disabled: false
         privacyEnhanced: true
 
+
+# changes in 1.20
 services:
-    instagram:
-        disableInlineCSS: true
-    twitter:
-        disableInlineCSS: true
+  disqus:
+    shortname: jimangel
+  googleAnalytics:
+    id: G-7X0S9Y56NW # Updated to G4A 8/27/2022
+  instagram:
+      disableInlineCSS: true
+  twitter:
+      disableInlineCSS: false

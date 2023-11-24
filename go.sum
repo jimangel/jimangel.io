@@ -1,4 +1,10 @@
 github.com/adityatelange/hugo-PaperMod v0.0.0-20221224152110-d3d90be8a4ea h1:Oh7CmQcvzhhNV4vJy9pXHP4SJoEPg0FVOIP73VwJR5Q=
 github.com/adityatelange/hugo-PaperMod v0.0.0-20221224152110-d3d90be8a4ea/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20231104103144-72ab73ffe5ba h1:oeWCvDPbqAOBlKZMHZBlvq5VZq6WjT7x7isvkx6jaIU=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20231104103144-72ab73ffe5ba/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20231111152359-5a99ab779d3a h1:NyBbL1m6ppAJMzHmbAmKxtnGnSNGnwQjblniKeWqDUM=
+github.com/adityatelange/hugo-PaperMod v0.0.0-20231111152359-5a99ab779d3a/go.mod h1:HCHxNMKYdGafUYjVV3ICiAqznZK2yH0iI53jqcDFDdQ=
 github.com/martignoni/hugo-notice v0.0.0-20220915151719-9571973877af h1:beo4H+y36B4t4wO4fu+rQI/tZDZB45VSLgKrpATezVs=
 github.com/martignoni/hugo-notice v0.0.0-20220915151719-9571973877af/go.mod h1:k+PSLmVlZC5iWWxLLOSDQetCCeeqKZQvQJ+AXLg6X1A=
+github.com/martignoni/hugo-notice v0.0.0-20230829114050-2d7d7460bc60 h1:cPU84OKIQJMEfuvgbAem94J5YDn3UBDrth17VM9I0QA=
+github.com/martignoni/hugo-notice v0.0.0-20230829114050-2d7d7460bc60/go.mod h1:MIQPOMgEcbyRC0gNLzQFSgrS+wIy3RuQ/HbaZYtTOKU=

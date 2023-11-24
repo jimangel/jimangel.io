@@ -1,7 +1,7 @@
 ---
 # not too long or too short (think G-search)
 title: "VMware homelab [Part 1]: Introduction & Considerations"
-date: 2022-12-31
+date: 2023-02-01
 # description is usually what's used in a google snippet
 # informs and interests users with a short, relevant summary of what a particular page is about.
 # They are like a pitch that convince the user that the page is exactly what they're looking for.
@@ -45,9 +45,11 @@ slug: "vmware-series-p1-considerations"  # make your URL pretty!
 
 ---
 
+**TL;DR:** Running a single node cluster avoids most of the following issues, but I wanted to run a VMware cluster closer to "real" production. Focusing on network design before jumping into ESXi installations will pay dividends.
+
 ## Intro
 
-In the fall of 2022, I decided to build a VMware homelab so I could explore [Anthos clusters on VMware](https://cloud.google.com/anthos/clusters/docs/on-prem/latest/overview) a bit closer. A few jobs back I administered VMware and in 2017 I blogged about [creating a single node VMware homelab](/posts/vmware-homelab-build-2017). I thought it _couldn't be that hard_ to build a multi-node VMware homelab with a few Intel NUCs. I was wrong.
+In the fall of 2022, I decided to build a VMware homelab so I could explore [Anthos clusters on VMware](https://cloud.google.com/anthos/clusters/docs/on-prem/latest/overview) a bit closer. A few jobs back, I administered VMware and in 2017 I blogged about [creating a single node VMware homelab](/posts/vmware-homelab-build-2017). I thought it _couldn't be that hard_ to build a multi-node VMware homelab with a few Intel NUCs. I was wrong.
 
 > The difference in settings up a single node ESXi host vs. a cluster of 3 ESXi hosts was staggering. Mainly the networking design required.
 
@@ -59,13 +61,14 @@ This is **Part 1** of a **3** part series I've called **VMware homelab**:
 - [[Part 2]: How to install a vSphere cluster at home](/posts/vmware-series-p2-installation/)
 - [[Part 3]: How to configure vSphere networking and storage](/posts/vmware-series-p3-network-storage/)
 
+![learning plan outlined into three steps of planning, foundation, and automation](/img/steps.png)
+
 ---
 
-**TL;DR:** Running a single node cluster avoids most of the following issues, but I wanted to run a VMware cluster closer to "real" production. Focusing on network design before jumping into ESXi installations will pay dividends.
 
 ## Overview
 
-My goal for this post isn't to create a "how to" guide but point out areas that I thought were challenging. Many of the topics below are things that I learned the hard way. Since homelabs are not the same for everyone, I hope this guide starts generic enough for most.
+My goal for this post is to identify areas that I found challenging or surprising. Many of the topics are things I learned the hard way. Since homelabs are not the same for everyone, I hope this guide is generic enough for most.
 
 Consider this guide to be more of a "choose your own adventure." I'll explain what direction I'm choosing and why in each section. The sections should nudge you in a direction that avoids future pitfalls.
 
@@ -104,7 +107,7 @@ By sharing the end state, you can determine how closely my architecture aligns w
 
 I'm using 3 Intel NUC 11 Pros with 8 cores and 64GB RAM. These models come with a 2.5G NIC and I happen to have a switch that supports 2.5G. I also have a QNAP ISCSi/NFS storage appliance that supports 2.5G.
 
-My plan is to add a USB NIC to each host and split "frontend" traffic from "backend." It shouldn't change much of the following discussion but I plan on using VMware vSphere 7.0 U3.
+My plan is to add a USB NIC to each host and split "frontend" traffic from "backend."
 
 ![diagram of 3 nucs and 1 qnap NAS networked together with various vLANs described for VMware](/img/vmware-homelab-2022.svg)
 
@@ -303,7 +306,7 @@ Early automation blogs, including mine, self installed (booted to memory, instal
 
 > VMware is moving away from the support of SD cards and USB drives as boot media. ESXi Boot configuration with only SD card or USB drive, without any persistent device, is not recommended with vSphere 7 Update 3. Customers are advised to move away from SD cards or USB drives completely. ([docs](https://blogs.vmware.com/vsphere/2021/09/esxi-7-boot-media-consideration-vmware-technical-guidance.html))
 
-ESXi 7.0 requires a boot disk of at least 32 GB of persistent storage. I believe the preferred amount is 128GB and I ended up using 1TB NVMe drives. The following picture shows a sample auto-partition between ESXi 6.x and 7.x:
+ESXi requires a boot disk of at least 32 GB of persistent storage. I believe the preferred amount is 128GB and I ended up using 1TB NVMe drives. The following picture shows a sample auto-partition between ESXi 6.x and 7.x:
 
 ![](/img/storage-disk-esxi7.jpg)
 
@@ -356,16 +359,3 @@ I now have a clear solution to target:
 The next part of this series is the technical steps to build the lab. Starting with the ISO creation and install of ESXi and VCSA.
 
 Check out Part 2 here: [How to install a vSphere cluster at home](/posts/vmware-series-p2-installation/)
-
-
-
-
-
-
-
-
-
-
-
-
-
