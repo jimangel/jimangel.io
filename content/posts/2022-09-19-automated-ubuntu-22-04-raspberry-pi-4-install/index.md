@@ -83,7 +83,7 @@ export FILE="ubuntu-22.04.1-preinstalled-server-arm64+raspi.img.xz"
 # REPLACE WITH YOUR USB (`lsblk`)
 export USB="/dev/sda"
 # `-d` decompress `<` redirect $FILE contents to expand `|` sending the output to `dd` to copy directly to $USB
-xz -d < $FILE - | dd bs=100M of=$USB
+xz -d < $FILE | sudo dd bs=100M of=$USB status=progress
 ```
 
 {{< notice tip >}}
