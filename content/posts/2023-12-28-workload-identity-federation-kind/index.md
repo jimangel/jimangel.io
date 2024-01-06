@@ -8,10 +8,10 @@ date: 2023-12-28
 description: "How to setup workload identity federation to allow workloads, that run on a self-hosted Kubernetes (KinD) cluster, authenticate to Google Cloud."
 summary: "A quick intro to using Kubernetes service accounts to authenticate to GCP, preventing the need to store or share service account keys."
 tags:
-- GCP
-- Kubernetes
-- Workload Identity
-- IAM
+- google cloud
+- kubernetes
+- workload identity
+- kind
 keywords:
 - GCP
 - Google Cloud Platform
