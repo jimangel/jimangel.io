@@ -1,7 +1,8 @@
-module:
-  imports:
-    - path: github.com/adityatelange/hugo-PaperMod
-    - path: github.com/martignoni/hugo-notice
+# using modules replaces the need for themes...
+#module:
+#  imports:
+#    - path: github.com/adityatelange/hugo-PaperMod
+#    - path: github.com/martignoni/hugo-notice
 
 # https://github.com/adityatelange/hugo-PaperMod/wiki/Variables
 baseURL: https://www.jimangel.io/

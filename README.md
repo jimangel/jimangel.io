@@ -14,6 +14,8 @@ hugo serve --cleanDestinationDir --gc --ignoreCache --buildDrafts --logLevel deb
 
 # Update theme
 
+I was mixing up hugo modules and git submodules and ran into problems, let's just use git submodules...
+
 ```
 # DON'T: git submodule update --remote --merge
 # ensure to check https://github.com/martignoni/hugo-notice (installed as a hugo module)
@@ -23,8 +25,21 @@ hugo serve --cleanDestinationDir --gc --ignoreCache --buildDrafts --logLevel deb
 git submodule deinit -f .
 git submodule update --init --remote --merge
 
-+ It seems like below does it all?
-hugo mod get -u
+# should work:
+git submodule update --remote --merge
+```
+
+## most recent update Jan/7/2024
+
+caused me to delete:
+
+```
+layouts/_default/single.html
+& 
+layouts/partials/index_profile.html
+
+cp themes/PaperMod/layouts/_default/single.html layouts/_default/single.html
+cp themes/PaperMod/layouts/partials/index_profile.html layouts/partials/index_profile.html
 ```
 
 # Original setup
@@ -162,7 +177,7 @@ rm -rf layouts/_default/_markup/render-image.html
 # shout out https://bwiggs.com/posts/2021-08-03-hugo-syntax-highlight-dark-light/
 mkdir -p layouts/partials/css/
 # light others: monokailight / manni / colorful / github / lovelace / tango / xcode / vs / friendly
-hugo gen chromastyles --style=manni > layouts/partials/css/syntax-light.css 
+hugo gen chromastyles --style=monokailight > layouts/partials/css/syntax-light.css 
 # dark others: monokai / dracula / native / paraiso-dark / solarized-dark / solarized-dark256 / fruity
 hugo gen chromastyles --style=dracula | sed -n 's/.*\//body.dark/p' > layouts/partials/css/syntax-dark.css
 
@@ -314,7 +329,8 @@ archives.html in layouts/_default/archives.html so the posts are grouped by year
 Found out that relative images are moved to cloudfront and absURL (https://gohugobrasil.netlify.app/functions/absurl/) are local. On my browser, cloudfront out performs netlify's CDN so all assets should be relative...
 
 ```
-cp themes/PaperMod/layouts/partials/cover.html layouts/partials/cover.html
+# maybe skip on cover?
+# cp themes/PaperMod/layouts/partials/cover.html layouts/partials/cover.html
 
 cp themes/PaperMod/layouts/partials/index_profile.html layouts/partials/index_profile.html
 

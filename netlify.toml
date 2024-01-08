@@ -4,7 +4,7 @@ command = "hugo --gc"
 # removed --minify
 
 [build.environment]
-HUGO_VERSION = "0.120.4"
+HUGO_VERSION = "0.121.2"
 HUGO_ENV = "production"
 
 [build.processing]
