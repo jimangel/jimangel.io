@@ -34,6 +34,8 @@ ShowWordCount: false
 cover:
     image: "img/raspberry-pi-feature.jpg" # image path/url
     alt: "Ubuntu Raspberry Pi Image for 22.04" # alt text
+    #caption: ""
+    relative: true
 
 slug: "autoinstall-ubuntu-22-on-raspberry-pi-4"  # make your URL pretty!
 ---

@@ -32,6 +32,8 @@ categories: []
 cover:
   image: "img/self-updating-gitops-cover.jpg"
   alt: "big cyberpunk looking rusted engine pulley with gears on a wall to represent automation"
+  #caption: ""
+  relative: true
 
 slug: "self-updating-gitops"
 ---

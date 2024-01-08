@@ -28,7 +28,8 @@ keywords:
 cover:
   image: img/esxi-6.7-install-featured.jpg
   alt: "A black sandisk USB 3.0 thumb drive with a white background" # alt text
-
+  #caption: ""
+  relative: true
 slug: "scripted-esxi-6-7-install-to-usb"
 ---
 

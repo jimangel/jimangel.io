@@ -25,7 +25,8 @@ keywords:
 cover:
   image: "img/jenkins-server-featured.jpg"
   alt: "large colorful plumbing pipes to represent pipelines"
-
+  #caption: ""
+  relative: true
 slug: "jenkins-server-using-terraform"
 ---
 

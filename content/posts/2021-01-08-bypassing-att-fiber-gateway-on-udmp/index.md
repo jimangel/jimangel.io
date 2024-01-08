@@ -44,7 +44,8 @@ keywords:
 cover:
   image: "img/bypassing-att-fiber-gateway-featured.jpg"
   alt: "UDMP pro by Unifi"
-
+  #caption: ""
+  relative: true
 slug: "bypassing-att-fiber-gateway-on-udmp"
 
 ---

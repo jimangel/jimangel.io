@@ -23,7 +23,8 @@ keywords:
 cover:
   image: "img/ubuntu-18-04-template-featured.jpg"
   alt: "Gingerbread cookies in piles of identical stacks like a repeatable template" # alt text
-
+  #caption: ""
+  relative: true
 slug: "create-a-vm-template-for-ubuntu-18-04-lts"
 ---
 

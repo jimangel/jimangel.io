@@ -25,7 +25,8 @@ categories: []
 cover:
   image: "img/cka-exam-featured.jpg"
   alt: "two students studying on the same shared paper book"
-
+  #caption: ""
+  relative: true
 slug: "cka-exam-for-experienced-kubernetes-operators"
 ---
 

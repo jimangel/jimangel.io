@@ -27,7 +27,8 @@ keywords:
 cover:
   image: "img/kind-clusters-featured.jpg"
   alt: "Dark blue PowerShell prompt with the command 'kind create cluster' typed out"
-
+  #caption: ""
+  relative: true
 slug: "running-kind-clusters-in-workstation-pro"
 ---
 

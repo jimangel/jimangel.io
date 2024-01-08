@@ -23,7 +23,8 @@ keywords:
 cover:
   image: img/automated-vcenter-featured.jpg
   alt: "A grey cat sleeping peacefully" # alt text
-
+  #caption: ""
+  relative: true
 slug: "automated-vcsa-vcenter-install"
 ---
 

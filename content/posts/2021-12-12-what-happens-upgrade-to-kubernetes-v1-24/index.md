@@ -26,6 +26,8 @@ comment: true
 cover:
   image: "img/dockershim-kubernetes-v1.24-cover.jpg"
   alt: "2 legs in jeans with dusty working boots on a gravel trail in front of an orange rusty wavey wall. The picture is cut vertically before the knees."
+  #caption: ""
+  relative: true
 
 slug: "dockershim-kubernetes-v1-24"
 ---

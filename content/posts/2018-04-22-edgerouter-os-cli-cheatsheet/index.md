@@ -22,7 +22,8 @@ keywords:
 cover:
   image: "img/edgerouter-cheatsheet-featured.jpg"
   alt: "Network patch panel zoomed in on a blue cable plugging into port 074 in between 8 grey cables" # alt text
-
+  #caption: ""
+  relative: true
 slug: ""
 ---
 

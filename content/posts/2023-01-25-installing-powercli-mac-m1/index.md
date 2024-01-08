@@ -43,6 +43,8 @@ draft: false
 cover:
     image: "img/vmware-powercli-featured.jpg"
     alt: "building that look like boxes stacked together like an abstract cityscape" # alt text
+    #caption: ""
+    relative: true
 # check config.toml for some of the default options / toggles
 
 # contain keywords relevant to the page's topic, and contain no spaces, underscores or other characters. You should avoid the use of parameters when possible, as they make URLs less inviting for users to click or share. Google's suggestions for URL structure specify using hyphens or dashes (-) rather than underscores (_). Unlike underscores, Google treats hyphens as separators between words in a URL.

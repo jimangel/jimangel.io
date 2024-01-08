@@ -23,7 +23,8 @@ keywords:
 cover:
   image: "img/upstream-kubernetes-featured.jpg"
   alt: "4 raspberry pi's in a clear case plugged into a 4-port POE networking switch"
-
+  #caption: ""
+  relative: true
 slug: "upstream-kubernetes-on-pi"
 ---
 

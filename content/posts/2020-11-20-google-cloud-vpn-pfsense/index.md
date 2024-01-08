@@ -36,7 +36,8 @@ keywords:
 cover:
   image: "img/google-cloud-vpn-pfsense-featured.jpg"
   alt: "hand drawn picture of a house on the left, representing home network, with a cylinder in the middle representing a VPN tunnel, and a cloud shape representing a GCP VPC. There's a firewall on either end of the cylinder representing pfsense and Google's firewall respectively"
-
+  #caption: ""
+  relative: true
 slug: "google-cloud-vpn-pfsense"
 ---
 

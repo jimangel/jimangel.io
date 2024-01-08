@@ -28,7 +28,8 @@ categories: []
 cover:
   image: "img/vmware-homelab-featured.jpg"
   alt: "A dark photo of tubes and cables messily wired around a room" # alt text
-
+  #caption: ""
+  relative: true
 slug: "vmware-homelab-build-2017"  # make your URL pretty!
 ---
 

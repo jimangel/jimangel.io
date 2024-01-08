@@ -42,6 +42,8 @@ ShowWordCount: false
 cover:
     image: "img/ubuntu-usb-install-22-04-cover.jpg" # image path/url
     alt: "Ubuntu desktop image for 22.04" # alt text
+    #caption: ""
+    relative: true
 
 slug: "automate-ubuntu-22-04-lts-bare-metal"  # make your URL pretty!
 ---
