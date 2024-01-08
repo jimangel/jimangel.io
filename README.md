@@ -34,12 +34,50 @@ git submodule update --remote --merge
 caused me to delete:
 
 ```
-layouts/_default/single.html
-& 
 layouts/partials/index_profile.html
 
-cp themes/PaperMod/layouts/_default/single.html layouts/_default/single.html
 cp themes/PaperMod/layouts/partials/index_profile.html layouts/partials/index_profile.html
+```
+
+Also had to redo highlighting:
+
+```
+# diff head
+diff layouts/partials/head.html themes/PaperMod/layouts/partials/head.html
+
+# copy and update
+cp themes/PaperMod/layouts/partials/head.html layouts/partials/head.html
+
+# example edit
+<title>{{ if .IsHome }}Jim Angel | {{ else }}{{ if .Title }}{{ .Title }} | {{ end }}{{ end }}{{ ( replace site.Title "Jim Angel | " "") }}</title>
+```
+
+Had to fix chroma (https://github.com/adityatelange/hugo-PaperMod/pull/1364):
+
+```
+# clean up old way:
+git rm layouts/partials/css/syntax-dark.css layouts/partials/css/syntax-light.css
+
+# manually removed a chunk from custom.css (for dark mode code).. might add back.
+# borland  monokai
+hugo gen chromastyles --style=monokai > assets/css/includes/chroma-styles.css
+
+# https://xyproto.github.io/splash/docs/all.html
+# adding lightmode / dark mode markdown (more info in layouts/partials/extend_head.html)
+# shout out https://bwiggs.com/posts/2021-08-03-hugo-syntax-highlight-dark-light/
+mkdir -p layouts/partials/css/
+# light others: monokailight / manni / colorful / github / lovelace / tango / xcode / vs / friendly
+hugo gen chromastyles --style=monokailight > layouts/partials/css/syntax-light.css 
+# dark others: monokai / dracula / native / paraiso-dark / solarized-dark / solarized-dark256 / fruity
+hugo gen chromastyles --style=dracula | sed -n 's/.*\//body.dark/p' > layouts/partials/css/syntax-dark.css
+
+# DON'T FORGET TO UPDATE custom.css with the bghljs color (to match theme of choice)
+# light (/* Background */ .bg { color: #272822; background-color: #fafafa; }
+cat layouts/partials/css/syntax-light.css | grep bg
+# dark (body.dark .bg { color: #f8f8f2; background-color: #272822; }
+cat layouts/partials/css/syntax-dark.css | grep bg
+
+# lastly, check that the colors are set (if they exist, or unset if they dont with important! in the custom CSS). This is the final override for the custom theme. I don't think it will cause many issues.
 ```
 
 # Original setup

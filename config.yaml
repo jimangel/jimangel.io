@@ -125,6 +125,7 @@ params:
   showtoc: false
   tocopen: false
   assets:
+    # not needed anymore: https://github.com/adityatelange/hugo-PaperMod/pull/1364
     disableHLJS: true # to disable highlight.js
     disableFingerprinting: false # https://github.com/adityatelange/hugo-PaperMod/issues/89#issuecomment-736549907
     favicon: "/favicon.ico"
@@ -182,6 +183,7 @@ markup:
       guessSyntax: true
       lineNos: false
       noClasses: false
+      style: dracula
 
 privacy:
     vimeo:
