@@ -217,8 +217,6 @@ Not only are there many competing ways to install the same GPU driver, but how d
 
 #### Finding the correct driver version
 
-First, find the version, then worry about the installation.
-
 Use the search menu on NVIDIA's <mark>[driver download site](https://www.nvidia.com/download/index.aspx)</mark> to find the latest recommended version to install.
 
 For example, searching for an RTX 3060 returns:
