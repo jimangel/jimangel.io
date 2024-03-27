@@ -21,16 +21,16 @@ slug: "kubectl-best-practices-windows"
 ---
 
 {{< notice warning >}}
-This post may contain inaccuracies, incomplete information, or partial solutions.
+This post may contain inaccuracies and partial information or solutions.
 
-In an effort to reduce my backlog of docs, I've decided to publish my partially-written content assisted by AI.
+In an effort to reduce my backlog of docs, I've decided to publish my nearly completed drafts assisted by AI.
 
-I wrote >80% of the content, but used generative AI to format and organize the content. I'm sure some tone is lost along the way.
+I wrote most of the following content, but used generative AI to format, organize, and complete the post. I'm sure some tone is lost along the way.
 
 Leave a comment if you find any issues!
 {{< /notice >}}
 
-_originally written on **June 4th 2019**:_
+_(originally created **June 4th 2019**)_
 
 ## Overview
 
