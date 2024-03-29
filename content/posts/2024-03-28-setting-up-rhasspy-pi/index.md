@@ -22,9 +22,9 @@ slug: "setting-up-rhasspy-pi"
 {{< notice warning >}}
 This post may contain inaccuracies and partial information or solutions.
 
-In an effort to reduce my backlog of docs, I've decided to publish my nearly completed drafts assisted by AI.
+To reduce my backlog of docs, I've decided to publish my nearly completed drafts assisted by AI.
 
-I wrote most of the following content, but used generative AI to format, organize, and complete the post. I'm sure some tone is lost along the way.
+I wrote most of the following content but used generative AI to format, organize, and complete the post. I'm sure some tone is lost along the way.
 
 Leave a comment if you find any issues!
 {{< /notice >}}
