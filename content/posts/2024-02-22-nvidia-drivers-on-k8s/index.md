@@ -399,6 +399,12 @@ sudo apt update
 sudo apt install -y nvidia-container-toolkit
 ```
 
+{{< notice note >}}
+As of the v1.12.0 release the NVIDIA Container Toolkit includes support for generating Container Device Interface (CDI) specifications - an alternative approach to this blog for adding GPUs to a container runtime.
+
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/cdi-support.html
+{{< /notice >}}
+
 ### Configure `containerd`
 
 Now that the tools are installed, we need to update the `containerd` config runtime classes. Luckily one of the tools, `nvidia-ctk` can automate that process.
@@ -577,7 +583,7 @@ In summary, exposing a GPU on k8s includes:
 1. Configure kubernetes (`helm install nvidia/gpu-operator`)
 1. Update deployment YAML to include GPU requests
 
-In the future, I might consider using the `ubuntu-driver` installer and have the Kubernetes GPU Operator manage the driver and container toolkit.
+In the future, I'd consider using the `ubuntu-driver` installer and/or having the Kubernetes GPU Operator manage the driver and container toolkit.
 
 If you have any questions, insights, or feedback, feel free to share!
 
