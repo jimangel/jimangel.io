@@ -6,6 +6,7 @@ command = "hugo --gc"
 [build.environment]
 HUGO_VERSION = "0.139.0"
 HUGO_ENV = "production"
+NODE_VERSION = "18"
 
 [build.processing]
 # If skip_processing = true, all other settings are ignored
