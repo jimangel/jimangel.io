@@ -9,6 +9,8 @@ hugo new --kind post posts/$(date '+%Y-%m-%d')-$URL.md
 # local preview
 
 ```
+git submodule update --remote --merge
+
 hugo server --cleanDestinationDir --gc --ignoreCache --buildDrafts
 ```
 
@@ -17,14 +19,11 @@ hugo server --cleanDestinationDir --gc --ignoreCache --buildDrafts
 I was mixing up hugo modules and git submodules and ran into problems, let's just use git submodules...
 
 ```
-# DON'T: git submodule update --remote --merge
-# ensure to check https://github.com/martignoni/hugo-notice (installed as a hugo module)
-# https://github.com/martignoni/hugo-notice#hugo-module
+# first time run:
+git submodule update --init --remote --merge
 
 # to "force reset" them
 git submodule deinit -f .
-git submodule update --init --remote --merge
-
 # should work:
 git submodule update --remote --merge
 ```
