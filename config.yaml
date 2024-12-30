@@ -151,8 +151,8 @@ params:
         #  - name: Github
         #    url: "https://github.com/jimangel"
   socialIcons:
-    - name: twitter
-      url: "https://twitter.com/JimmAngel"
+    - name: bluesky
+      url: "https://bsky.app/profile/jimangel.io"
     - name: github
       url: "https://github.com/jimangel"
     - name: linkedin
