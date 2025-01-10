@@ -196,6 +196,12 @@ Would I buy it again? No.
 
 ![AirGradient ONE](/img/airgradient.png)
 
+{{< notice note >}}
+**(01/10/2025) Update:** A direct integration with AirGradient & Home Assistant was released in June of 2024. ([Integration Page](https://www.home-assistant.io/integrations/airgradient))
+
+It appears this integration is based on HTTP / Polling vs. Bluetooth and would resolve the bulk of my concerns with this platform.
+{{< /notice >}}
+
 When I started this journey, anything that required ESPHome was a deal breaker. I really wanted to avoid building my own air monitor from scratch ([like seen here](https://www.jeffgeerling.com/blog/2021/airgradient-diy-air-quality-monitor-co2-pm25)).
 
 Ultimately, I ended up using ESPHome anyways for my Bluetooth Proxy and I thought I would give it a go. ESPHome is an open source project by Nabu Casa that allows easy programming of Espressif controller boards. It took me awhile to figure this out, but it comes down to: if you can connect to the board (USB or network), then ESPHome can push a config to it and get you up and running.
