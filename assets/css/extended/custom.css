@@ -41,10 +41,40 @@ code {
     background-color: unset !important;
 }
 
-/* 
+/*
 :root {
      / cat assets/css/includes/chroma-styles.css | grep bg /
     --code-block-bg: #282a36;
 }
 
 */
+
+/* Copy Page Button */
+.post-header {
+    position: relative;
+}
+
+.copy-page-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: var(--radius);
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    color: var(--secondary);
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.copy-page-button:hover {
+    background: var(--border);
+}
+
+@media (max-width: 500px) {
+    .copy-page-button {
+        padding: 3px 8px;
+        font-size: 11px;
+    }
+}

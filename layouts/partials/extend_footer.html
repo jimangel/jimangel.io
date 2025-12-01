@@ -1,0 +1,196 @@
+{{- /* Copy Page Button Script */ -}}
+<script>
+(function() {
+    const copyBtn = document.getElementById('copy-page-btn');
+    const postContent = document.querySelector('.post-content');
+
+    if (!copyBtn || !postContent) return;
+
+    copyBtn.addEventListener('click', function() {
+        const markdown = htmlToMarkdown(postContent);
+
+        navigator.clipboard.writeText(markdown).then(function() {
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(function() {
+                copyBtn.textContent = originalText;
+            }, 2000);
+        }).catch(function(err) {
+            console.error('Failed to copy:', err);
+        });
+    });
+
+    function htmlToMarkdown(element) {
+        const clone = element.cloneNode(true);
+
+        // Remove notice style blocks (like the AI warning)
+        clone.querySelectorAll('style, script, .notice svg, .icon-notice').forEach(el => el.remove());
+
+        return processNode(clone).trim();
+    }
+
+    function processNode(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            return node.textContent;
+        }
+
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+            return '';
+        }
+
+        const tag = node.tagName.toLowerCase();
+        let result = '';
+
+        // Handle different elements
+        switch (tag) {
+            case 'h1':
+                return '\n# ' + getTextContent(node) + '\n\n';
+            case 'h2':
+                return '\n## ' + getTextContent(node) + '\n\n';
+            case 'h3':
+                return '\n### ' + getTextContent(node) + '\n\n';
+            case 'h4':
+                return '\n#### ' + getTextContent(node) + '\n\n';
+            case 'h5':
+                return '\n##### ' + getTextContent(node) + '\n\n';
+            case 'h6':
+                return '\n###### ' + getTextContent(node) + '\n\n';
+
+            case 'p':
+                return processChildren(node) + '\n\n';
+
+            case 'br':
+                return '\n';
+
+            case 'hr':
+                return '\n---\n\n';
+
+            case 'strong':
+            case 'b':
+                return '**' + processChildren(node) + '**';
+
+            case 'em':
+            case 'i':
+                return '*' + processChildren(node) + '*';
+
+            case 'code':
+                // Check if inside a pre (code block)
+                if (node.parentElement && node.parentElement.tagName.toLowerCase() === 'pre') {
+                    return node.textContent;
+                }
+                return '`' + node.textContent + '`';
+
+            case 'pre':
+                const codeEl = node.querySelector('code');
+                const codeText = codeEl ? codeEl.textContent : node.textContent;
+                // Try to detect language from class
+                let lang = '';
+                if (codeEl) {
+                    const langClass = Array.from(codeEl.classList).find(c => c.startsWith('language-'));
+                    if (langClass) lang = langClass.replace('language-', '');
+                }
+                return '\n```' + lang + '\n' + codeText.trim() + '\n```\n\n';
+
+            case 'blockquote':
+                const lines = processChildren(node).trim().split('\n');
+                return '\n' + lines.map(line => '> ' + line).join('\n') + '\n\n';
+
+            case 'a':
+                const href = node.getAttribute('href') || '';
+                const text = processChildren(node);
+                if (href && !href.startsWith('#')) {
+                    return '[' + text + '](' + href + ')';
+                }
+                return text;
+
+            case 'img':
+                const src = node.getAttribute('src') || '';
+                const alt = node.getAttribute('alt') || '';
+                return '![' + alt + '](' + src + ')';
+
+            case 'ul':
+                return '\n' + processListItems(node, '-') + '\n';
+
+            case 'ol':
+                return '\n' + processListItems(node, '1.') + '\n';
+
+            case 'li':
+                return processChildren(node);
+
+            case 'div':
+                // Handle notice boxes
+                if (node.classList.contains('notice')) {
+                    const titleEl = node.querySelector('.notice-title');
+                    const title = titleEl ? titleEl.textContent.trim() : '';
+                    if (titleEl) titleEl.remove();
+                    const content = processChildren(node).trim();
+                    if (title) {
+                        return '\n> **' + title + '**\n> ' + content.split('\n').join('\n> ') + '\n\n';
+                    }
+                    return '\n> ' + content.split('\n').join('\n> ') + '\n\n';
+                }
+                // Handle highlight divs (code blocks)
+                if (node.classList.contains('highlight')) {
+                    return processChildren(node);
+                }
+                return processChildren(node);
+
+            case 'span':
+                return processChildren(node);
+
+            case 'table':
+                return processTable(node) + '\n\n';
+
+            default:
+                return processChildren(node);
+        }
+    }
+
+    function processChildren(node) {
+        let result = '';
+        node.childNodes.forEach(child => {
+            result += processNode(child);
+        });
+        return result;
+    }
+
+    function getTextContent(node) {
+        // Get text content but skip anchor links
+        const clone = node.cloneNode(true);
+        clone.querySelectorAll('.anchor').forEach(el => el.remove());
+        return clone.textContent.trim();
+    }
+
+    function processListItems(node, marker) {
+        let result = '';
+        let index = 1;
+        node.childNodes.forEach(child => {
+            if (child.nodeType === Node.ELEMENT_NODE && child.tagName.toLowerCase() === 'li') {
+                const prefix = marker === '1.' ? index + '. ' : '- ';
+                const content = processChildren(child).trim();
+                result += prefix + content + '\n';
+                index++;
+            }
+        });
+        return result;
+    }
+
+    function processTable(table) {
+        let result = '';
+        const rows = table.querySelectorAll('tr');
+
+        rows.forEach((row, rowIndex) => {
+            const cells = row.querySelectorAll('th, td');
+            const cellTexts = Array.from(cells).map(cell => processChildren(cell).trim());
+            result += '| ' + cellTexts.join(' | ') + ' |\n';
+
+            // Add separator after header row
+            if (rowIndex === 0) {
+                result += '| ' + cellTexts.map(() => '---').join(' | ') + ' |\n';
+            }
+        });
+
+        return result;
+    }
+})();
+</script>
