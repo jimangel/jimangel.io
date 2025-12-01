@@ -50,7 +50,7 @@ That got me thinking about the next evolution for cloud-native practitioners.
 
 I posted a silly question on Twitter about "turning on all the automation."
 
-{{< twitter user="jimmangel" id="1297254167262769159" >}}
+{{< x user="jimmangel" id="1297254167262769159" >}}
 
 In this proposal, the cluster would self-upgrade, and GitOps would update applications, including itself. High-level overview: 
 
@@ -68,7 +68,7 @@ I wanted to try this using local VMs. So I spun up 3 Ubuntu VMs on VMware Workst
 
 In my first attempt, I built the cluster using [kube-spray](https://github.com/kubernetes-sigs/kubespray) because it's production ready with more "batteries included." The "batteries included" obscured some of the configuration, which later bit me.
 
-{{< tweet user="jimmangel" id="1304925547752026112" >}}
+{{< x user="jimmangel" id="1304925547752026112" >}}
 
 ### isitstillrunning.com
 
@@ -82,7 +82,7 @@ However, I made some mistakes when configuring kubespray, and I had to redo the 
 
 In mid-February of 2021, [central Texas lost power](https://en.wikipedia.org/wiki/2021_Texas_power_crisis) for a week, impacting millions. I was without power and water for five days which was longer than the cluster's DHCP leases. Each node in the cluster received a new IP. 🤦
 
-{{< tweet user="jimmangel" id="1372196855161950216" >}}
+{{< x user="jimmangel" id="1372196855161950216" >}}
 
 Below is the final screen grab before I took the cluster offline. The gap on the right side are when the script fails due to the lack of a working Kubernetes cluster.
 
