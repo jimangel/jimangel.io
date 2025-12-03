@@ -17,7 +17,7 @@
 
 /* For whatever reason, this is the background color on home... */
 .list {
-    background: white;
+    background: var(--theme);
 }
 
 /* Word wrap code vs. horzscroll */
