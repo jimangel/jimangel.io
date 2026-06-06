@@ -25,9 +25,9 @@ keywords:
 draft: false
 
 cover:
-    # image: "pics/ceiling-demo.jpg"
-    # alt: "Live plane radar projected onto a ceiling"
-    # relative: true
+    image: "pics/system-diagram.png"
+    alt: "System diagram: ADS-B receiver Pi feeding JSON to a projector Pi pointed at the ceiling"
+    relative: true
 
 slug: "ceiling-radar-ads-b-projector"
 ---
