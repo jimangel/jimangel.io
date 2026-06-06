@@ -52,13 +52,13 @@ I didn't want to spend a ton of time on this, so I set a goal: **Only allow 4 ho
 
 Just want the code? TLDR: [github.com/jimangel/Ceiling-Radar](https://github.com/jimangel/Ceiling-Radar).
 
-## The idea
+## Why 2 Pis?
 
-![System diagram: ADS-B receiver Pi feeding JSON to a projector Pi pointed at the ceiling](pics/system-diagram.png)
+I used 2 Pis because one was already set up and I had an extra. 
 
-{{< notice note >}}
-I used 2 Pis because one was already set up and I had an extra. This setup could be combined and/or use an online ADS-B service like [ADS-B Exchange](https://www.adsbexchange.com/). Building your own [ADS-B receiver](https://www.flightradar24.com/build-your-own) is simple (the antenna was ~$40), and if you share your data back to flight providers, a lot of times they'll give you a "free" premium subscription!
-{{< /notice >}}
+This setup could be combined and/or use an online ADS-B service like [ADS-B Exchange](https://www.adsbexchange.com/).
+
+Building your own [ADS-B receiver](https://www.flightradar24.com/build-your-own) is simple (the antenna was ~$40), and if you share your data back to flight providers, a lot of times they'll give you a "free" premium subscription!
 
 ## Get a working projector
 
